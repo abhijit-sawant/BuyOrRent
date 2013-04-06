@@ -17,14 +17,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dip"
             android:text="@string/yearlyGrossIncome"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/editText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView1"
-            android:layout_marginLeft="60dip"
+            android:layout_marginLeft="55dip"
             android:layout_toRightOf="@+id/textView1"
             android:inputType="numberDecimal"
             android:minWidth="100dip" />
@@ -47,7 +47,7 @@
             android:layout_below="@+id/textView1"
             android:layout_marginTop="40dip"
             android:text="@string/itemizedDeduct"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/editText2"
@@ -76,7 +76,7 @@
             android:layout_below="@+id/textView2"
             android:layout_marginTop="40dip"
             android:text="@string/taxBracket"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/editText3"
@@ -106,7 +106,7 @@
             android:layout_below="@+id/textView3"
             android:layout_marginTop="40dip"
             android:text="@string/maritalStatus"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textSize="15sp" />
         
          <Spinner
             android:id="@+id/spinner1"

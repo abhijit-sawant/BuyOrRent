@@ -73,6 +73,7 @@ public final class R {
         public static final int editText3=0x7f090037;
         public static final int editText4=0x7f09003a;
         public static final int menu_settings=0x7f09003d;
+        public static final int realtabcontent=0x01010000;
         public static final int scrollView1=0x7f090030;
         public static final int seekBar1=0x7f090032;
         public static final int seekBar2=0x7f090035;
