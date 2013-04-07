@@ -29,12 +29,12 @@
 	<string name="rentInsurance">Renters Insurance</string>
 	<string name="utilities">Utilities per Month</string>
 	
-	<string name="maritalStatus">Marital Status</string>
+	<string name="martialStatus">Martial Status</string>
 	<string name="yearlyGrossIncome">Yearly Gross\nIncome</string>
 	<string name="itemizedDeduct">Itemized Deduction</string>
 	<string name="taxBracket">Tax Bracket (%)</string>
 	
-	<string-array name="maritalStatus_array">
+	<string-array name="martialStatus_array">
         <item>Married</item>
         <item>Unmarried</item>
     </string-array>

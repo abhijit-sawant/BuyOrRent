@@ -9,7 +9,7 @@ package aum.fin.buyorrent;
 
 public final class R {
     public static final class array {
-        public static final int maritalStatus_array=0x7f060000;
+        public static final int martialStatus_array=0x7f060000;
     }
     public static final class attr {
     }
@@ -68,22 +68,33 @@ public final class R {
         public static final int actBuy_textView9=0x7f090025;
         public static final int actBuy_textYearlyTitle=0x7f090013;
         public static final int actBuy_yearlyExpDivider=0x7f090010;
-        public static final int editText1=0x7f090031;
-        public static final int editText2=0x7f090034;
-        public static final int editText3=0x7f090037;
-        public static final int editText4=0x7f09003a;
-        public static final int menu_settings=0x7f09003d;
+        public static final int actRent_editText1=0x7f090032;
+        public static final int actRent_editText2=0x7f090035;
+        public static final int actRent_editText3=0x7f090038;
+        public static final int actRent_editText4=0x7f09003b;
+        public static final int actRent_seekBar1=0x7f090033;
+        public static final int actRent_seekBar2=0x7f090036;
+        public static final int actRent_seekBar3=0x7f090039;
+        public static final int actRent_seekBar4=0x7f09003c;
+        public static final int actRent_textView1=0x7f090031;
+        public static final int actRent_textView2=0x7f090034;
+        public static final int actRent_textView3=0x7f090037;
+        public static final int actRent_textView4=0x7f09003a;
+        public static final int actTax_editText1=0x7f09003e;
+        public static final int actTax_editText2=0x7f090041;
+        public static final int actTax_editText3=0x7f090044;
+        public static final int actTax_seekBar1=0x7f09003f;
+        public static final int actTax_seekBar2=0x7f090042;
+        public static final int actTax_seekBar3=0x7f090045;
+        public static final int actTax_spinner1=0x7f090047;
+        public static final int actTax_textView1=0x7f09003d;
+        public static final int actTax_textView2=0x7f090040;
+        public static final int actTax_textView3=0x7f090043;
+        public static final int actTax_textView4=0x7f090046;
+        public static final int menu_settings=0x7f090048;
         public static final int realtabcontent=0x01010000;
         public static final int scrollView1=0x7f090030;
-        public static final int seekBar1=0x7f090032;
-        public static final int seekBar2=0x7f090035;
-        public static final int seekBar3=0x7f090038;
-        public static final int seekBar4=0x7f09003b;
-        public static final int spinner1=0x7f09003c;
         public static final int textView1=0x7f09002f;
-        public static final int textView2=0x7f090033;
-        public static final int textView3=0x7f090036;
-        public static final int textView4=0x7f090039;
     }
     public static final class layout {
         public static final int activity_buy=0x7f030000;
@@ -108,7 +119,7 @@ public final class R {
         public static final int intRate=0x7f05000a;
         public static final int itemizedDeduct=0x7f05001b;
         public static final int loanAmt=0x7f050009;
-        public static final int maritalStatus=0x7f050019;
+        public static final int martialStatus=0x7f050019;
         public static final int menu_settings=0x7f050001;
         public static final int mortInsRate=0x7f050012;
         public static final int periExpenses=0x7f050011;
