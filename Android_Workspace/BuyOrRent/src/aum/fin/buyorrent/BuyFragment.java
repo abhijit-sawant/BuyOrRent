@@ -3,6 +3,7 @@ package aum.fin.buyorrent;
 import android.R.drawable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -34,7 +35,7 @@ public class BuyFragment  extends Fragment {
      final ScrollView viewBuy = (ScrollView)inflater.inflate(R.layout.activity_buy, container, false);
      mTextHousePrice = (EditText) viewBuy.findViewById(R.id.actBuy_editText1);
      mSeekHousePrice = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar1);
-     
+          
      //yearly expenses
      final RelativeLayout loYearlyTitle = (RelativeLayout) viewBuy.findViewById(R.id.actBuy_layoutYearlyTitle);
      final RelativeLayout loYearlyContent = (RelativeLayout) viewBuy.findViewById(R.id.actBuy_layoutYearlyContent);
@@ -66,38 +67,41 @@ public class BuyFragment  extends Fragment {
      } });
      
      class BuyTextWatcher implements TextWatcher {
-    	 private int mIntMin = 0;
-    	 private int mIntMax = 0;
+    	 private double mDblMin = 0;
+    	 private double mDblMax = 0;
+    	 private SeekBar mSeekBarLinked;
     	 
-    	 public BuyTextWatcher(int iMin, int iMax) {
-    		 mIntMin = iMin;
-    		 mIntMax = iMax;
+    	 public BuyTextWatcher(double dMin, double dMax, SeekBar seekBarLinked) {
+    		 mDblMin = dMin;
+    		 mDblMax = dMax;
+    		 mSeekBarLinked = seekBarLinked;
     	 }
     	 
     	 public void afterTextChanged(Editable s) {}	 
     	 public void beforeTextChanged(CharSequence s, int start, int count, int after){}
     	 public void onTextChanged(CharSequence s, int start, int before, int count) {
-    		 mSeekHousePrice.setMax(1000);
     		 if(s.toString().length() <= 0)
     		 {
-    			 mSeekHousePrice.setProgress(0);
+    			 mSeekBarLinked.setProgress(0);
     			 return;
     		 }
-    		 double dInput = Double.valueOf(s.toString()).doubleValue();
-    		 double dTemp = (double)((dInput - mIntMin)/(mIntMax - mIntMin)) * 1000.0;
+    		 double dInput = Double.valueOf(s.toString());
+    		 double dTemp = (dInput - mDblMin)/(mDblMax - mDblMin) * 100;
     		 int iPos = (int)(dTemp + 0.5);
-    		 mSeekHousePrice.setProgress(iPos);
+    		 mSeekBarLinked.setProgress(iPos);
     	 }
      
      };
      
      class BuySeekBarListner implements SeekBar.OnSeekBarChangeListener {
-    	 private int mIntMin = 0;
-    	 private int mIntMax = 0;
+    	 private double mDblMin = 0;
+    	 private double mDblMax = 0;
+    	 private EditText mEditTextLinked;
     	 
-    	 public BuySeekBarListner(int iMin, int iMax) {
-    		 mIntMin = iMin;
-    		 mIntMax = iMax;
+    	 public BuySeekBarListner(double dMin, double dMax, EditText editTextLinked) {
+    		 mDblMin = dMin;
+    		 mDblMax = dMax;
+    		 mEditTextLinked = editTextLinked;
     	 }
     	 
     	 public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -105,16 +109,22 @@ public class BuyFragment  extends Fragment {
     	 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
     		 if(fromUser)
     		 {
-	    		 mIntHousePrice = (int) ((double) (progress/1000.0) * (mIntMax - mIntMin)) + mIntMin;
-	    		 mTextHousePrice.setText(String.valueOf(mIntHousePrice));
+	    		 double dTemp = ((progress/100.0) * (mDblMax - mDblMin)) + mDblMin;
+	    		 if(mEditTextLinked.getInputType() == (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL))
+	    		 {
+	    			 int iTemp = (int) dTemp;
+	    			 mEditTextLinked.setText(String.valueOf(iTemp));
+	    		 }
+	    		 else
+	    			 mEditTextLinked.setText(String.valueOf(dTemp));
     		 }
     	 }    	 
      };
      
-     mTextHousePrice.addTextChangedListener(new BuyTextWatcher(mIntHousePriceMin, mIntHousePriceMax));
-     mTextHousePrice.setText(String.valueOf(mIntHousePrice));
+     mTextHousePrice.addTextChangedListener(new BuyTextWatcher(mIntHousePriceMin, mIntHousePriceMax, mSeekHousePrice));
+     mTextHousePrice.setText("300000");
      
-     mSeekHousePrice.setOnSeekBarChangeListener(new BuySeekBarListner(mIntHousePriceMin, mIntHousePriceMax));
+     mSeekHousePrice.setOnSeekBarChangeListener(new BuySeekBarListner(mIntHousePriceMin, mIntHousePriceMax, mTextHousePrice));
           
      return viewBuy;
     }

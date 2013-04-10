@@ -26,7 +26,7 @@
 	        android:layout_alignBottom="@+id/actBuy_textView1"
 	        android:layout_marginLeft="60dip"
 	        android:layout_toRightOf="@+id/actBuy_textView1"
-	        android:inputType="numberDecimal"
+	        android:inputType="number"
 	        android:minWidth="100dip" />
 	    
 	    <SeekBar
