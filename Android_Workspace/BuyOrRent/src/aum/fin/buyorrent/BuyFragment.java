@@ -19,12 +19,18 @@ public class BuyFragment  extends Fragment {
     /** (non-Javadoc)
      * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
      */
-    private int mIntHousePriceMax = 600000;
     private int mIntHousePriceMin = 50000;
-    private int mIntHousePrice    = 300000;
+    private int mIntHousePriceMax = 600000;
+
+    private int mIntDownPayMin = 0;    
+    private int mIntDownPayMax = 600000;
+
     
     private EditText mTextHousePrice;
     private SeekBar  mSeekHousePrice;
+    
+    private EditText mTextDownPay;
+    private SeekBar  mSeekDownPay;
     
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -35,6 +41,9 @@ public class BuyFragment  extends Fragment {
      final ScrollView viewBuy = (ScrollView)inflater.inflate(R.layout.activity_buy, container, false);
      mTextHousePrice = (EditText) viewBuy.findViewById(R.id.actBuy_editText1);
      mSeekHousePrice = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar1);
+     
+     mTextDownPay = (EditText) viewBuy.findViewById(R.id.actBuy_editText2);
+     mSeekDownPay = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar2);     
           
      //yearly expenses
      final RelativeLayout loYearlyTitle = (RelativeLayout) viewBuy.findViewById(R.id.actBuy_layoutYearlyTitle);
@@ -66,43 +75,17 @@ public class BuyFragment  extends Fragment {
      	}
      } });
      
-     class BuyTextWatcher implements TextWatcher {
-    	 private double mDblMin = 0;
-    	 private double mDblMax = 0;
-    	 private SeekBar mSeekBarLinked;
-    	 
-    	 public BuyTextWatcher(double dMin, double dMax, SeekBar seekBarLinked) {
-    		 mDblMin = dMin;
-    		 mDblMax = dMax;
-    		 mSeekBarLinked = seekBarLinked;
-    	 }
-    	 
-    	 public void afterTextChanged(Editable s) {}	 
-    	 public void beforeTextChanged(CharSequence s, int start, int count, int after){}
-    	 public void onTextChanged(CharSequence s, int start, int before, int count) {
-    		 if(s.toString().length() <= 0)
-    		 {
-    			 mSeekBarLinked.setProgress(0);
-    			 return;
-    		 }
-    		 double dInput = Double.valueOf(s.toString());
-    		 double dTemp = (dInput - mDblMin)/(mDblMax - mDblMin) * 100;
-    		 int iPos = (int)(dTemp + 0.5);
-    		 mSeekBarLinked.setProgress(iPos);
-    	 }
-     
-     };
-     
      class BuySeekBarListner implements SeekBar.OnSeekBarChangeListener {
     	 private double mDblMin = 0;
     	 private double mDblMax = 0;
     	 private EditText mEditTextLinked;
     	 
-    	 public BuySeekBarListner(double dMin, double dMax, EditText editTextLinked) {
-    		 mDblMin = dMin;
-    		 mDblMax = dMax;
+    	 public BuySeekBarListner(EditText editTextLinked) {
     		 mEditTextLinked = editTextLinked;
     	 }
+    	 
+    	 public void setProgressMin(double dMin) { mDblMin = dMin; }
+    	 public void setProgressMax(double dMax) { mDblMax = dMax; }
     	 
     	 public void onStartTrackingTouch(SeekBar seekBar) {}
     	 public void onStopTrackingTouch(SeekBar seekBar) {}
@@ -121,11 +104,53 @@ public class BuyFragment  extends Fragment {
     	 }    	 
      };
      
-     mTextHousePrice.addTextChangedListener(new BuyTextWatcher(mIntHousePriceMin, mIntHousePriceMax, mSeekHousePrice));
-     mTextHousePrice.setText("300000");
+     class BuyTextWatcher implements TextWatcher {
+    	 private double mDblMin = 0;
+    	 private double mDblMax = 0;
+    	 private SeekBar mSeekBarLinked;
+    	 private BuySeekBarListner mSeekBarLinkedListner;
+    	 
+    	 public BuyTextWatcher(SeekBar seekBarLinked, BuySeekBarListner seekBarLinkedListner) {
+    		 mSeekBarLinked = seekBarLinked;
+    		 mSeekBarLinkedListner = seekBarLinkedListner;
+    	 }
+    	 
+    	 public void afterTextChanged(Editable s) {}	 
+    	 public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+    	 public void onTextChanged(CharSequence s, int start, int before, int count) {
+    		 if(s.toString().length() <= 0)
+    		 {
+    			 mSeekBarLinked.setProgress(0);
+    			 return;
+    		 }
+    		 double dInput = Double.valueOf(s.toString());
+    		 if(dInput < mDblMin ||  dInput > mDblMax)
+    		 {
+    			 mDblMin = 0;
+    			 double dTemp = (int)(dInput - dInput*0.5);
+    			 if(dTemp > 0)
+    				 mDblMin = dTemp;
+    			 mDblMax = (int)(dInput + dInput*0.5); 
+    			 
+    			 mSeekBarLinkedListner.setProgressMin(mDblMin);
+    			 mSeekBarLinkedListner.setProgressMax(mDblMax);
+    		 }
+    		 double dTemp = (dInput - mDblMin)/(mDblMax - mDblMin) * 100;
+    		 int iPos = (int)(dTemp + 0.5);
+    		 mSeekBarLinked.setProgress(iPos);
+    	 }     
+     };
      
-     mSeekHousePrice.setOnSeekBarChangeListener(new BuySeekBarListner(mIntHousePriceMin, mIntHousePriceMax, mTextHousePrice));
-          
+     BuySeekBarListner seekBarListnerHousePrice = new BuySeekBarListner(mTextHousePrice);
+     mTextHousePrice.addTextChangedListener(new BuyTextWatcher(mSeekHousePrice, seekBarListnerHousePrice));
+     mTextHousePrice.setText("300000");     
+     mSeekHousePrice.setOnSeekBarChangeListener(seekBarListnerHousePrice);
+     
+     BuySeekBarListner seekBarListnerDownPay = new BuySeekBarListner(mTextDownPay);
+     mTextDownPay.addTextChangedListener(new BuyTextWatcher(mSeekDownPay, seekBarListnerDownPay));
+     mTextDownPay.setText("100000");     
+     mSeekDownPay.setOnSeekBarChangeListener(seekBarListnerDownPay);
+     
      return viewBuy;
     }
 }

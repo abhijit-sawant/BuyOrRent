@@ -16,9 +16,9 @@
 	<string name="tenure">Loan Tenure</string>
 	<string name="holdPeriod">Holding Period</string>
 	<string name="yearlyExpenses">Yearly Expenses</string>
-	<string name="yearTax">Yearly Tax</string>
-	<string name="yearlyMaint">Yearly Maintenance</string>
-	<string name="yearlyPropIns">Yearly Insurance</string>
+	<string name="yearTax">Property Tax</string>
+	<string name="yearlyMaint">Maintenance</string>
+	<string name="yearlyPropIns">Insurance</string>
 	<string name="periExpenses">Peripheral Expenses</string>
 	<string name="mortInsRate">Mortgage Insurance\nRate (%)</string>
 	<string name="closingCost">Closing Cost (%)</string>
