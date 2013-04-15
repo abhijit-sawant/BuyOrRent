@@ -2,9 +2,6 @@ package aum.fin.buyorrent;
 
 import android.R.drawable;
 import android.support.v4.app.Fragment;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +13,7 @@ import android.widget.ScrollView;
 import android.widget.SeekBar;
 
 public class BuyFragment  extends Fragment {
-    /** (non-Javadoc)
-     * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
-     */
+
     private EditText mTextHousePrice;
     private SeekBar  mSeekHousePrice;
     
@@ -52,8 +47,7 @@ public class BuyFragment  extends Fragment {
     private EditText mTextApprRate;
     private SeekBar  mSeekApprRate;    
     
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     	
         if (container == null) { //if fragment's container frame does not exist in layout just return null
             return null;
@@ -124,103 +118,21 @@ public class BuyFragment  extends Fragment {
 		    	}
 		    } 
 		});  	
-		 
-		linkEditTextNSeekBar(mTextHousePrice, mSeekHousePrice, "300000");
-		linkEditTextNSeekBar(mTextDownPay, mSeekDownPay, "100000");
-		linkEditTextNSeekBar(mTextIntRate, mSeekIntRate, "0.20");
-		linkEditTextNSeekBar(mTextLoanTenr, mSeekLoanTenr, "15");
-		linkEditTextNSeekBar(mTextHoldingPeriod, mSeekHoldingPeriod, "15");
-		linkEditTextNSeekBar(mTextYearlyTax, mSeekYearlyTax, "2000");
-		linkEditTextNSeekBar(mTextYearlyMaintain, mSeekYearlyMaintain, "1200");
-		linkEditTextNSeekBar(mTextYearlyPropIns, mSeekYearlyPropIns, "1200");
-		linkEditTextNSeekBar(mTextMortIns, mSeekMortIns, "0.52");
-		linkEditTextNSeekBar(mTextClosingCost, mSeekClosingCost, "7.00");
-		linkEditTextNSeekBar(mTextApprRate, mSeekApprRate, "2.00");
+		
+		EditTextSeekBarLinker textNBarLinker = new EditTextSeekBarLinker();
+		
+		textNBarLinker.linkEditTextNSeekBar(mTextHousePrice, mSeekHousePrice, "300000");
+		textNBarLinker.linkEditTextNSeekBar(mTextDownPay, mSeekDownPay, "100000");
+		textNBarLinker.linkEditTextNSeekBar(mTextIntRate, mSeekIntRate, "0.20");
+		textNBarLinker.linkEditTextNSeekBar(mTextLoanTenr, mSeekLoanTenr, "15");
+		textNBarLinker.linkEditTextNSeekBar(mTextHoldingPeriod, mSeekHoldingPeriod, "15");
+		textNBarLinker.linkEditTextNSeekBar(mTextYearlyTax, mSeekYearlyTax, "2000");
+		textNBarLinker.linkEditTextNSeekBar(mTextYearlyMaintain, mSeekYearlyMaintain, "1200");
+		textNBarLinker.linkEditTextNSeekBar(mTextYearlyPropIns, mSeekYearlyPropIns, "1200");
+		textNBarLinker.linkEditTextNSeekBar(mTextMortIns, mSeekMortIns, "0.52");
+		textNBarLinker.linkEditTextNSeekBar(mTextClosingCost, mSeekClosingCost, "7.00");
+		textNBarLinker.linkEditTextNSeekBar(mTextApprRate, mSeekApprRate, "2.00");
 
 		return viewBuy;
-    }
-    
-    class BuySeekBarListner implements SeekBar.OnSeekBarChangeListener {
-    	private double mDblMin = 0;
-    	private double mDblMax = 0;
-    	private EditText mEditTextLinked;
-   	 
-    	public BuySeekBarListner(EditText editTextLinked) {
-   		 	mEditTextLinked = editTextLinked;
-   	 	}
-   	 
-		 public void setProgressMin(double dMin) { mDblMin = dMin; }
-		 public void setProgressMax(double dMax) { mDblMax = dMax; }
-		 public EditText getLinkedEditText() { return mEditTextLinked; }
-   	 
-	   	 public void onStartTrackingTouch(SeekBar seekBar) {}
-	   	 public void onStopTrackingTouch(SeekBar seekBar) {}
-	   	 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-	   		 if(fromUser)
-	   		 {
-	    		 double dTemp = ((progress/100.0) * (mDblMax - mDblMin)) + mDblMin;
-	    		 if(mEditTextLinked.getInputType() == (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL))
-	    		 {
-	    			 int iTemp = (int) dTemp;
-	    			 mEditTextLinked.setText(String.valueOf(iTemp));
-	    		 }
-	    		 else
-	    			 mEditTextLinked.setText(String.format("%.2f", dTemp));
-	   		 }
-	   	 }    	 
-    };
-    
-    class BuyTextWatcher implements TextWatcher {
-		private double mDblMin = 0;
-		private double mDblMax = 0;
-		private SeekBar mSeekBarLinked;
-		private BuySeekBarListner mSeekBarLinkedListner;
-		 
-		public BuyTextWatcher(SeekBar seekBarLinked, BuySeekBarListner seekBarLinkedListner) {
-			mSeekBarLinked = seekBarLinked;
-			mSeekBarLinkedListner = seekBarLinkedListner;
-		}
-		 
-		public void afterTextChanged(Editable s) {}	 
-		public void beforeTextChanged(CharSequence s, int start, int count, int after){}
-		public void onTextChanged(CharSequence s, int start, int before, int count) {
-			 if(s.toString().length() <= 0)
-			 {
-				 mSeekBarLinked.setProgress(0);
-				 return;
-			 }
-			 double dInput = Double.valueOf(s.toString());
-			 if(dInput < mDblMin ||  dInput > mDblMax)
-			 {
-				 mDblMin = dInput - dInput*0.5;
-				 if(mSeekBarLinkedListner.getLinkedEditText().getInputType() == 
-						 (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL))
-				 {
-					 mDblMin = (int) mDblMin;
-				 }
-				 if(mDblMin < 0)
-					 mDblMin = 0;
-				 
-				 mDblMax = dInput + dInput*0.5;
-				 if(mSeekBarLinkedListner.getLinkedEditText().getInputType() == 
-						 (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL))
-				 {
-					 mDblMax = (int) mDblMax;
-				 }    			 
-				 
-				 mSeekBarLinkedListner.setProgressMin(mDblMin);
-				 mSeekBarLinkedListner.setProgressMax(mDblMax);
-			 }
-			 double dTemp = (dInput - mDblMin)/(mDblMax - mDblMin) * 100;
-			 int iPos = (int)(dTemp + 0.5);
-			 mSeekBarLinked.setProgress(iPos);
-		 }     
-    };
-    
-    private void linkEditTextNSeekBar(EditText text, SeekBar bar, String strDefault) {
-    	 BuySeekBarListner barListner = new BuySeekBarListner(text);
-	     text.addTextChangedListener(new BuyTextWatcher(bar, barListner));
-	     text.setText(strDefault);     
-	     bar.setOnSeekBarChangeListener(barListner);     	 
     }
 }

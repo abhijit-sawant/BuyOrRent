@@ -26,7 +26,7 @@
 	        android:layout_alignBottom="@+id/actRent_textView1"
 	        android:layout_marginLeft="100dip"
 	        android:layout_toRightOf="@+id/actRent_textView1"
-	        android:inputType="numberDecimal"
+	        android:inputType="number"
 	        android:minWidth="100dip" />
 	    
 	    <SeekBar
@@ -85,7 +85,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/actRent_textView3"
 	        android:layout_alignLeft="@+id/actRent_editText2"
-	        android:inputType="numberDecimal"
+	        android:inputType="number"
 	        android:minWidth="100dip"/>
 	    
 	    <SeekBar
@@ -114,7 +114,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/actRent_editText3"
 	        android:layout_alignBottom="@+id/actRent_textView4"
-	        android:inputType="numberDecimal"
+	        android:inputType="number"
 	        android:minWidth="100dip"/>
 	    
 	     <SeekBar
