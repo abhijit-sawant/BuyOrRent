@@ -82,6 +82,9 @@ public class EditTextSeekBarLinker {
 			 double dTemp = (dInput - mDblMin)/(mDblMax - mDblMin) * 100;
 			 int iPos = (int)(dTemp + 0.5);
 			 mSeekBarLinked.setProgress(iPos);
+			 
+    		 MainFragment parentFragment = (MainFragment) mSeekBarLinked.getContext();
+    		 parentFragment.calcBuyOrRent();
 		 }     
     };
     

@@ -10,16 +10,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
+import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
  
-/**
- * @author mwho
- *
- */
 public class MainFragment extends FragmentActivity implements TabHost.OnTabChangeListener {
  
     private TabHost mTabHost;
     private HashMap mapTabInfo = new HashMap();
     private TabInfo mLastTab   = null;
+    private CalcBuyOrRent mCalcBuyOrRent = null;
+    
+    private boolean bAppLoading = true;
  
     private class TabInfo {
          private String tag;
@@ -42,9 +42,6 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
             mContext = context;
         }
  
-        /** (non-Javadoc)
-         * @see android.widget.TabHost.TabContentFactory#createTabContent(java.lang.String)
-         */
         public View createTabContent(String tag) {
             View v = new View(mContext);
             v.setMinimumWidth(0);
@@ -54,9 +51,12 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
  
     }
     
-    /** (non-Javadoc)
-     * @see android.support.v4.app.FragmentActivity#onCreate(android.os.Bundle)
-     */
+    protected void onStart() {
+    	super.onStart();
+    	bAppLoading = false;
+    	calcBuyOrRent();
+    }
+    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Step 1: Inflate layout
@@ -65,12 +65,9 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         initialiseTabHost(savedInstanceState);
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
-        }
+        }      
     }
  
-    /** (non-Javadoc)
-     * @see android.support.v4.app.FragmentActivity#onSaveInstanceState(android.os.Bundle)
-     */
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString("tab", mTabHost.getCurrentTabTag()); //save the tab selected
         super.onSaveInstanceState(outState);
@@ -113,9 +110,6 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         tabHost.addTab(tabSpec);
     }
  
-    /** (non-Javadoc)
-     * @see android.widget.TabHost.OnTabChangeListener#onTabChanged(java.lang.String)
-     */
     public void onTabChanged(String tag) {
         TabInfo newTab = (TabInfo) this.mapTabInfo.get(tag);
         if (mLastTab != newTab) {
@@ -138,6 +132,23 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
             ft.commit();
             this.getSupportFragmentManager().executePendingTransactions();
         }
+    }
+    
+    public CalcBuyOrRent getCalcBuyOrRent() {
+    	if(mCalcBuyOrRent == null)
+    		mCalcBuyOrRent = new CalcBuyOrRent();
+    	return mCalcBuyOrRent;
+    }
+    
+    public void calcBuyOrRent() {
+    	if(bAppLoading)
+    		return;
+    	
+    	Fragment fragmentCurrent = getSupportFragmentManager().findFragmentByTag(mTabHost.getCurrentTabTag());
+    	if(fragmentCurrent == null)
+    		return;
+    	
+    	((OnDataChangedListener) fragmentCurrent).onDataChanged();
     }
  
 }

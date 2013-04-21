@@ -11,8 +11,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
+import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
 
-public class BuyFragment  extends Fragment {
+public class BuyFragment  extends Fragment implements OnDataChangedListener {
 
     private EditText mTextHousePrice;
     private SeekBar  mSeekHousePrice;
@@ -45,13 +46,17 @@ public class BuyFragment  extends Fragment {
     private SeekBar  mSeekClosingCost;
     
     private EditText mTextApprRate;
-    private SeekBar  mSeekApprRate;    
+    private SeekBar  mSeekApprRate;  
+    
+    private Boolean mbIsCreated = false;
     
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     	
         if (container == null) { //if fragment's container frame does not exist in layout just return null
             return null;
         }
+        
+        mbIsCreated = false;
         
 		final ScrollView viewBuy = (ScrollView)inflater.inflate(R.layout.activity_buy, container, false);
 		mTextHousePrice = (EditText) viewBuy.findViewById(R.id.actBuy_editText1);
@@ -120,19 +125,42 @@ public class BuyFragment  extends Fragment {
 		});  	
 		
 		EditTextSeekBarLinker textNBarLinker = new EditTextSeekBarLinker();
+		CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
 		
-		textNBarLinker.linkEditTextNSeekBar(mTextHousePrice, mSeekHousePrice, "300000");
-		textNBarLinker.linkEditTextNSeekBar(mTextDownPay, mSeekDownPay, "100000");
-		textNBarLinker.linkEditTextNSeekBar(mTextIntRate, mSeekIntRate, "0.20");
-		textNBarLinker.linkEditTextNSeekBar(mTextLoanTenr, mSeekLoanTenr, "15");
-		textNBarLinker.linkEditTextNSeekBar(mTextHoldingPeriod, mSeekHoldingPeriod, "15");
-		textNBarLinker.linkEditTextNSeekBar(mTextYearlyTax, mSeekYearlyTax, "2000");
-		textNBarLinker.linkEditTextNSeekBar(mTextYearlyMaintain, mSeekYearlyMaintain, "1200");
-		textNBarLinker.linkEditTextNSeekBar(mTextYearlyPropIns, mSeekYearlyPropIns, "1200");
-		textNBarLinker.linkEditTextNSeekBar(mTextMortIns, mSeekMortIns, "0.52");
-		textNBarLinker.linkEditTextNSeekBar(mTextClosingCost, mSeekClosingCost, "7.00");
-		textNBarLinker.linkEditTextNSeekBar(mTextApprRate, mSeekApprRate, "2.00");
+		textNBarLinker.linkEditTextNSeekBar(mTextHousePrice, mSeekHousePrice, String.valueOf(calc.getHousePrice()));
+		textNBarLinker.linkEditTextNSeekBar(mTextDownPay, mSeekDownPay, String.valueOf(calc.getDownPay()));
+		textNBarLinker.linkEditTextNSeekBar(mTextIntRate, mSeekIntRate, String.format("%.2f", calc.getLoanIntRate()));
+		textNBarLinker.linkEditTextNSeekBar(mTextLoanTenr, mSeekLoanTenr,String.valueOf(calc.getLoanTenr()));
+		textNBarLinker.linkEditTextNSeekBar(mTextHoldingPeriod, mSeekHoldingPeriod, String.valueOf(calc.getHoldingPriod()));
+		textNBarLinker.linkEditTextNSeekBar(mTextYearlyTax, mSeekYearlyTax, String.valueOf(calc.getYearlyTax()));
+		textNBarLinker.linkEditTextNSeekBar(mTextYearlyMaintain, mSeekYearlyMaintain, String.valueOf(calc.getYearlyMaintain()));
+		textNBarLinker.linkEditTextNSeekBar(mTextYearlyPropIns, mSeekYearlyPropIns, String.valueOf(calc.getYearlyPropIns()));
+		textNBarLinker.linkEditTextNSeekBar(mTextMortIns, mSeekMortIns, String.format("%.2f", calc.getMortIns()));
+		textNBarLinker.linkEditTextNSeekBar(mTextClosingCost, mSeekClosingCost, String.format("%.2f", calc.getClosingCost()));
+		textNBarLinker.linkEditTextNSeekBar(mTextApprRate, mSeekApprRate, String.format("%.2f", calc.getHomeApprRate()));
+		
+		mbIsCreated = true;
 
 		return viewBuy;
     }
+    
+    public void onDataChanged() {
+    	if(!mbIsCreated)
+    		return;
+    	
+    	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
+    	
+    	calc.setHousePrice(Integer.valueOf(mTextHousePrice.getText().toString()));
+    	calc.setDownPay(Integer.valueOf(mTextDownPay.getText().toString()));
+    	calc.setLoanIntRate(Double.valueOf(mTextIntRate.getText().toString()));
+    	calc.setLoanTenr(Integer.valueOf(mTextLoanTenr.getText().toString()));
+    	calc.setHoldingPriod(Integer.valueOf(mTextHoldingPeriod.getText().toString()));
+    	calc.setYearlyTax(Integer.valueOf(mTextYearlyTax.getText().toString()));
+    	calc.setYearlyMaintain(Integer.valueOf(mTextYearlyMaintain.getText().toString()));
+    	calc.setYearlyPropIns(Integer.valueOf(mTextYearlyPropIns.getText().toString()));
+    	calc.setMortIns(Double.valueOf(mTextMortIns.getText().toString()));
+    	calc.setClosingCost(Double.valueOf(mTextClosingCost.getText().toString()));
+    	calc.setHomeApprRate(Double.valueOf(mTextApprRate.getText().toString()));
+    }    
+    
 }

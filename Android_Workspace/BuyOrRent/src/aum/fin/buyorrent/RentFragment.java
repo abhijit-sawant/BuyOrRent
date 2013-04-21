@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
+import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
 
-public class RentFragment extends Fragment {
+public class RentFragment extends Fragment implements OnDataChangedListener {
 	
     private EditText mTextRent;
     private SeekBar  mSeekRent;
@@ -23,11 +24,16 @@ public class RentFragment extends Fragment {
     private EditText mTextUtility;
     private SeekBar  mSeekUtility;
     
+    private boolean mbIsCreated = false;
+    
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    	
+    	    	
         if (container == null) {
             return null;
         }
+        
+        mbIsCreated = false;
+    	
         final ScrollView viewRent = (ScrollView)inflater.inflate(R.layout.activity_rent, container, false);
         
         mTextRent = (EditText) viewRent.findViewById(R.id.actRent_editText1);
@@ -43,13 +49,30 @@ public class RentFragment extends Fragment {
         mSeekUtility = (SeekBar) viewRent.findViewById(R.id.actRent_seekBar4);
         
         EditTextSeekBarLinker textNBarLinker = new EditTextSeekBarLinker();
-		
-		textNBarLinker.linkEditTextNSeekBar(mTextRent, mSeekRent, "800");
-		textNBarLinker.linkEditTextNSeekBar(mTextYrlyRentIncrease, mSeekYrlyRentIncrease, "4.00");
-		textNBarLinker.linkEditTextNSeekBar(mTextIns, mSeekIns, "0");
-		textNBarLinker.linkEditTextNSeekBar(mTextUtility, mSeekUtility, "50");
+        CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
         
+		textNBarLinker.linkEditTextNSeekBar(mTextRent, mSeekRent, String.valueOf(calc.getRent()));
+		textNBarLinker.linkEditTextNSeekBar(mTextYrlyRentIncrease, mSeekYrlyRentIncrease,
+				                            String.format("%.2f", calc.getRentIncreaseRate()));
+		textNBarLinker.linkEditTextNSeekBar(mTextIns, mSeekIns, String.valueOf(calc.getRentIns()));
+		textNBarLinker.linkEditTextNSeekBar(mTextUtility, mSeekUtility, String.valueOf(calc.getUtility()));
+        
+		mbIsCreated = true;
+		
         return viewRent;
     }
+    
+    public void onDataChanged() {
+    	if(!mbIsCreated)
+    		return;
+    	
+    	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
+    	
+    	calc.setRent(Integer.valueOf(mTextRent.getText().toString()));
+    	calc.setRentIncreaseRate(Double.valueOf(mTextYrlyRentIncrease.getText().toString()));
+    	calc.setRentIns(Integer.valueOf(mTextIns.getText().toString()));
+    	calc.setUtility(Integer.valueOf(mTextUtility.getText().toString()));
+    }
+    
 }
 
