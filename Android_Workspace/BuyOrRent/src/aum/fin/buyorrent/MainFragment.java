@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
+import android.widget.TextView;
 import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
  
 public class MainFragment extends FragmentActivity implements TabHost.OnTabChangeListener {
@@ -18,6 +19,7 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     private HashMap mapTabInfo = new HashMap();
     private TabInfo mLastTab   = null;
     private CalcBuyOrRent mCalcBuyOrRent = null;
+    private TextView mTextBuyRent;
     
     private boolean bAppLoading = true;
  
@@ -61,11 +63,14 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         super.onCreate(savedInstanceState);
         // Step 1: Inflate layout
         setContentView(R.layout.activity_main);
+        
         // Step 2: Setup TabHost
         initialiseTabHost(savedInstanceState);
         if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
-        }      
+        }  
+        
+        mTextBuyRent = (TextView) findViewById(R.id.actMain_textView1);
     }
  
     protected void onSaveInstanceState(Bundle outState) {
@@ -149,6 +154,11 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     		return;
     	
     	((OnDataChangedListener) fragmentCurrent).onDataChanged();
+    	
+    	getCalcBuyOrRent().calculate();
+    	double dBuyProfit = getCalcBuyOrRent().getBuyProfit();
+    	
+    	mTextBuyRent.setText(String.format("%.2f", dBuyProfit));
     }
  
 }

@@ -27,13 +27,15 @@ public class CalcBuyOrRent {
 	private int    miItemDeduct;
 	private double mdTaxBracket;
 	
+	private double mdBuyProfit;
+	
 	public CalcBuyOrRent() {		
 		//loan
 		miHousePrice     = 300000;
 		miDownPay        = 100000;
-		mdLoanIntRate    = 0.20;
+		mdLoanIntRate    = 2;
 		miLoanTenr       = 15;
-		miHoldingPeriod  = 15;
+		miHoldingPeriod  = 4;
 		miYearlyTax      = 2000;
 		miYearlyMaintain = 1200;
 		miYearlyPropIns  = 1200;
@@ -51,6 +53,8 @@ public class CalcBuyOrRent {
 		miGrossIncome = 80000;
 		miItemDeduct  = 10000;
 		mdTaxBracket  = 15;		
+		
+		mdBuyProfit = 0;
 	}
 	
 	public int getHousePrice() {
@@ -196,5 +200,42 @@ public class CalcBuyOrRent {
 	public void setTaxBracket(double dVal) {
 		mdTaxBracket = dVal;
 	}
-
+	
+	public double getBuyProfit() {
+		return mdBuyProfit;
+	}
+	
+	public void calculate() {
+		int iLoanAmount = miHousePrice - miDownPay;
+		double dIntRatePerMont = (mdLoanIntRate*0.01)/12;
+		int iNumLoanPay = miLoanTenr * 12;
+		
+		double dMonthlyPayment = iLoanAmount * dIntRatePerMont;
+		dMonthlyPayment = dMonthlyPayment / (1 - (1/Math.pow(1 + dIntRatePerMont, iNumLoanPay)));
+		
+		double dMortInsPerMonth = (mdMortIns * 0.01 * iLoanAmount)/12;
+		double dTotalMonthlyPay = dMonthlyPayment + dMortInsPerMonth;
+		
+		int iHoldingPeriodMnths = miHoldingPeriod * 12;
+		double dLoanBalance = iLoanAmount;
+		dLoanBalance = dLoanBalance * (1 - Math.pow(1 + dIntRatePerMont, iHoldingPeriodMnths - iNumLoanPay));
+		dLoanBalance = dLoanBalance / (1 - Math.pow(1 + dIntRatePerMont, -1 * iNumLoanPay));
+		
+		double dMortPaid = dMonthlyPayment * iHoldingPeriodMnths;
+		double dPrincipalPaid = iLoanAmount - dLoanBalance;
+		double dIntPaid = dMortPaid - dPrincipalPaid;
+		
+		//house sell price
+		double dHouseSellPrice = miHousePrice;
+		for(int i = 1; i <= miHoldingPeriod; i++)
+			dHouseSellPrice += dHouseSellPrice * (mdHomeApprRate * 0.01);
+		
+		double dTaxNIntPerYear = ((dIntPaid * 12) / iHoldingPeriodMnths) + miYearlyTax;
+		double dTotalMortIns = dMortInsPerMonth * iHoldingPeriodMnths;
+		
+		double dTaxInsMaintain = ((double) (miYearlyTax + miYearlyPropIns + miYearlyMaintain) / 12) * iHoldingPeriodMnths;
+		double dClosingCost = mdClosingCost * 0.01 * dHouseSellPrice;
+		
+		mdBuyProfit = dHouseSellPrice - (miHousePrice + dIntPaid + dClosingCost + dTotalMortIns + dTaxInsMaintain);
+	}
 }

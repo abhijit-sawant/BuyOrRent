@@ -68,6 +68,7 @@ public final class R {
         public static final int actBuy_textView9=0x7f090025;
         public static final int actBuy_textYearlyTitle=0x7f090013;
         public static final int actBuy_yearlyExpDivider=0x7f090010;
+        public static final int actMain_textView1=0x7f09002f;
         public static final int actRent_editText1=0x7f090032;
         public static final int actRent_editText2=0x7f090035;
         public static final int actRent_editText3=0x7f090038;
@@ -94,7 +95,6 @@ public final class R {
         public static final int menu_settings=0x7f090048;
         public static final int realtabcontent=0x01010000;
         public static final int scrollView1=0x7f090030;
-        public static final int textView1=0x7f09002f;
     }
     public static final class layout {
         public static final int activity_buy=0x7f030000;
