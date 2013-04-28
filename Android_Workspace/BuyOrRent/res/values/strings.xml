@@ -7,7 +7,10 @@
     <string name="title_activity_rent">Rent</string>
     <string name="title_activity_tax">Tax</string>
     
-    <string name="buttonLabel">Decide</string>
+    <string name="buyprofitloss">Buy Profit</string>
+    <string name="rentexpenses">Rent</string>
+    <string name="netprofitloss">Net Profit</string>
+    <string name="decision">Decision</string>
     
     <string name="housePrice">House Price</string>
 	<string name="downPay">Down Payment</string>

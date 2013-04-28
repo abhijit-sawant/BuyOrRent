@@ -70,7 +70,7 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
         }  
         
-        mTextBuyRent = (TextView) findViewById(R.id.actMain_textView1);
+        mTextBuyRent = (TextView) findViewById(R.id.actMain_textView2);
     }
  
     protected void onSaveInstanceState(Bundle outState) {
