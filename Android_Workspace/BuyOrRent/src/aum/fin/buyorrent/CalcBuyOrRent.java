@@ -28,6 +28,7 @@ public class CalcBuyOrRent {
 	private double mdTaxBracket;
 	
 	private double mdBuyProfit;
+	private double mdTotalRent;
 	
 	public CalcBuyOrRent() {		
 		//loan
@@ -55,6 +56,7 @@ public class CalcBuyOrRent {
 		mdTaxBracket  = 15;		
 		
 		mdBuyProfit = 0;
+		mdTotalRent = 0;
 	}
 	
 	public int getHousePrice() {
@@ -205,6 +207,14 @@ public class CalcBuyOrRent {
 		return mdBuyProfit;
 	}
 	
+	public double getTotalRent() {
+		return -1 * mdTotalRent;
+	}
+	
+	public double getNetProfit() {
+		return (getBuyProfit() - getTotalRent());
+	}
+	
 	public void calculate() {
 		int iLoanAmount = miHousePrice - miDownPay;
 		double dIntRatePerMont = (mdLoanIntRate*0.01)/12;
@@ -226,9 +236,7 @@ public class CalcBuyOrRent {
 		double dIntPaid = dMortPaid - dPrincipalPaid;
 		
 		//house sell price
-		double dHouseSellPrice = miHousePrice;
-		for(int i = 1; i <= miHoldingPeriod; i++)
-			dHouseSellPrice += dHouseSellPrice * (mdHomeApprRate * 0.01);
+		double dHouseSellPrice = futureValueOnAnnual(miHousePrice, mdHomeApprRate, miHoldingPeriod);
 		
 		double dTaxNIntPerYear = ((dIntPaid * 12) / iHoldingPeriodMnths) + miYearlyTax;
 		double dTotalMortIns = dMortInsPerMonth * iHoldingPeriodMnths;
@@ -237,5 +245,28 @@ public class CalcBuyOrRent {
 		double dClosingCost = mdClosingCost * 0.01 * dHouseSellPrice;
 		
 		mdBuyProfit = dHouseSellPrice - (miHousePrice + dIntPaid + dClosingCost + dTotalMortIns + dTaxInsMaintain);
+		
+		double temp = futureValueOnMonthly(miRent, mdRentIncreaseRate, miHoldingPeriod);
+		mdTotalRent = futureValueOnMonthly((miRent), mdRentIncreaseRate, miHoldingPeriod) + (miHoldingPeriod*12*miUtility);
 	}
+	
+	private double futureValueOnAnnual(double dCurVal, double dApprRate, int iPeriod) {
+		double dFutVal = dCurVal;
+		for(int i = 1; i <= iPeriod; i++)
+			dFutVal += dFutVal * (dApprRate * 0.01);
+		return dFutVal;
+	}
+	
+	private double futureValueOnMonthly(double dCurVal, double dApprRate, int iPeriod) {
+		double dFutVal = 0;
+		double dMonthly = dCurVal;
+		for(int i = 1; i <= iPeriod; i++)
+		{
+			dFutVal += 12 * dMonthly;
+			dMonthly += dMonthly * (dApprRate * 0.01);
+		}
+		return dFutVal;
+	}
+	
+	
 }

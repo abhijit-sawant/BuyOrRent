@@ -12,6 +12,9 @@
     <string name="netprofitloss">Net Profit</string>
     <string name="decision">Decision</string>
     
+    <string name="decisionbuy">Buy</string>
+    <string name="decisionrent">Rent</string>
+    
     <string name="housePrice">House Price</string>
 	<string name="downPay">Down Payment</string>
 	<string name="loanAmt">Loan Amount</string>

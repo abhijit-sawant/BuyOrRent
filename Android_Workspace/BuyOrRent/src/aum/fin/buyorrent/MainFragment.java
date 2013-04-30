@@ -19,7 +19,11 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     private HashMap mapTabInfo = new HashMap();
     private TabInfo mLastTab   = null;
     private CalcBuyOrRent mCalcBuyOrRent = null;
+    
     private TextView mTextBuyRent;
+    private TextView mTextRent;
+    private TextView mTextNetProfit;
+    private TextView mTextDecision;
     
     private boolean bAppLoading = true;
  
@@ -70,7 +74,11 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
         }  
         
-        mTextBuyRent = (TextView) findViewById(R.id.actMain_textView2);
+        mTextBuyRent   = (TextView) findViewById(R.id.actMain_textView2);
+        mTextRent      = (TextView) findViewById(R.id.actMain_textView4);
+        mTextNetProfit = (TextView) findViewById(R.id.actMain_textView6);
+        mTextDecision  = (TextView) findViewById(R.id.actMain_textView8);
+        
     }
  
     protected void onSaveInstanceState(Bundle outState) {
@@ -156,9 +164,18 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     	((OnDataChangedListener) fragmentCurrent).onDataChanged();
     	
     	getCalcBuyOrRent().calculate();
-    	double dBuyProfit = getCalcBuyOrRent().getBuyProfit();
+    	double dBuyProfit  = getCalcBuyOrRent().getBuyProfit();
+    	double dRent       = getCalcBuyOrRent().getTotalRent();
+    	double dNetProfit  = getCalcBuyOrRent().getNetProfit();
     	
     	mTextBuyRent.setText(String.format("%.2f", dBuyProfit));
+    	mTextRent.setText(String.format("%.2f", dRent));
+    	mTextNetProfit.setText(String.format("%.2f", dNetProfit));
+    	
+    	if(dNetProfit > 0)
+    		mTextDecision.setText(R.string.decisionbuy);
+    	else
+    		mTextDecision.setText(R.string.decisionrent);
     }
  
 }
