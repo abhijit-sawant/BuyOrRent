@@ -21,13 +21,13 @@
 
 	    <EditText
 	        android:id="@+id/actBuy_editText1"
-	        android:layout_width="wrap_content"
+	        android:layout_width="100dip"
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/actBuy_textView1"
-	        android:layout_marginLeft="60dip"
+	        android:layout_marginLeft="30dip"
 	        android:layout_toRightOf="@+id/actBuy_textView1"
 	        android:inputType="number"
-	        android:minWidth="100dip" />
+	        android:maxWidth="100dip" />
 	    
 	    <SeekBar
 	        android:id="@+id/actBuy_seekBar1"
@@ -52,12 +52,12 @@
 	        
 	    <EditText
 	        android:id="@+id/actBuy_editText2"
-	        android:layout_width="wrap_content"
+	        android:layout_width="100dip"
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/actBuy_textView2"
 	        android:layout_alignLeft="@+id/actBuy_editText1"
 	        android:inputType="number"
-	        android:minWidth="100dip"/>
+	        android:maxWidth="100dip"/>
 	    
 	     <SeekBar
 	        android:id="@+id/actBuy_seekBar2"
@@ -82,12 +82,12 @@
 	
 	    <EditText
 	        android:id="@+id/actBuy_editText3"
-	        android:layout_width="wrap_content"
+	        android:layout_width="100dip"
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/actBuy_textView3"
 	        android:layout_alignLeft="@+id/actBuy_editText2"
 	        android:inputType="numberDecimal"
-	        android:minWidth="100dip"/>
+	        android:maxWidth="100dip"/>
 	    
 	    <SeekBar
 	        android:id="@+id/actBuy_seekBar3"
@@ -112,12 +112,12 @@
 	
 	    <EditText
 	        android:id="@+id/actBuy_editText4"
-	        android:layout_width="wrap_content"
+	        android:layout_width="100dip"
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/actBuy_editText3"
 	        android:layout_alignBottom="@+id/actBuy_textView4"
 	        android:inputType="number"
-	        android:minWidth="100dip"/>
+	        android:maxWidth="100dip"/>
 	    
 	     <SeekBar
 	        android:id="@+id/actBuy_seekBar4"
@@ -141,12 +141,12 @@
 	
 	    <EditText
 	        android:id="@+id/actBuy_editText5"
-	        android:layout_width="wrap_content"
+	        android:layout_width="100dip"
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/actBuy_editText4"
 	        android:layout_alignBottom="@+id/actBuy_textView5"
 	        android:inputType="number"
-	        android:minWidth="100dip"/>
+	        android:maxWidth="100dip"/>
 	    
 	     <SeekBar
 	        android:id="@+id/actBuy_seekBar5"
@@ -216,13 +216,13 @@
 			
 			    <EditText
 			        android:id="@+id/actBuy_editText6"
-			        android:layout_width="wrap_content"
+			        android:layout_width="100dip"
 			        android:layout_height="wrap_content"
 					android:layout_alignBottom="@+id/actBuy_textView6"
-		        	android:layout_marginLeft="55dip"
+		        	android:layout_marginLeft="25dip"
 		        	android:layout_toRightOf="@+id/actBuy_textView6"
 			        android:inputType="number"
-			        android:minWidth="100dip"/>
+			        android:maxWidth="100dip"/>
 			    
 			     <SeekBar
 			        android:id="@+id/actBuy_seekBar6"
@@ -246,12 +246,12 @@
 			
 			    <EditText
 			        android:id="@+id/actBuy_editText7"
-			        android:layout_width="wrap_content"
+			        android:layout_width="100dip"
 			        android:layout_height="wrap_content"
 			        android:layout_alignLeft="@+id/actBuy_editText6"
 			        android:layout_alignBottom="@+id/actBuy_textView7"
 			        android:inputType="number"
-			        android:minWidth="100dip"/>
+			        android:maxWidth="100dip"/>
 			    
 			     <SeekBar
 			        android:id="@+id/actBuy_seekBar7"
@@ -275,12 +275,12 @@
 			
 			    <EditText
 			        android:id="@+id/actBuy_editText8"
-			        android:layout_width="wrap_content"
+			        android:layout_width="100dip"
 			        android:layout_height="wrap_content"
 			        android:layout_alignLeft="@+id/actBuy_editText7"
 			        android:layout_alignBottom="@+id/actBuy_textView8"
 			        android:inputType="number"
-			        android:minWidth="100dip"/>
+			        android:maxWidth="100dip"/>
 			    
 			     <SeekBar
 			        android:id="@+id/actBuy_seekBar8"
@@ -354,13 +354,13 @@
 			
 			    <EditText
 			        android:id="@+id/actBuy_editText9"
-			        android:layout_width="wrap_content"
+			        android:layout_width="70dip"
 			        android:layout_height="wrap_content"
 			        android:layout_alignBottom="@+id/actBuy_textView9"
 		        	android:layout_toRightOf="@+id/actBuy_textView9"
 		        	android:layout_marginLeft="0dip"
 			        android:inputType="numberDecimal"
-			        android:minWidth="100dip"/>
+			        android:maxWidth="70dip"/>
 			    
 			     <SeekBar
 			        android:id="@+id/actBuy_seekBar9"
@@ -384,12 +384,12 @@
 			
 			    <EditText
 			        android:id="@+id/actBuy_editText10"
-			        android:layout_width="wrap_content"
+			        android:layout_width="70dip"
 			        android:layout_height="wrap_content"
 			        android:layout_alignLeft="@+id/actBuy_editText9"
 			        android:layout_alignBottom="@+id/actBuy_textView10"
 			        android:inputType="numberDecimal"
-			        android:minWidth="100dip"/>
+			        android:maxWidth="70dip"/>
 			    
 			     <SeekBar
 			        android:id="@+id/actBuy_seekBar10"
@@ -413,12 +413,12 @@
 			
 			    <EditText
 			        android:id="@+id/actBuy_editText11"
-			        android:layout_width="wrap_content"
+			        android:layout_width="70dip"
 			        android:layout_height="wrap_content"
 			        android:layout_alignLeft="@+id/actBuy_editText10"
 			        android:layout_alignBottom="@+id/actBuy_textView11"
 			        android:inputType="numberDecimal"
-			        android:minWidth="100dip"/>
+			        android:maxWidth="70dip"/>
 			    
 			     <SeekBar
 			        android:id="@+id/actBuy_seekBar11"

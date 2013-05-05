@@ -21,13 +21,13 @@
 
 	    <EditText
 	        android:id="@+id/actRent_editText1"
-	        android:layout_width="wrap_content"
+	        android:layout_width="75dip"
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/actRent_textView1"
 	        android:layout_marginLeft="100dip"
 	        android:layout_toRightOf="@+id/actRent_textView1"
 	        android:inputType="number"
-	        android:minWidth="100dip" />
+	        android:maxWidth="75dip" />
 	    
 	    <SeekBar
 	        android:id="@+id/actRent_seekBar1"
@@ -52,12 +52,12 @@
 	        
 	    <EditText
 	        android:id="@+id/actRent_editText2"
-	        android:layout_width="wrap_content"
+	        android:layout_width="75dip"
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/actRent_textView2"
 	        android:layout_alignLeft="@+id/actRent_editText1"
 	        android:inputType="numberDecimal"
-	        android:minWidth="100dip"/>
+	        android:maxWidth="75dip"/>
 	    
 	     <SeekBar
 	        android:id="@+id/actRent_seekBar2"
@@ -81,12 +81,12 @@
 	
 	    <EditText
 	        android:id="@+id/actRent_editText3"
-	        android:layout_width="wrap_content"
+	        android:layout_width="75dip"
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/actRent_textView3"
 	        android:layout_alignLeft="@+id/actRent_editText2"
 	        android:inputType="number"
-	        android:minWidth="100dip"/>
+	        android:maxWidth="75dip"/>
 	    
 	    <SeekBar
 	        android:id="@+id/actRent_seekBar3"
@@ -110,12 +110,12 @@
 	
 	    <EditText
 	        android:id="@+id/actRent_editText4"
-	        android:layout_width="wrap_content"
+	        android:layout_width="75dip"
 	        android:layout_height="wrap_content"
 	        android:layout_alignLeft="@+id/actRent_editText3"
 	        android:layout_alignBottom="@+id/actRent_textView4"
 	        android:inputType="number"
-	        android:minWidth="100dip"/>
+	        android:maxWidth="75dip"/>
 	    
 	     <SeekBar
 	        android:id="@+id/actRent_seekBar4"

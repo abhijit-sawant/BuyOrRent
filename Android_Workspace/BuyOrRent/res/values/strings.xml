@@ -12,8 +12,8 @@
     <string name="netprofitloss">Net Profit</string>
     <string name="decision">Decision</string>
     
-    <string name="decisionbuy">Buy</string>
-    <string name="decisionrent">Rent</string>
+    <string name="decisionbuy">BUY</string>
+    <string name="decisionrent">RENT</string>
     
     <string name="housePrice">House Price</string>
 	<string name="downPay">Down Payment</string>
@@ -37,7 +37,7 @@
 	
 	<string name="martialStatus">Martial Status</string>
 	<string name="yearlyGrossIncome">Yearly Gross\nIncome</string>
-	<string name="itemizedDeduct">Itemized Deduction</string>
+	<string name="itemizedDeduct">Itemized\nDeduction</string>
 	<string name="taxBracket">Tax Bracket (%)</string>
 	
 	<string-array name="martialStatus_array">

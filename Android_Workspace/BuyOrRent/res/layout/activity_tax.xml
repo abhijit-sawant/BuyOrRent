@@ -21,13 +21,13 @@
 
         <EditText
             android:id="@+id/actTax_editText1"
-            android:layout_width="wrap_content"
+            android:layout_width="100dip"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/actTax_textView1"
-            android:layout_marginLeft="55dip"
+            android:layout_marginLeft="25dip"
             android:layout_toRightOf="@+id/actTax_textView1"
             android:inputType="number"
-            android:minWidth="100dip" />
+            android:maxWidth="100dip" />
 
         <SeekBar
             android:id="@+id/actTax_seekBar1"
@@ -51,12 +51,12 @@
 
         <EditText
             android:id="@+id/actTax_editText2"
-            android:layout_width="wrap_content"
+            android:layout_width="100dip"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/actTax_textView2"
             android:layout_alignLeft="@+id/actTax_editText1"
             android:inputType="number"
-            android:minWidth="100dip" />
+            android:maxWidth="100dip" />
 
         <SeekBar
             android:id="@+id/actTax_seekBar2"
@@ -80,12 +80,12 @@
 
         <EditText
             android:id="@+id/actTax_editText3"
-            android:layout_width="wrap_content"
+            android:layout_width="100dip"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/actTax_textView3"
             android:layout_alignLeft="@+id/actTax_editText2"
             android:inputType="numberDecimal"
-            android:minWidth="100dip" />
+            android:maxWidth="100dip" />
 
         <SeekBar
             android:id="@+id/actTax_seekBar3"

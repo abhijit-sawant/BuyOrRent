@@ -3,6 +3,7 @@ package aum.fin.buyorrent;
 import java.util.HashMap;
  
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -26,6 +27,9 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     private TextView mTextDecision;
     
     private boolean bAppLoading = true;
+    
+    private final int miRed   = 0xffff3333;
+    private final int miGreen = 0xff006600; //0x9600ff80;
  
     private class TabInfo {
          private String tag;
@@ -77,7 +81,9 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         mTextBuyRent   = (TextView) findViewById(R.id.actMain_textView2);
         mTextRent      = (TextView) findViewById(R.id.actMain_textView4);
         mTextNetProfit = (TextView) findViewById(R.id.actMain_textView6);
-        mTextDecision  = (TextView) findViewById(R.id.actMain_textView8);
+        mTextDecision  = (TextView) findViewById(R.id.actMain_textView7);
+        
+        mTextRent.setTextColor(miRed);
         
     }
  
@@ -169,13 +175,29 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     	double dNetProfit  = getCalcBuyOrRent().getNetProfit();
     	
     	mTextBuyRent.setText(String.format("%.2f", dBuyProfit));
+    	if(dBuyProfit < 0)
+    		mTextBuyRent.setTextColor(miRed);
+    	else
+    		mTextBuyRent.setTextColor(miGreen);
+    	
     	mTextRent.setText(String.format("%.2f", dRent));
+    	
     	mTextNetProfit.setText(String.format("%.2f", dNetProfit));
+    	if(dNetProfit < 0)
+    		mTextNetProfit.setTextColor(miRed);
+    	else
+    		mTextNetProfit.setTextColor(miGreen);
     	
     	if(dNetProfit > 0)
+    	{
     		mTextDecision.setText(R.string.decisionbuy);
+    		mTextDecision.setTextColor(miGreen);
+    	}
     	else
+    	{
     		mTextDecision.setText(R.string.decisionrent);
+    		mTextDecision.setTextColor(miRed);
+    	}
     }
  
 }
