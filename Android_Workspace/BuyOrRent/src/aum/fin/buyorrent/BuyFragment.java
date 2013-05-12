@@ -2,6 +2,8 @@ package aum.fin.buyorrent;
 
 import android.R.drawable;
 import android.support.v4.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,36 +19,54 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 
     private EditText mTextHousePrice;
     private SeekBar  mSeekHousePrice;
+    private EditTextSeekBarLinker mHousePriceLnk;
     
     private EditText mTextDownPay;
     private SeekBar  mSeekDownPay;
+    private EditTextSeekBarLinker mDownPayLnk;
     
     private EditText mTextIntRate;
     private SeekBar  mSeekIntRate;
+    private EditTextSeekBarLinker mIntRateLnk;
     
     private EditText mTextLoanTenr;
     private SeekBar  mSeekLoanTenr;
+    private EditTextSeekBarLinker mLoanTenrLnk;
     
     private EditText mTextHoldingPeriod;
     private SeekBar  mSeekHoldingPeriod;
+    private EditTextSeekBarLinker mHoldingPeriodLnk;
     
     private EditText mTextYearlyTax;
     private SeekBar  mSeekYearlyTax;
+    private EditTextSeekBarLinker mYearlyTaxLnk;
     
     private EditText mTextYearlyMaintain;
     private SeekBar  mSeekYearlyMaintain; 
+    private EditTextSeekBarLinker mYearlyMaintainLnk;
     
     private EditText mTextYearlyPropIns;
     private SeekBar  mSeekYearlyPropIns;    
+    private EditTextSeekBarLinker mYearlyPropInsLnk;
     
     private EditText mTextMortIns;
     private SeekBar  mSeekMortIns;
+    private EditTextSeekBarLinker mMortInsLnk;
     
     private EditText mTextClosingCost;
     private SeekBar  mSeekClosingCost;
+    private EditTextSeekBarLinker mClosingCostLnk;
     
     private EditText mTextApprRate;
-    private SeekBar  mSeekApprRate;  
+    private SeekBar  mSeekApprRate;
+    private EditTextSeekBarLinker mApprRateLnk;
+    
+    private RelativeLayout mLoYearlyContent;
+    private ImageView      mImgYearlyArrow;
+    private RelativeLayout mLoPeriContent;
+	private ImageView      mImgPeriArrow;
+    
+    private SharedPreferences mPrefrences;
     
     private Boolean mbIsCreated = false;
     
@@ -90,58 +110,113 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 		mSeekClosingCost = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar10); 
 		 
 		mTextApprRate = (EditText) viewBuy.findViewById(R.id.actBuy_editText11);
-		mSeekApprRate = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar11);      
+		mSeekApprRate = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar11);  
+		
+		mPrefrences = ((MainFragment) getActivity()).getPreferences(Context.MODE_PRIVATE);
 		      
 		//yearly expenses
 		final RelativeLayout loYearlyTitle = (RelativeLayout) viewBuy.findViewById(R.id.actBuy_layoutYearlyTitle);
-		final RelativeLayout loYearlyContent = (RelativeLayout) viewBuy.findViewById(R.id.actBuy_layoutYearlyContent);
-		final ImageView imgYearlyArrow = (ImageView) viewBuy.findViewById(R.id.actBuy_imageYearlyArrow);
+		mLoYearlyContent = (RelativeLayout) viewBuy.findViewById(R.id.actBuy_layoutYearlyContent);
+		mImgYearlyArrow  = (ImageView) viewBuy.findViewById(R.id.actBuy_imageYearlyArrow);
 		loYearlyTitle.setOnClickListener(new View.OnClickListener() {
 		    public void onClick(View v) {
 		    	if (v == loYearlyTitle) {
-		    		loYearlyContent.setVisibility(loYearlyContent.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-		    		if(loYearlyContent.getVisibility() == View.VISIBLE)
-		    			imgYearlyArrow.setImageResource(drawable.arrow_up_float);
+		    		mLoYearlyContent.setVisibility(mLoYearlyContent.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+		    		if(mLoYearlyContent.getVisibility() == View.VISIBLE)
+		    			mImgYearlyArrow.setImageResource(drawable.arrow_up_float);
 		    		else
-		    			imgYearlyArrow.setImageResource(drawable.arrow_down_float);
+		    			mImgYearlyArrow.setImageResource(drawable.arrow_down_float);
 		    	}
 		    } 
 		});
 		    
 		//peripheral expenses
 		final RelativeLayout loPeriTitle = (RelativeLayout) viewBuy.findViewById(R.id.actBuy_layoutPeriTitle);
-		final RelativeLayout loPeriContent = (RelativeLayout) viewBuy.findViewById(R.id.actBuy_layoutPeriContent);
-		final ImageView imgPeriArrow = (ImageView) viewBuy.findViewById(R.id.actBuy_imagePeriArrow);
+		mLoPeriContent = (RelativeLayout) viewBuy.findViewById(R.id.actBuy_layoutPeriContent);
+		mImgPeriArrow  = (ImageView) viewBuy.findViewById(R.id.actBuy_imagePeriArrow);
 		loPeriTitle.setOnClickListener(new View.OnClickListener() {
 		    public void onClick(View v) {
 		    	if (v == loPeriTitle) {
-		    		loPeriContent.setVisibility(loPeriContent.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-		    		if(loPeriContent.getVisibility() == View.VISIBLE)
-		    			imgPeriArrow.setImageResource(drawable.arrow_up_float);
+		    		mLoPeriContent.setVisibility(mLoPeriContent.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+		    		if(mLoPeriContent.getVisibility() == View.VISIBLE)
+		    			mImgPeriArrow.setImageResource(drawable.arrow_up_float);
 		    		else
-		    			imgPeriArrow.setImageResource(drawable.arrow_down_float);
+		    			mImgPeriArrow.setImageResource(drawable.arrow_down_float);
 		    	}
 		    } 
-		});  	
+		});  
 		
-		EditTextSeekBarLinker textNBarLinker = new EditTextSeekBarLinker();
-		CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
 		
-		textNBarLinker.linkEditTextNSeekBar(mTextHousePrice, mSeekHousePrice, String.valueOf(calc.getHousePrice()));
-		textNBarLinker.linkEditTextNSeekBar(mTextDownPay, mSeekDownPay, String.valueOf(calc.getDownPay()));
-		textNBarLinker.linkEditTextNSeekBar(mTextIntRate, mSeekIntRate, String.format("%.2f", calc.getLoanIntRate()));
-		textNBarLinker.linkEditTextNSeekBar(mTextLoanTenr, mSeekLoanTenr,String.valueOf(calc.getLoanTenr()));
-		textNBarLinker.linkEditTextNSeekBar(mTextHoldingPeriod, mSeekHoldingPeriod, String.valueOf(calc.getHoldingPriod()));
-		textNBarLinker.linkEditTextNSeekBar(mTextYearlyTax, mSeekYearlyTax, String.valueOf(calc.getYearlyTax()));
-		textNBarLinker.linkEditTextNSeekBar(mTextYearlyMaintain, mSeekYearlyMaintain, String.valueOf(calc.getYearlyMaintain()));
-		textNBarLinker.linkEditTextNSeekBar(mTextYearlyPropIns, mSeekYearlyPropIns, String.valueOf(calc.getYearlyPropIns()));
-		textNBarLinker.linkEditTextNSeekBar(mTextMortIns, mSeekMortIns, String.format("%.2f", calc.getMortIns()));
-		textNBarLinker.linkEditTextNSeekBar(mTextClosingCost, mSeekClosingCost, String.format("%.2f", calc.getClosingCost()));
-		textNBarLinker.linkEditTextNSeekBar(mTextApprRate, mSeekApprRate, String.format("%.2f", calc.getHomeApprRate()));
+		
+        CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
+		
+		mHousePriceLnk     = new EditTextSeekBarLinker(mTextHousePrice, mSeekHousePrice, calc.getHousePrice(), "HousePrice");
+		mDownPayLnk        = new EditTextSeekBarLinker(mTextDownPay, mSeekDownPay, calc.getDownPay(), "DownPay");
+		mIntRateLnk        = new EditTextSeekBarLinker(mTextIntRate, mSeekIntRate, calc.getLoanIntRate(), "IntRate");
+		mLoanTenrLnk       = new EditTextSeekBarLinker(mTextLoanTenr, mSeekLoanTenr, calc.getLoanTenr(), "LoanTenr");
+		mHoldingPeriodLnk  = new EditTextSeekBarLinker(mTextHoldingPeriod, mSeekHoldingPeriod, calc.getHoldingPriod(), "HoldingPeriod");
+		mYearlyTaxLnk      = new EditTextSeekBarLinker(mTextYearlyTax, mSeekYearlyTax, calc.getYearlyTax(), "YearlyTax");
+		mYearlyMaintainLnk = new EditTextSeekBarLinker(mTextYearlyMaintain, mSeekYearlyMaintain, calc.getYearlyMaintain(), "YearlyMaintain");
+		mYearlyPropInsLnk  = new EditTextSeekBarLinker(mTextYearlyPropIns, mSeekYearlyPropIns, calc.getYearlyPropIns(), "YearlyPropIns");
+		mMortInsLnk        = new EditTextSeekBarLinker(mTextMortIns, mSeekMortIns, calc.getMortIns(), "MortIns");
+		mClosingCostLnk    = new EditTextSeekBarLinker(mTextClosingCost, mSeekClosingCost, calc.getClosingCost(), "ClosingCost");
+		mApprRateLnk       = new EditTextSeekBarLinker(mTextApprRate, mSeekApprRate, calc.getHomeApprRate(), "ApprRate");
 		
 		mbIsCreated = true;
-
 		return viewBuy;
+    }
+    
+    public void onResume() {
+    	super.onResume();
+    	
+    	//set visibility state of yearly expenses layout
+		int iLoYearlyState = mPrefrences.getInt("LoYearlyState", View.INVISIBLE);
+		mLoYearlyContent.setVisibility(iLoYearlyState == View.VISIBLE ? View.VISIBLE : View.GONE);
+		if(iLoYearlyState == View.VISIBLE)
+			mImgYearlyArrow.setImageResource(drawable.arrow_up_float);
+		else
+			mImgYearlyArrow.setImageResource(drawable.arrow_down_float);
+		
+		//set visibility state of yearly expenses layout
+		int iLoPeriState = mPrefrences.getInt("LoPeriState", View.INVISIBLE);
+		mLoPeriContent.setVisibility(iLoPeriState == View.VISIBLE ? View.VISIBLE : View.GONE);
+		if(iLoPeriState == View.VISIBLE)
+			mImgPeriArrow.setImageResource(drawable.arrow_up_float);
+		else
+			mImgPeriArrow.setImageResource(drawable.arrow_down_float);
+    }
+    
+    public void onPause() {
+    	super.onPause();
+    	
+    	SharedPreferences.Editor editor = mPrefrences.edit();
+    	editor.putInt("LoYearlyState", mLoYearlyContent.getVisibility());
+    	editor.putInt("LoPeriState",   mLoPeriContent.getVisibility());
+    	
+    	editor.putFloat("HousePriceMax",     (float) mHousePriceLnk.getTextWatcher().getMax());
+    	editor.putFloat("HousePriceMin",     (float) mHousePriceLnk.getTextWatcher().getMin());
+    	editor.putFloat("DownPayMax",        (float) mDownPayLnk.getTextWatcher().getMax());
+    	editor.putFloat("DownPayMin",        (float) mDownPayLnk.getTextWatcher().getMin());
+    	editor.putFloat("IntRateMax",        (float) mIntRateLnk.getTextWatcher().getMax());
+    	editor.putFloat("IntRateMin",        (float) mIntRateLnk.getTextWatcher().getMin());
+    	editor.putFloat("LoanTenrMax",       (float) mLoanTenrLnk.getTextWatcher().getMax());
+    	editor.putFloat("LoanTenrMin",       (float) mLoanTenrLnk.getTextWatcher().getMin());
+    	editor.putFloat("HoldingPeriodMax",  (float) mHoldingPeriodLnk.getTextWatcher().getMax());
+    	editor.putFloat("HoldingPeriodMin",  (float) mHoldingPeriodLnk.getTextWatcher().getMin());
+    	editor.putFloat("YearlyTaxMax",      (float) mYearlyTaxLnk.getTextWatcher().getMax());
+    	editor.putFloat("YearlyTaxMin",      (float) mYearlyTaxLnk.getTextWatcher().getMin());
+    	editor.putFloat("YearlyMaintainMax", (float) mYearlyMaintainLnk.getTextWatcher().getMax());
+    	editor.putFloat("YearlyMaintainMin", (float) mYearlyMaintainLnk.getTextWatcher().getMin());
+    	editor.putFloat("YearlyPropInsMax",  (float) mYearlyPropInsLnk.getTextWatcher().getMax());
+    	editor.putFloat("YearlyPropInsMin",  (float) mYearlyPropInsLnk.getTextWatcher().getMin());
+    	editor.putFloat("MortInsMax",        (float) mMortInsLnk.getTextWatcher().getMax());
+    	editor.putFloat("MortInsMin",        (float) mMortInsLnk.getTextWatcher().getMin());
+    	editor.putFloat("ClosingCostMax",    (float) mClosingCostLnk.getTextWatcher().getMax());
+    	editor.putFloat("ClosingCostMin",    (float) mClosingCostLnk.getTextWatcher().getMin());
+    	editor.putFloat("ApprRateMax",       (float) mApprRateLnk.getTextWatcher().getMax());
+    	editor.putFloat("ApprRateMin",       (float) mApprRateLnk.getTextWatcher().getMin());
+    	
+    	editor.commit();
     }
     
     public void onDataChanged() {
@@ -161,6 +236,6 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
     	calc.setMortIns(Double.valueOf(mTextMortIns.getText().toString()));
     	calc.setClosingCost(Double.valueOf(mTextClosingCost.getText().toString()));
     	calc.setHomeApprRate(Double.valueOf(mTextApprRate.getText().toString()));
-    }    
+    }
     
 }

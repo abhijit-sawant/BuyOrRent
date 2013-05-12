@@ -1,5 +1,7 @@
 package aum.fin.buyorrent;
 
+import android.content.SharedPreferences;
+
 public class CalcBuyOrRent {
 	
 	public interface OnDataChangedListener {
@@ -30,13 +32,45 @@ public class CalcBuyOrRent {
 	private double mdBuyProfit;
 	private double mdTotalRent;
 	
-	public CalcBuyOrRent() {		
+	public CalcBuyOrRent(SharedPreferences pref) {	
+		
+		resetToDefault();
+		
+		//loan
+		miHousePrice     = pref.getInt("HousePrice", miHousePrice);
+		miDownPay        = pref.getInt("DownPay", miDownPay);
+		mdLoanIntRate    = pref.getFloat("IntRate", (float) mdLoanIntRate);
+		miLoanTenr       = pref.getInt("LoanTenr", miLoanTenr);
+		miHoldingPeriod  = pref.getInt("HoldingPeriod", miHoldingPeriod);
+		miYearlyTax      = pref.getInt("YearlyTax", miYearlyTax);
+		miYearlyMaintain = pref.getInt("YearlyMaintain", miYearlyMaintain);
+		miYearlyPropIns  = pref.getInt("YearlyPropIns", miYearlyPropIns);
+		mdMortIns        = pref.getFloat("MortIns", (float) mdMortIns);
+		mdClosingCost    = pref.getFloat("ClosingCost", (float) mdClosingCost);
+		mdHomeApprRate   = pref.getFloat("ApprRate", (float) mdHomeApprRate);
+		
+		//rent
+		miRent             = pref.getInt("Rent", miRent);
+		mdRentIncreaseRate = pref.getFloat("RentIncreaseRate", (float) mdRentIncreaseRate);
+		miRentIns          = pref.getInt("RentIns", miRentIns);
+		miUtility          = pref.getInt("Utility", miUtility);
+		
+		//tax
+		miGrossIncome = pref.getInt("GrossIncome", miGrossIncome);
+		miItemDeduct  = pref.getInt("ItemDeduct", miItemDeduct);
+		mdTaxBracket  = pref.getFloat("TaxBracket", (float) mdTaxBracket);	
+		
+		mdBuyProfit = 0;
+		mdTotalRent = 0;
+	}
+	
+	public void resetToDefault() {
 		//loan
 		miHousePrice     = 300000;
 		miDownPay        = 100000;
 		mdLoanIntRate    = 2;
-		miLoanTenr       = 15;
-		miHoldingPeriod  = 4;
+		miLoanTenr       = 30;
+		miHoldingPeriod  = 15;
 		miYearlyTax      = 2000;
 		miYearlyMaintain = 1200;
 		miYearlyPropIns  = 1200;
@@ -250,7 +284,7 @@ public class CalcBuyOrRent {
 		mdTotalRent = futureValueOnMonthly((miRent), mdRentIncreaseRate, miHoldingPeriod) + (miHoldingPeriod*12*miUtility);
 	}
 	
-	private double futureValueOnAnnual(double dCurVal, double dApprRate, int iPeriod) {
+    private double futureValueOnAnnual(double dCurVal, double dApprRate, int iPeriod) {
 		double dFutVal = dCurVal;
 		for(int i = 1; i <= iPeriod; i++)
 			dFutVal += dFutVal * (dApprRate * 0.01);
@@ -268,5 +302,31 @@ public class CalcBuyOrRent {
 		return dFutVal;
 	}
 	
+	public void onPause(SharedPreferences pref) {
+		SharedPreferences.Editor editor = pref.edit();
+    	
+    	editor.putInt("HousePrice",     miHousePrice);
+    	editor.putInt("DownPay",        miDownPay);
+    	editor.putFloat("IntRate",      (float) mdLoanIntRate);
+    	editor.putInt("LoanTenr",       miLoanTenr);
+    	editor.putInt("HoldingPeriod",  miHoldingPeriod);
+    	editor.putInt("YearlyTax",      miYearlyTax);
+    	editor.putInt("YearlyMaintain", miYearlyMaintain);
+    	editor.putInt("YearlyPropIns",  miYearlyPropIns);
+    	editor.putFloat("MortIns",      (float) mdMortIns);
+    	editor.putFloat("ClosingCost",  (float) mdClosingCost);
+    	editor.putFloat("ApprRate",     (float) mdHomeApprRate);
+    	
+    	editor.putInt("Rent",               miRent);
+    	editor.putFloat("RentIncreaseRate", (float) mdRentIncreaseRate);
+    	editor.putInt("RentIns",            miRentIns);
+    	editor.putInt("Utility",            miUtility);
+    	
+    	editor.putInt("GrossIncome",  miGrossIncome);
+    	editor.putInt("ItemDeduct",   miItemDeduct);
+    	editor.putFloat("TaxBracket", (float) mdTaxBracket);
+    	
+    	editor.commit();
+	}	
 	
 }

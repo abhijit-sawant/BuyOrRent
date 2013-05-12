@@ -1,6 +1,8 @@
 package aum.fin.buyorrent;
 
 import android.support.v4.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,15 +16,21 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
 	
     private EditText mTextRent;
     private SeekBar  mSeekRent;
+    private EditTextSeekBarLinker mRentLnk;
     
     private EditText mTextYrlyRentIncrease;
     private SeekBar  mSeekYrlyRentIncrease;
+    private EditTextSeekBarLinker mYrlyRentIncreaseLnk;
     
-    private EditText mTextIns;
-    private SeekBar  mSeekIns;
+    private EditText mTextRentIns;
+    private SeekBar  mSeekRentIns;
+    private EditTextSeekBarLinker mRentInsLnk;
     
     private EditText mTextUtility;
     private SeekBar  mSeekUtility;
+    private EditTextSeekBarLinker mUtilityLnk;
+    
+    private SharedPreferences mPrefrences;
     
     private boolean mbIsCreated = false;
     
@@ -42,24 +50,40 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
         mTextYrlyRentIncrease = (EditText) viewRent.findViewById(R.id.actRent_editText2);
         mSeekYrlyRentIncrease = (SeekBar) viewRent.findViewById(R.id.actRent_seekBar2);
         
-        mTextIns = (EditText) viewRent.findViewById(R.id.actRent_editText3);
-        mSeekIns = (SeekBar) viewRent.findViewById(R.id.actRent_seekBar3);
+        mTextRentIns = (EditText) viewRent.findViewById(R.id.actRent_editText3);
+        mSeekRentIns = (SeekBar) viewRent.findViewById(R.id.actRent_seekBar3);
         
         mTextUtility = (EditText) viewRent.findViewById(R.id.actRent_editText4);
         mSeekUtility = (SeekBar) viewRent.findViewById(R.id.actRent_seekBar4);
         
-        EditTextSeekBarLinker textNBarLinker = new EditTextSeekBarLinker();
-        CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
+        mPrefrences = ((MainFragment) getActivity()).getPreferences(Context.MODE_PRIVATE);
         
-		textNBarLinker.linkEditTextNSeekBar(mTextRent, mSeekRent, String.valueOf(calc.getRent()));
-		textNBarLinker.linkEditTextNSeekBar(mTextYrlyRentIncrease, mSeekYrlyRentIncrease,
-				                            String.format("%.2f", calc.getRentIncreaseRate()));
-		textNBarLinker.linkEditTextNSeekBar(mTextIns, mSeekIns, String.valueOf(calc.getRentIns()));
-		textNBarLinker.linkEditTextNSeekBar(mTextUtility, mSeekUtility, String.valueOf(calc.getUtility()));
+        CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();       
         
-		mbIsCreated = true;
-		
+		mRentLnk = new EditTextSeekBarLinker(mTextRent, mSeekRent, calc.getRent(), "Rent");
+		mYrlyRentIncreaseLnk = new EditTextSeekBarLinker(mTextYrlyRentIncrease, mSeekYrlyRentIncrease, 
+				                                        calc.getRentIncreaseRate(), "YrlyRentIncrease");
+		mRentInsLnk = new EditTextSeekBarLinker(mTextRentIns, mSeekRentIns, calc.getRentIns(), "RentIns");
+		mUtilityLnk = new EditTextSeekBarLinker(mTextUtility, mSeekUtility, calc.getUtility(), "Utility");
+        
+		mbIsCreated = true;		
         return viewRent;
+    }
+    
+    public void onPause() {
+    	super.onPause();
+    	
+    	SharedPreferences.Editor editor = mPrefrences.edit();
+    	editor.putFloat("RentMax",             (float) mRentLnk.getTextWatcher().getMax());
+    	editor.putFloat("RentMin",             (float) mRentLnk.getTextWatcher().getMin());
+    	editor.putFloat("YrlyRentIncreaseMax", (float) mYrlyRentIncreaseLnk.getTextWatcher().getMax());
+    	editor.putFloat("YrlyRentIncreaseMin", (float) mYrlyRentIncreaseLnk.getTextWatcher().getMin());
+    	editor.putFloat("RentInsMax",          (float) mRentInsLnk.getTextWatcher().getMax());
+    	editor.putFloat("RentInsMin",          (float) mRentInsLnk.getTextWatcher().getMin());
+    	editor.putFloat("UtilityMax",          (float) mUtilityLnk.getTextWatcher().getMax());
+    	editor.putFloat("UtilityMin",          (float) mUtilityLnk.getTextWatcher().getMin());
+    	
+    	editor.commit();
     }
     
     public void onDataChanged() {
@@ -70,9 +94,8 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
     	
     	calc.setRent(Integer.valueOf(mTextRent.getText().toString()));
     	calc.setRentIncreaseRate(Double.valueOf(mTextYrlyRentIncrease.getText().toString()));
-    	calc.setRentIns(Integer.valueOf(mTextIns.getText().toString()));
+    	calc.setRentIns(Integer.valueOf(mTextRentIns.getText().toString()));
     	calc.setUtility(Integer.valueOf(mTextUtility.getText().toString()));
     }
-    
 }
 

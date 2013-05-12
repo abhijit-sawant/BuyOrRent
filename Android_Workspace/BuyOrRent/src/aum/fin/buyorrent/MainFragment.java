@@ -128,6 +128,12 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         } 
         tabHost.addTab(tabSpec);
     }
+    
+    protected void onPause() {
+    	super.onPause();
+    	
+    	getCalcBuyOrRent().onPause(getPreferences(Context.MODE_PRIVATE));
+    }
  
     public void onTabChanged(String tag) {
         TabInfo newTab = (TabInfo) this.mapTabInfo.get(tag);
@@ -155,7 +161,7 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     
     public CalcBuyOrRent getCalcBuyOrRent() {
     	if(mCalcBuyOrRent == null)
-    		mCalcBuyOrRent = new CalcBuyOrRent();
+    		mCalcBuyOrRent = new CalcBuyOrRent(getPreferences(Context.MODE_PRIVATE));
     	return mCalcBuyOrRent;
     }
     
