@@ -73,13 +73,13 @@ public final class R {
         public static final int actMain_RelLayout2=0x7f090038;
         public static final int actMain_ResultDivider=0x7f090037;
         public static final int actMain_TabDivider=0x7f09003a;
+        public static final int actMain_textSwitcher1=0x7f090039;
         public static final int actMain_textView1=0x7f090031;
         public static final int actMain_textView2=0x7f090032;
         public static final int actMain_textView3=0x7f090033;
         public static final int actMain_textView4=0x7f090034;
         public static final int actMain_textView5=0x7f090035;
         public static final int actMain_textView6=0x7f090036;
-        public static final int actMain_textView7=0x7f090039;
         public static final int actRent_editText1=0x7f09003d;
         public static final int actRent_editText2=0x7f090040;
         public static final int actRent_editText3=0x7f090043;

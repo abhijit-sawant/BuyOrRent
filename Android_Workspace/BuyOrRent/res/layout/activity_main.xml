@@ -98,15 +98,12 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1">
 
-			<TextView
-				android:id="@+id/actMain_textView7"
+			<TextSwitcher
+				android:id="@+id/actMain_textSwitcher1"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="40dip"
-				android:layout_centerInParent="true"
-				android:text="@string/decision"
-				android:textStyle="bold"
-				android:textSize="20sp" />
+				android:layout_centerInParent="true"/>
 
         </RelativeLayout>
     

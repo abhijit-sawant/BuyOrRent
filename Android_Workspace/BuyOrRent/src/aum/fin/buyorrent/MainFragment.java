@@ -4,6 +4,7 @@ import java.util.HashMap;
  
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
+import android.widget.TextSwitcher;
 import android.widget.TextView;
 import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
  
@@ -44,9 +46,10 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     private TextView mTextBuyRent;
     private TextView mTextRent;
     private TextView mTextNetProfit;
-    private TextView mTextDecision;
+    private TextSwitcher mTextSwitchDecision;
     
     private boolean mbUpdateResult = false;
+    private String  mstrDecision = "";
     
     private final int miRed   = 0xffff3333;
     private final int miGreen = 0xff006600; //0x9600ff80;
@@ -66,12 +69,17 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
  
     protected void onStart() {
     	super.onStart();
+    	
     	setUpdateResult(true);
     	calcBuyOrRent();
     }
     
     protected void onPause() {
     	super.onPause();
+    	
+    	SharedPreferences.Editor editor = getPreferences(Context.MODE_PRIVATE).edit();
+    	editor.putString("Decision", mstrDecision);
+    	editor.commit();
     	
     	getCalcBuyOrRent().onPause(getPreferences(Context.MODE_PRIVATE));
     }
@@ -90,9 +98,37 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         mTextBuyRent   = (TextView) findViewById(R.id.actMain_textView2);
         mTextRent      = (TextView) findViewById(R.id.actMain_textView4);
         mTextNetProfit = (TextView) findViewById(R.id.actMain_textView6);
-        mTextDecision  = (TextView) findViewById(R.id.actMain_textView7);
+        mTextSwitchDecision  = (TextSwitcher) findViewById(R.id.actMain_textSwitcher1);
+        
+
+        TextView buy = new TextView(this);
+        buy.setTextColor(miRed);
+        buy.setTextSize(30);
+        buy.setTypeface(null, Typeface.BOLD);    
+        
+        TextView rent = new TextView(this);
+        rent.setTextColor(miGreen);
+        rent.setTextSize(30);
+        rent.setTypeface(null, Typeface.BOLD);
+        
+        mstrDecision = getPreferences(Context.MODE_PRIVATE).getString("Decision", "");
+        if(mstrDecision.equals("RENT"))
+        {
+	        mTextSwitchDecision.addView(buy);
+	        mTextSwitchDecision.addView(rent);
+        }
+        else
+        {
+        	mTextSwitchDecision.addView(rent);
+        	mTextSwitchDecision.addView(buy);
+        }
+        
+        mTextSwitchDecision.setInAnimation(this,  android.R.anim.fade_in);
+        mTextSwitchDecision.setOutAnimation(this, android.R.anim.fade_out);
         
         mTextRent.setTextColor(miRed);
+        
+        
         
     }
  
@@ -243,13 +279,25 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     	
     	if(dNetProfit > 0)
     	{
-    		mTextDecision.setText(R.string.decisionbuy);
-    		mTextDecision.setTextColor(miGreen);
+    		if(mstrDecision.equals("BUY") == false)
+    		{
+    			mstrDecision = "BUY";
+    			mTextSwitchDecision.setText(mstrDecision);    			 
+    		} 
+    		else
+    			mTextSwitchDecision.setCurrentText(mstrDecision);
+    		//mTextDecision.setTextColor(miGreen);
     	}
     	else
     	{
-    		mTextDecision.setText(R.string.decisionrent);
-    		mTextDecision.setTextColor(miRed);
+    		if(mstrDecision.equals("RENT") == false)
+    		{
+    			mstrDecision = "RENT";
+    			mTextSwitchDecision.setText(mstrDecision);    			 
+    		}
+    		else
+    			mTextSwitchDecision.setCurrentText(mstrDecision);
+    		//mTextDecision.setTextColor(miRed);
     	}
     }
  
