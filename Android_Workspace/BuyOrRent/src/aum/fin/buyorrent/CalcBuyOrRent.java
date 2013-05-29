@@ -6,6 +6,7 @@ public class CalcBuyOrRent {
 	
 	public interface OnDataChangedListener {
 		public void onDataChanged();
+		public void onResetToDefault();
 	}
 	
 	private int    miHousePrice;
