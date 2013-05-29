@@ -63,15 +63,30 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
 	  adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	  mSpinMaritalStatus.setAdapter(adapter);
 	  
-	  CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
-		
-	  mGrossIncomeLnk = new EditTextSeekBarLinker(mTextGrossIncome, mSeekGrossIncome, calc.getGrossIncome(), "GrossIncome");
-	  mItemDeductLnk = new EditTextSeekBarLinker(mTextItemDeduct, mSeekItemDeduct, calc.getItmeDeduct(), "ItemDeduct");
-	  mTaxBracketLnk = new EditTextSeekBarLinker(mTextTaxBracket, mSeekTaxBracket, calc.getTaxBracket(), "TaxBracket");
-	  
 	  mbIsCreated = true;
 	  
 	  return viewTax;
+    }
+    
+    public void onResetToDefault() {
+    	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
+    	
+    	mGrossIncomeLnk.setValMinMax(mTextGrossIncome, calc.getGrossIncome(), "");
+    	mItemDeductLnk.setValMinMax(mTextItemDeduct, calc.getItmeDeduct(), "");
+   		mTaxBracketLnk.setValMinMax(mTextTaxBracket, calc.getTaxBracket(), "");    	
+    }
+    
+    public void onStart () {
+    	super.onStart();
+    	
+   		((MainFragment) getActivity()).setUpdateResult(false);
+   		
+   		CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();		
+   		mGrossIncomeLnk = new EditTextSeekBarLinker(mTextGrossIncome, mSeekGrossIncome, calc.getGrossIncome(), "GrossIncome");
+   		mItemDeductLnk = new EditTextSeekBarLinker(mTextItemDeduct, mSeekItemDeduct, calc.getItmeDeduct(), "ItemDeduct");
+   		mTaxBracketLnk = new EditTextSeekBarLinker(mTextTaxBracket, mSeekTaxBracket, calc.getTaxBracket(), "TaxBracket");
+   		
+   		((MainFragment) getActivity()).setUpdateResult(true);
     }
     
     public void onPause() {

@@ -146,25 +146,47 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 		    } 
 		});  
 		
-		
-		
-        CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
-		
-		mHousePriceLnk     = new EditTextSeekBarLinker(mTextHousePrice, mSeekHousePrice, calc.getHousePrice(), "HousePrice");
-		mDownPayLnk        = new EditTextSeekBarLinker(mTextDownPay, mSeekDownPay, calc.getDownPay(), "DownPay");
-		mIntRateLnk        = new EditTextSeekBarLinker(mTextIntRate, mSeekIntRate, calc.getLoanIntRate(), "IntRate");
-		mLoanTenrLnk       = new EditTextSeekBarLinker(mTextLoanTenr, mSeekLoanTenr, calc.getLoanTenr(), "LoanTenr");
-		mHoldingPeriodLnk  = new EditTextSeekBarLinker(mTextHoldingPeriod, mSeekHoldingPeriod, calc.getHoldingPriod(), "HoldingPeriod");
-		mYearlyTaxLnk      = new EditTextSeekBarLinker(mTextYearlyTax, mSeekYearlyTax, calc.getYearlyTax(), "YearlyTax");
-		mYearlyMaintainLnk = new EditTextSeekBarLinker(mTextYearlyMaintain, mSeekYearlyMaintain, calc.getYearlyMaintain(), "YearlyMaintain");
-		mYearlyPropInsLnk  = new EditTextSeekBarLinker(mTextYearlyPropIns, mSeekYearlyPropIns, calc.getYearlyPropIns(), "YearlyPropIns");
-		mMortInsLnk        = new EditTextSeekBarLinker(mTextMortIns, mSeekMortIns, calc.getMortIns(), "MortIns");
-		mClosingCostLnk    = new EditTextSeekBarLinker(mTextClosingCost, mSeekClosingCost, calc.getClosingCost(), "ClosingCost");
-		mApprRateLnk       = new EditTextSeekBarLinker(mTextApprRate, mSeekApprRate, calc.getHomeApprRate(), "ApprRate");
-		
 		mbIsCreated = true;
 		return viewBuy;
     }
+    
+    public void onResetToDefault() {
+    	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();    	
+    	mHousePriceLnk.setValMinMax(mTextHousePrice, calc.getHousePrice(), "");
+    	mDownPayLnk.setValMinMax(mTextDownPay, calc.getDownPay(), "");
+    	mIntRateLnk.setValMinMax(mTextIntRate, calc.getLoanIntRate(), "");
+    	mLoanTenrLnk.setValMinMax(mTextLoanTenr, calc.getLoanTenr(), "");
+    	mHoldingPeriodLnk.setValMinMax(mTextHoldingPeriod, calc.getHoldingPriod(), "");
+    	mYearlyTaxLnk.setValMinMax(mTextYearlyTax, calc.getYearlyTax(), "");
+    	mYearlyMaintainLnk.setValMinMax(mTextYearlyMaintain, calc.getYearlyMaintain(), "");
+    	mYearlyPropInsLnk.setValMinMax(mTextYearlyPropIns, calc.getYearlyPropIns(), "");
+    	mMortInsLnk.setValMinMax(mTextMortIns, calc.getMortIns(), "");
+    	mClosingCostLnk.setValMinMax(mTextClosingCost, calc.getClosingCost(), "");
+    	mApprRateLnk.setValMinMax(mTextApprRate, calc.getHomeApprRate(), "");
+    }
+    
+    public void onStart () {
+    	super.onStart();
+    	
+   		((MainFragment) getActivity()).setUpdateResult(false);
+    	
+    	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent(); 		
+ 		mHousePriceLnk     = new EditTextSeekBarLinker(mTextHousePrice, mSeekHousePrice, calc.getHousePrice(), "HousePrice");
+ 		mDownPayLnk        = new EditTextSeekBarLinker(mTextDownPay, mSeekDownPay, calc.getDownPay(), "DownPay");
+ 		mIntRateLnk        = new EditTextSeekBarLinker(mTextIntRate, mSeekIntRate, calc.getLoanIntRate(), "IntRate");
+ 		mLoanTenrLnk       = new EditTextSeekBarLinker(mTextLoanTenr, mSeekLoanTenr, calc.getLoanTenr(), "LoanTenr");
+ 		mHoldingPeriodLnk  = new EditTextSeekBarLinker(mTextHoldingPeriod, mSeekHoldingPeriod, calc.getHoldingPriod(), "HoldingPeriod");
+ 		mYearlyTaxLnk      = new EditTextSeekBarLinker(mTextYearlyTax, mSeekYearlyTax, calc.getYearlyTax(), "YearlyTax");
+ 		mYearlyMaintainLnk = new EditTextSeekBarLinker(mTextYearlyMaintain, mSeekYearlyMaintain, calc.getYearlyMaintain(), "YearlyMaintain");
+ 		mYearlyPropInsLnk  = new EditTextSeekBarLinker(mTextYearlyPropIns, mSeekYearlyPropIns, calc.getYearlyPropIns(), "YearlyPropIns");
+ 		mMortInsLnk        = new EditTextSeekBarLinker(mTextMortIns, mSeekMortIns, calc.getMortIns(), "MortIns");
+ 		mClosingCostLnk    = new EditTextSeekBarLinker(mTextClosingCost, mSeekClosingCost, calc.getClosingCost(), "ClosingCost");
+ 		mApprRateLnk       = new EditTextSeekBarLinker(mTextApprRate, mSeekApprRate, calc.getHomeApprRate(), "ApprRate");
+ 		
+ 		((MainFragment) getActivity()).setUpdateResult(true);
+ 	 	((MainFragment) getActivity()).calcBuyOrRent();
+    }
+
     
     public void onResume() {
     	super.onResume();

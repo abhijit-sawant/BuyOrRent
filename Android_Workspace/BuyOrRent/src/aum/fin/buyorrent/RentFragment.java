@@ -14,7 +14,7 @@ import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
 
 public class RentFragment extends Fragment implements OnDataChangedListener {
 	
-    private EditText mTextRent;
+    private EditText mTextRent = null;
     private SeekBar  mSeekRent;
     private EditTextSeekBarLinker mRentLnk;
     
@@ -58,16 +58,32 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
         
         mPrefrences = ((MainFragment) getActivity()).getPreferences(Context.MODE_PRIVATE);
         
-        CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();       
-        
-		mRentLnk = new EditTextSeekBarLinker(mTextRent, mSeekRent, calc.getRent(), "Rent");
+        mbIsCreated = true;		
+        return viewRent;
+    }
+    
+    public void onResetToDefault() {
+    	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
+    	
+    	mRentLnk.setValMinMax(mTextRent, calc.getRent(), "");
+    	mYrlyRentIncreaseLnk.setValMinMax(mTextYrlyRentIncrease, calc.getRentIncreaseRate(), "");
+    	mRentInsLnk.setValMinMax(mTextRentIns, calc.getRentIns(), "");
+		mUtilityLnk.setValMinMax(mTextUtility, calc.getUtility(), "");    	
+    }
+    
+    public void onStart () {
+    	super.onStart();
+    	
+   		((MainFragment) getActivity()).setUpdateResult(false);
+   		
+   		CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
+       	mRentLnk = new EditTextSeekBarLinker(mTextRent, mSeekRent, calc.getRent(), "Rent");        
 		mYrlyRentIncreaseLnk = new EditTextSeekBarLinker(mTextYrlyRentIncrease, mSeekYrlyRentIncrease, 
 				                                        calc.getRentIncreaseRate(), "YrlyRentIncrease");
 		mRentInsLnk = new EditTextSeekBarLinker(mTextRentIns, mSeekRentIns, calc.getRentIns(), "RentIns");
 		mUtilityLnk = new EditTextSeekBarLinker(mTextUtility, mSeekUtility, calc.getUtility(), "Utility");
-        
-		mbIsCreated = true;		
-        return viewRent;
+   		
+   		((MainFragment) getActivity()).setUpdateResult(true);
     }
     
     public void onPause() {

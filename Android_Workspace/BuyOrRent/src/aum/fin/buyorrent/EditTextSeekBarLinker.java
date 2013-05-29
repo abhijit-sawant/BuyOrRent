@@ -32,13 +32,7 @@ public class EditTextSeekBarLinker {
 	   		 if(fromUser)
 	   		 {
 	    		 double dTemp = ((progress/100.0) * (mDblMax - mDblMin)) + mDblMin;
-	    		 if(mEditTextLinked.getInputType() == (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL))
-	    		 {
-	    			 int iTemp = (int) dTemp;
-	    			 mEditTextLinked.setText(String.valueOf(iTemp));
-	    		 }
-	    		 else
-	    			 mEditTextLinked.setText(String.format("%.2f", dTemp));
+	    		 setTextVal(mEditTextLinked, dTemp);
 	   		 }
 	   	 }    	 
     };
@@ -116,22 +110,7 @@ public class EditTextSeekBarLinker {
   	     text.addTextChangedListener(mTextWatcher);
   	     bar.setOnSeekBarChangeListener(mBarListner);
      
-	     SharedPreferences pref = ((MainFragment) text.getContext()).getPreferences(Context.MODE_PRIVATE);
-	     double dMin = (double) pref.getFloat(strPref + "Min", (float) (dVal - dVal*0.5));
-	     double dMax = (double) pref.getFloat(strPref + "Max", (float) (dVal + dVal*0.5));
-	     
-	     mBarListner.setProgressMin(dMin);
-	     mBarListner.setProgressMax(dMax);	     
-	     mTextWatcher.setMin(dMin);
-	     mTextWatcher.setMax(dMax);
-	     
-	     if(text.getInputType() == (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL))
-		 {
-			 int iTemp = (int) dVal;
-			 text.setText(String.valueOf(iTemp));
-		 }
-		 else
-			 text.setText(String.format("%.2f", dVal));
+  	     setValMinMax(text, dVal, strPref);
   }
     
    public BuySeekBarListner getSeekBarListner() {
@@ -140,6 +119,31 @@ public class EditTextSeekBarLinker {
    
    public BuyTextWatcher getTextWatcher() {
 	   return mTextWatcher;
+   }
+   
+   public void setValMinMax(EditText text, double dVal, String strPref) {
+	   double dMin = dVal - dVal*0.5;
+	   double dMax = dVal + dVal*0.5;	   
+	   if(strPref != "")
+	   {
+		   SharedPreferences pref = ((MainFragment) text.getContext()).getPreferences(Context.MODE_PRIVATE);
+		   dMin = (double) pref.getFloat(strPref + "Min", (float) (dMin));
+		   dMax = (double) pref.getFloat(strPref + "Max", (float) (dMax));
+	   }
+	     
+	   mBarListner.setProgressMin(dMin);
+	   mBarListner.setProgressMax(dMax);	     
+	   mTextWatcher.setMin(dMin);
+	   mTextWatcher.setMax(dMax);
+	     
+	   setTextVal(text, dVal);
+   }
+   
+   static public void setTextVal(EditText text, double dVal) {	   
+	   if(text.getInputType() == (InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_NORMAL))
+		   text.setText(String.valueOf((int) dVal));
+	   else
+		   text.setText(String.format("%.2f", dVal));
    }
 
 }

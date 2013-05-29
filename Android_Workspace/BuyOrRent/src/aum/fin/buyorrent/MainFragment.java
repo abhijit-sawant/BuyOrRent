@@ -3,11 +3,14 @@ package aum.fin.buyorrent;
 import java.util.HashMap;
  
 import android.content.Context;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabContentFactory;
@@ -15,6 +18,23 @@ import android.widget.TextView;
 import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
  
 public class MainFragment extends FragmentActivity implements TabHost.OnTabChangeListener {
+	
+	class TabFactory implements TabContentFactory {
+		 
+        private final Context mContext;
+ 
+        public TabFactory(Context context) {
+            mContext = context;
+        }
+ 
+        public View createTabContent(String tag) {
+            View v = new View(mContext);
+            v.setMinimumWidth(0);
+            v.setMinimumHeight(0);
+            return v;
+        }
+ 
+    }
  
     private TabHost mTabHost;
     private HashMap mapTabInfo = new HashMap();
@@ -26,7 +46,7 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     private TextView mTextNetProfit;
     private TextView mTextDecision;
     
-    private boolean bAppLoading = true;
+    private boolean mbUpdateResult = false;
     
     private final int miRed   = 0xffff3333;
     private final int miGreen = 0xff006600; //0x9600ff80;
@@ -44,27 +64,16 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
  
     }
  
-    class TabFactory implements TabContentFactory {
- 
-        private final Context mContext;
- 
-        public TabFactory(Context context) {
-            mContext = context;
-        }
- 
-        public View createTabContent(String tag) {
-            View v = new View(mContext);
-            v.setMinimumWidth(0);
-            v.setMinimumHeight(0);
-            return v;
-        }
- 
-    }
-    
     protected void onStart() {
     	super.onStart();
-    	bAppLoading = false;
+    	setUpdateResult(true);
     	calcBuyOrRent();
+    }
+    
+    protected void onPause() {
+    	super.onPause();
+    	
+    	getCalcBuyOrRent().onPause(getPreferences(Context.MODE_PRIVATE));
     }
     
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,12 +138,32 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         tabHost.addTab(tabSpec);
     }
     
-    protected void onPause() {
-    	super.onPause();
+    private void onResetToDefault() {
+    	setUpdateResult(false);
     	
-    	getCalcBuyOrRent().onPause(getPreferences(Context.MODE_PRIVATE));
+    	SharedPreferences pref =  getPreferences(Context.MODE_PRIVATE);
+    	SharedPreferences.Editor edit = pref.edit();
+    	edit.clear();
+    	edit.commit();
+    	
+    	getCalcBuyOrRent().resetToDefault();
+    	
+    	Fragment fragmentCurrent = getSupportFragmentManager().findFragmentByTag(mTabHost.getCurrentTabTag());
+    	if(fragmentCurrent != null)
+    		((OnDataChangedListener) fragmentCurrent).onResetToDefault();
+    	
+    	setUpdateResult(true);
+    	calcBuyOrRent();
     }
- 
+    
+    public void setUpdateResult(boolean bVal) {
+    	mbUpdateResult = bVal;
+    }
+    
+    public boolean getUpdateResult() {
+    	return mbUpdateResult;
+    }
+    
     public void onTabChanged(String tag) {
         TabInfo newTab = (TabInfo) this.mapTabInfo.get(tag);
         if (mLastTab != newTab) {
@@ -159,6 +188,24 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         }
     }
     
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_reset_values:
+            	onResetToDefault();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    
     public CalcBuyOrRent getCalcBuyOrRent() {
     	if(mCalcBuyOrRent == null)
     		mCalcBuyOrRent = new CalcBuyOrRent(getPreferences(Context.MODE_PRIVATE));
@@ -166,7 +213,7 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     }
     
     public void calcBuyOrRent() {
-    	if(bAppLoading)
+    	if(getUpdateResult() == false)
     		return;
     	
     	Fragment fragmentCurrent = getSupportFragmentManager().findFragmentByTag(mTabHost.getCurrentTabTag());
