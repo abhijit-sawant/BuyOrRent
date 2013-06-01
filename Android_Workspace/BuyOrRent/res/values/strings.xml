@@ -5,9 +5,9 @@
     <string name="app_name">BuyOrRent</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">Buy Or Rent</string>
-    <string name="title_activity_buy">Buy</string>
-    <string name="title_activity_rent">Rent</string>
-    <string name="title_activity_tax">Tax</string>
+    <string name="title_activity_buy"><b>Buy</b></string>
+    <string name="title_activity_rent"><b>Rent</b></string>
+    <string name="title_activity_tax"><b>Tax</b></string>
     
     <string name="buyprofitloss">Buy Profit</string>
     <string name="rentexpenses">Rent</string>
