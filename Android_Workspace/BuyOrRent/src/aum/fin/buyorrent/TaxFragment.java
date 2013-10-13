@@ -16,19 +16,19 @@ import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
 
 public class TaxFragment extends Fragment implements OnDataChangedListener {
 	
-    private EditText mTextGrossIncome;
+    /*private EditText mTextGrossIncome;
     private SeekBar  mSeekGrossIncome;
     private EditTextSeekBarLinker mGrossIncomeLnk;
     
     private EditText mTextItemDeduct;
     private SeekBar  mSeekItemDeduct;
-    private EditTextSeekBarLinker mItemDeductLnk;
+    private EditTextSeekBarLinker mItemDeductLnk;*/
     
     private EditText mTextTaxBracket;
     private SeekBar  mSeekTaxBracket; 
     private EditTextSeekBarLinker mTaxBracketLnk;
     
-    private Spinner mSpinMaritalStatus;
+    //private Spinner mSpinMaritalStatus;
     
     private SharedPreferences mPrefrences;
     
@@ -44,24 +44,24 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
        
         ScrollView viewTax = (ScrollView)inflater.inflate(R.layout.activity_tax, container, false);
        
-       mTextGrossIncome = (EditText) viewTax.findViewById(R.id.actTax_editText1);
+       /*mTextGrossIncome = (EditText) viewTax.findViewById(R.id.actTax_editText1);
        mSeekGrossIncome = (SeekBar) viewTax.findViewById(R.id.actTax_seekBar1);
        
        mTextItemDeduct = (EditText) viewTax.findViewById(R.id.actTax_editText2);
-       mSeekItemDeduct = (SeekBar) viewTax.findViewById(R.id.actTax_seekBar2);
+       mSeekItemDeduct = (SeekBar) viewTax.findViewById(R.id.actTax_seekBar2);*/
        
-       mTextTaxBracket = (EditText) viewTax.findViewById(R.id.actTax_editText3);
-       mSeekTaxBracket = (SeekBar) viewTax.findViewById(R.id.actTax_seekBar3);       
-        
-      //set martial status choices
-       mSpinMaritalStatus = (Spinner) viewTax.findViewById(R.id.actTax_spinner1);
+       mTextTaxBracket = (EditText) viewTax.findViewById(R.id.actTax_editText1);
+       mSeekTaxBracket = (SeekBar) viewTax.findViewById(R.id.actTax_seekBar1); 
        
        mPrefrences = ((MainFragment) getActivity()).getPreferences(Context.MODE_PRIVATE);
-	 
+        
+      //set martial status choices
+      /*mSpinMaritalStatus = (Spinner) viewTax.findViewById(R.id.actTax_spinner1);
+      	 
 	  ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.martialStatus_array,
 	                                                                       android.R.layout.simple_spinner_item);
 	  adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	  mSpinMaritalStatus.setAdapter(adapter);
+	  mSpinMaritalStatus.setAdapter(adapter);*/
 	  
 	  mbIsCreated = true;
 	  
@@ -71,8 +71,8 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
     public void onResetToDefault() {
     	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
     	
-    	mGrossIncomeLnk.setValMinMax(mTextGrossIncome, calc.getGrossIncome(), "");
-    	mItemDeductLnk.setValMinMax(mTextItemDeduct, calc.getItmeDeduct(), "");
+/*    	mGrossIncomeLnk.setValMinMax(mTextGrossIncome, calc.getGrossIncome(), "");
+    	mItemDeductLnk.setValMinMax(mTextItemDeduct, calc.getItmeDeduct(), "");*/
    		mTaxBracketLnk.setValMinMax(mTextTaxBracket, calc.getTaxBracket(), "");    	
     }
     
@@ -82,8 +82,8 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
    		((MainFragment) getActivity()).setUpdateResult(false);
    		
    		CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();		
-   		mGrossIncomeLnk = new EditTextSeekBarLinker(mTextGrossIncome, mSeekGrossIncome, calc.getGrossIncome(), "GrossIncome");
-   		mItemDeductLnk = new EditTextSeekBarLinker(mTextItemDeduct, mSeekItemDeduct, calc.getItmeDeduct(), "ItemDeduct");
+/*   		mGrossIncomeLnk = new EditTextSeekBarLinker(mTextGrossIncome, mSeekGrossIncome, calc.getGrossIncome(), "GrossIncome");
+   		mItemDeductLnk = new EditTextSeekBarLinker(mTextItemDeduct, mSeekItemDeduct, calc.getItmeDeduct(), "ItemDeduct");*/
    		mTaxBracketLnk = new EditTextSeekBarLinker(mTextTaxBracket, mSeekTaxBracket, calc.getTaxBracket(), "TaxBracket");
    		
    		((MainFragment) getActivity()).setUpdateResult(true);
@@ -94,10 +94,10 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
     	
     	SharedPreferences.Editor editor = mPrefrences.edit();
     	
-    	editor.putFloat("GrossIncomeMax", (float) mGrossIncomeLnk.getTextWatcher().getMax());
+/*    	editor.putFloat("GrossIncomeMax", (float) mGrossIncomeLnk.getTextWatcher().getMax());
     	editor.putFloat("GrossIncomeMin", (float) mGrossIncomeLnk.getTextWatcher().getMin());
     	editor.putFloat("ItemDeductMax", (float) mItemDeductLnk.getTextWatcher().getMax());
-    	editor.putFloat("ItemDeductMin", (float) mItemDeductLnk.getTextWatcher().getMin());
+    	editor.putFloat("ItemDeductMin", (float) mItemDeductLnk.getTextWatcher().getMin());*/
     	editor.putFloat("TaxBracketMax", (float) mTaxBracketLnk.getTextWatcher().getMax());
     	editor.putFloat("TaxBracketMin", (float) mTaxBracketLnk.getTextWatcher().getMin());
     	
@@ -109,8 +109,8 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
     		return;
     	
     	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
-    	calc.setGrossIncome(Integer.valueOf(mTextGrossIncome.getText().toString()));
-    	calc.setItemDeduct(Integer.valueOf(mTextItemDeduct.getText().toString()));
+/*    	calc.setGrossIncome(Integer.valueOf(mTextGrossIncome.getText().toString()));
+    	calc.setItemDeduct(Integer.valueOf(mTextItemDeduct.getText().toString()));*/
     	calc.setTaxBracket(Double.valueOf(mTextTaxBracket.getText().toString()));
     }
 }

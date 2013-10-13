@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dip"
-            android:text="@string/yearlyGrossIncome"
+            android:text="@string/taxBracket"
             android:textSize="15sp" />
 
         <EditText
@@ -38,83 +38,8 @@
             android:layout_marginBottom="8dip"
             android:layout_marginLeft="2dip"
             android:layout_marginRight="2dip"
-            android:layout_toRightOf="@+id/actTax_editText1" />
-
-        <TextView
-            android:id="@+id/actTax_textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/actTax_textView1"
-            android:layout_marginTop="40dip"
-            android:text="@string/itemizedDeduct"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/actTax_editText2"
-            android:layout_width="100dip"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/actTax_textView2"
-            android:layout_alignLeft="@+id/actTax_editText1"
-            android:inputType="number"
-            android:maxWidth="100dip" />
-
-        <SeekBar
-            android:id="@+id/actTax_seekBar2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/actTax_textView2"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="8dip"
-            android:layout_marginLeft="2dip"
-            android:layout_marginRight="2dip"
-            android:layout_toRightOf="@+id/actTax_editText2" />
-
-        <TextView
-            android:id="@+id/actTax_textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/actTax_textView2"
-            android:layout_marginTop="40dip"
-            android:text="@string/taxBracket"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/actTax_editText3"
-            android:layout_width="100dip"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/actTax_textView3"
-            android:layout_alignLeft="@+id/actTax_editText2"
-            android:inputType="numberDecimal"
-            android:maxWidth="100dip" />
-
-        <SeekBar
-            android:id="@+id/actTax_seekBar3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/actTax_textView3"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="8dip"
-            android:layout_marginLeft="2dip"
-            android:layout_marginRight="2dip"
-            android:layout_toRightOf="@+id/actTax_editText3" />
+            android:layout_toRightOf="@+id/actTax_editText1" />      
         
-        <TextView
-            android:id="@+id/actTax_textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/actTax_textView3"
-            android:layout_marginTop="40dip"
-            android:text="@string/martialStatus"
-            android:textSize="15sp" />
-        
-         <Spinner
-            android:id="@+id/actTax_spinner1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/actTax_textView4"
-            android:layout_alignLeft="@+id/actTax_editText3"/>    
-
     </RelativeLayout>
     
 </ScrollView>    

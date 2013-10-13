@@ -20,7 +20,6 @@ public final class R {
         public static final int ic_action_search=0x7f020000;
         public static final int ic_launcher=0x7f020001;
         public static final int ic_launcher_org=0x7f020002;
-        public static final int ic_launcher_template=0x7f020003;
     }
     public static final class id {
         public static final int actBuy_bottomDivider=0x7f09002e;
@@ -94,19 +93,11 @@ public final class R {
         public static final int actRent_textView3=0x7f090042;
         public static final int actRent_textView4=0x7f090045;
         public static final int actTax_editText1=0x7f090049;
-        public static final int actTax_editText2=0x7f09004c;
-        public static final int actTax_editText3=0x7f09004f;
         public static final int actTax_seekBar1=0x7f09004a;
-        public static final int actTax_seekBar2=0x7f09004d;
-        public static final int actTax_seekBar3=0x7f090050;
-        public static final int actTax_spinner1=0x7f090052;
         public static final int actTax_textView1=0x7f090048;
-        public static final int actTax_textView2=0x7f09004b;
-        public static final int actTax_textView3=0x7f09004e;
-        public static final int actTax_textView4=0x7f090051;
-        public static final int item_reset_values=0x7f090054;
+        public static final int item_reset_values=0x7f09004c;
         public static final int linearLayout1=0x7f09002f;
-        public static final int menu_settings=0x7f090053;
+        public static final int menu_settings=0x7f09004b;
         public static final int realtabcontent=0x01010000;
         public static final int scrollView1=0x7f09003b;
     }
