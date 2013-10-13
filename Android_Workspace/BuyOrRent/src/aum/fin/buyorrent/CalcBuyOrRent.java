@@ -280,6 +280,7 @@ public class CalcBuyOrRent {
 		double dClosingCost = mdClosingCost * 0.01 * dHouseSellPrice;
 		
 		mdBuyProfit = dHouseSellPrice - (miHousePrice + dIntPaid + dClosingCost + dTotalMortIns + dTaxInsMaintain);
+		mdBuyProfit = mdBuyProfit + taxSavings(dMonthlyPayment, dIntRatePerMont);
 		
 		double temp = futureValueOnMonthly(miRent, mdRentIncreaseRate, miHoldingPeriod);
 		mdTotalRent = futureValueOnMonthly((miRent), mdRentIncreaseRate, miHoldingPeriod) + (miHoldingPeriod*12*miUtility);
@@ -301,6 +302,25 @@ public class CalcBuyOrRent {
 			dMonthly += dMonthly * (dApprRate * 0.01);
 		}
 		return dFutVal;
+	}
+	
+	private double taxSavings(double dMonthlyPay, double dIntRatePerMont) {
+		double dTaxSaving = 0;
+		int iLoanAmount = miHousePrice - miDownPay;
+		double dOldAmtOwed = iLoanAmount;
+		for(int i = 1; i <= miHoldingPeriod; i++) {
+			int n = i*12;
+			double dAmtOwed = (Math.pow((1 + dIntRatePerMont), n)) * iLoanAmount;
+			dAmtOwed = dAmtOwed - (((Math.pow((1 + dIntRatePerMont), n) - 1) / dIntRatePerMont) * dMonthlyPay);
+			
+			double dTotalAmtPayed  = 12 * dMonthlyPay;
+			double dPrincipalPayed = dOldAmtOwed - dAmtOwed;
+			double dIntPayed       = dTotalAmtPayed - dPrincipalPayed;
+			dTaxSaving = dTaxSaving + (dIntPayed * mdTaxBracket) / 100;
+			dOldAmtOwed = dAmtOwed;
+		}
+		
+		return dTaxSaving;
 	}
 	
 	public void onPause(SharedPreferences pref) {
