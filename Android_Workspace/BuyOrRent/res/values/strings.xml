@@ -37,10 +37,8 @@
 	<string name="rentInsurance">Renters Insurance</string>
 	<string name="utilities">Utilities per Month</string>
 	
-	<string name="martialStatus">Martial Status</string>
-	<string name="yearlyGrossIncome">Yearly Gross\nIncome</string>
-	<string name="itemizedDeduct">Itemized\nDeduction</string>
 	<string name="taxBracket">Tax Bracket (%)</string>
+	<string name="taxBracketHelp">Keep this zero or blank if itemized deduction is less than standard deduction</string>
 	
 	<string-array name="martialStatus_array">
         <item>Married</item>

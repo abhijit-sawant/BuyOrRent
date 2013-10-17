@@ -26,8 +26,6 @@ public class CalcBuyOrRent {
 	private int    miRentIns;
 	private int    miUtility;
 	
-	private int    miGrossIncome;
-	private int    miItemDeduct;
 	private double mdTaxBracket;
 	
 	private double mdBuyProfit;
@@ -57,8 +55,6 @@ public class CalcBuyOrRent {
 		miUtility          = pref.getInt("Utility", miUtility);
 		
 		//tax
-		miGrossIncome = pref.getInt("GrossIncome", miGrossIncome);
-		miItemDeduct  = pref.getInt("ItemDeduct", miItemDeduct);
 		mdTaxBracket  = pref.getFloat("TaxBracket", (float) mdTaxBracket);	
 		
 		mdBuyProfit = 0;
@@ -86,9 +82,7 @@ public class CalcBuyOrRent {
 		miUtility          = 50;
 		
 		//tax
-		miGrossIncome = 80000;
-		miItemDeduct  = 10000;
-		mdTaxBracket  = 15;		
+		mdTaxBracket  = 0;		
 		
 		mdBuyProfit = 0;
 		mdTotalRent = 0;
@@ -214,22 +208,6 @@ public class CalcBuyOrRent {
 		miUtility = iVal;
 	}
 	
-	public int getGrossIncome() {
-		return miGrossIncome;
-	}
-	
-	public void setGrossIncome(int iVal) {
-		miGrossIncome = iVal;
-	}
-	
-	public int getItmeDeduct() {
-		return miItemDeduct;
-	}
-	
-	public void setItemDeduct(int iVal) {
-		miItemDeduct = iVal;
-	}
-	
 	public double getTaxBracket() {
 		return mdTaxBracket;
 	}
@@ -259,7 +237,6 @@ public class CalcBuyOrRent {
 		dMonthlyPayment = dMonthlyPayment / (1 - (1/Math.pow(1 + dIntRatePerMont, iNumLoanPay)));
 		
 		double dMortInsPerMonth = (mdMortIns * 0.01 * iLoanAmount)/12;
-		double dTotalMonthlyPay = dMonthlyPayment + dMortInsPerMonth;
 		
 		int iHoldingPeriodMnths = miHoldingPeriod * 12;
 		double dLoanBalance = iLoanAmount;
@@ -273,7 +250,6 @@ public class CalcBuyOrRent {
 		//house sell price
 		double dHouseSellPrice = futureValueOnAnnual(miHousePrice, mdHomeApprRate, miHoldingPeriod);
 		
-		double dTaxNIntPerYear = ((dIntPaid * 12) / iHoldingPeriodMnths) + miYearlyTax;
 		double dTotalMortIns = dMortInsPerMonth * iHoldingPeriodMnths;
 		
 		double dTaxInsMaintain = ((double) (miYearlyTax + miYearlyPropIns + miYearlyMaintain) / 12) * iHoldingPeriodMnths;
@@ -282,7 +258,6 @@ public class CalcBuyOrRent {
 		mdBuyProfit = dHouseSellPrice - (miHousePrice + dIntPaid + dClosingCost + dTotalMortIns + dTaxInsMaintain);
 		mdBuyProfit = mdBuyProfit + taxSavings(dMonthlyPayment, dIntRatePerMont);
 		
-		double temp = futureValueOnMonthly(miRent, mdRentIncreaseRate, miHoldingPeriod);
 		mdTotalRent = futureValueOnMonthly((miRent), mdRentIncreaseRate, miHoldingPeriod) + (miHoldingPeriod*12*miUtility);
 	}
 	
@@ -343,8 +318,6 @@ public class CalcBuyOrRent {
     	editor.putInt("RentIns",            miRentIns);
     	editor.putInt("Utility",            miUtility);
     	
-    	editor.putInt("GrossIncome",  miGrossIncome);
-    	editor.putInt("ItemDeduct",   miItemDeduct);
     	editor.putFloat("TaxBracket", (float) mdTaxBracket);
     	
     	editor.commit();

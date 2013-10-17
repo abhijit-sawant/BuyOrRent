@@ -15,6 +15,7 @@
             android:id="@+id/actTax_textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="40dip"
             android:layout_marginTop="25dip"
             android:text="@string/taxBracket"
             android:textSize="15sp" />
@@ -26,19 +27,18 @@
             android:layout_alignBottom="@+id/actTax_textView1"
             android:layout_marginLeft="25dip"
             android:layout_toRightOf="@+id/actTax_textView1"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:maxWidth="100dip" />
 
-        <SeekBar
-            android:id="@+id/actTax_seekBar1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/actTax_textView1"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="8dip"
-            android:layout_marginLeft="2dip"
-            android:layout_marginRight="2dip"
-            android:layout_toRightOf="@+id/actTax_editText1" />      
+        <TextView
+	       android:id="@+id/actTax_textView2"
+	       android:layout_width="fill_parent" 
+           android:layout_height="fill_parent" 
+           android:gravity="center"
+	       android:layout_below="@+id/actTax_textView1"
+	       android:layout_marginTop="10dip"
+	       android:text="@string/taxBracketHelp"
+	       android:textSize="12sp" />      
         
     </RelativeLayout>
     

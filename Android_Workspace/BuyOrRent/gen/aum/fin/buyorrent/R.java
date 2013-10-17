@@ -93,8 +93,8 @@ public final class R {
         public static final int actRent_textView3=0x7f090042;
         public static final int actRent_textView4=0x7f090045;
         public static final int actTax_editText1=0x7f090049;
-        public static final int actTax_seekBar1=0x7f09004a;
         public static final int actTax_textView1=0x7f090048;
+        public static final int actTax_textView2=0x7f09004a;
         public static final int item_reset_values=0x7f09004c;
         public static final int linearLayout1=0x7f09002f;
         public static final int menu_settings=0x7f09004b;
@@ -126,9 +126,7 @@ public final class R {
         public static final int holdPeriod=0x7f050012;
         public static final int housePrice=0x7f05000d;
         public static final int intRate=0x7f050010;
-        public static final int itemizedDeduct=0x7f050021;
         public static final int loanAmt=0x7f05000f;
-        public static final int martialStatus=0x7f05001f;
         public static final int menu_settings=0x7f050002;
         public static final int mortInsRate=0x7f050018;
         public static final int netprofitloss=0x7f050009;
@@ -137,7 +135,8 @@ public final class R {
         public static final int rentInsurance=0x7f05001d;
         public static final int rentexpenses=0x7f050008;
         public static final int reset_values=0x7f050000;
-        public static final int taxBracket=0x7f050022;
+        public static final int taxBracket=0x7f05001f;
+        public static final int taxBracketHelp=0x7f050020;
         public static final int tenure=0x7f050011;
         public static final int title_activity_buy=0x7f050004;
         public static final int title_activity_main=0x7f050003;
@@ -146,7 +145,6 @@ public final class R {
         public static final int utilities=0x7f05001e;
         public static final int yearTax=0x7f050014;
         public static final int yearlyExpenses=0x7f050013;
-        public static final int yearlyGrossIncome=0x7f050020;
         public static final int yearlyMaint=0x7f050015;
         public static final int yearlyPropIns=0x7f050016;
         public static final int yearlyRentIncrease=0x7f05001c;
