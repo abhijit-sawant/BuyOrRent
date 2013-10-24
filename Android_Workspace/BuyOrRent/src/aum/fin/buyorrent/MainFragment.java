@@ -79,6 +79,7 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     	
     	SharedPreferences.Editor editor = getPreferences(Context.MODE_PRIVATE).edit();
     	editor.putString("Decision", mstrDecision);
+    	editor.putString("TabTag", mTabHost.getCurrentTabTag());
     	editor.commit();
     	
     	getCalcBuyOrRent().onPause(getPreferences(Context.MODE_PRIVATE));
@@ -91,9 +92,13 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         
         // Step 2: Setup TabHost
         initialiseTabHost(savedInstanceState);
-        if (savedInstanceState != null) {
+        /*if (savedInstanceState != null) {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
-        }  
+        }*/
+        String strTabTag = getPreferences(Context.MODE_PRIVATE).getString("TabTag", "");
+        if(!strTabTag.equals("")) {
+        	mTabHost.setCurrentTabByTag(strTabTag);
+        }
         
         mTextBuyRent   = (TextView) findViewById(R.id.actMain_textView2);
         mTextRent      = (TextView) findViewById(R.id.actMain_textView4);
@@ -127,9 +132,6 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         mTextSwitchDecision.setOutAnimation(this, android.R.anim.fade_out);
         
         mTextRent.setTextColor(miRed);
-        
-        
-        
     }
  
     protected void onSaveInstanceState(Bundle outState) {
