@@ -108,10 +108,14 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
     	
     	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
     	
-    	calc.setRent(Integer.valueOf(mTextRent.getText().toString()));
-    	calc.setRentIncreaseRate(Double.valueOf(mTextYrlyRentIncrease.getText().toString()));
-    	calc.setRentIns(Integer.valueOf(mTextRentIns.getText().toString()));
-    	calc.setUtility(Integer.valueOf(mTextUtility.getText().toString()));
+    	try {
+	    	calc.setRent(Integer.valueOf(mTextRent.getText().toString()));
+	    	calc.setRentIncreaseRate(Double.valueOf(mTextYrlyRentIncrease.getText().toString()));
+	    	calc.setRentIns(Integer.valueOf(mTextRentIns.getText().toString()));
+	    	calc.setUtility(Integer.valueOf(mTextUtility.getText().toString()));
+    	} catch(NumberFormatException e) {
+    		//do nothing
+    	}
     }
 }
 

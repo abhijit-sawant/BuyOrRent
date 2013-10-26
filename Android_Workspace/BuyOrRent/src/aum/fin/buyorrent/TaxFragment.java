@@ -68,7 +68,13 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
     	double dVal = 0;
     	String strVal = mTextTaxBracket.getText().toString();
     	if(strVal.length() > 0)
-    		dVal = Double.valueOf(strVal);
+    	{
+    		try {
+    			dVal = Double.valueOf(strVal);
+    		} catch(NumberFormatException e) {
+        		//do nothing
+        	}
+    	}
     		
     	calc.setTaxBracket(dVal);
     }

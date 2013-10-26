@@ -199,7 +199,7 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 		else
 			mImgYearlyArrow.setImageResource(drawable.arrow_down_float);
 		
-		//set visibility state of yearly expenses layout
+		//set visibility state of peripheral expenses layout
 		int iLoPeriState = mPrefrences.getInt("LoPeriState", View.INVISIBLE);
 		mLoPeriContent.setVisibility(iLoPeriState == View.VISIBLE ? View.VISIBLE : View.GONE);
 		if(iLoPeriState == View.VISIBLE)
@@ -247,17 +247,21 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
     	
     	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
     	
-    	calc.setHousePrice(Integer.valueOf(mTextHousePrice.getText().toString()));
-    	calc.setDownPay(Integer.valueOf(mTextDownPay.getText().toString()));
-    	calc.setLoanIntRate(Double.valueOf(mTextIntRate.getText().toString()));
-    	calc.setLoanTenr(Integer.valueOf(mTextLoanTenr.getText().toString()));
-    	calc.setHoldingPriod(Integer.valueOf(mTextHoldingPeriod.getText().toString()));
-    	calc.setYearlyTax(Integer.valueOf(mTextYearlyTax.getText().toString()));
-    	calc.setYearlyMaintain(Integer.valueOf(mTextYearlyMaintain.getText().toString()));
-    	calc.setYearlyPropIns(Integer.valueOf(mTextYearlyPropIns.getText().toString()));
-    	calc.setMortIns(Double.valueOf(mTextMortIns.getText().toString()));
-    	calc.setClosingCost(Double.valueOf(mTextClosingCost.getText().toString()));
-    	calc.setHomeApprRate(Double.valueOf(mTextApprRate.getText().toString()));
+    	try {
+	    	calc.setHousePrice(Integer.valueOf(mTextHousePrice.getText().toString()));
+	    	calc.setDownPay(Integer.valueOf(mTextDownPay.getText().toString()));
+	    	calc.setLoanIntRate(Double.valueOf(mTextIntRate.getText().toString()));
+	    	calc.setLoanTenr(Integer.valueOf(mTextLoanTenr.getText().toString()));
+	    	calc.setHoldingPriod(Integer.valueOf(mTextHoldingPeriod.getText().toString()));
+	    	calc.setYearlyTax(Integer.valueOf(mTextYearlyTax.getText().toString()));
+	    	calc.setYearlyMaintain(Integer.valueOf(mTextYearlyMaintain.getText().toString()));
+	    	calc.setYearlyPropIns(Integer.valueOf(mTextYearlyPropIns.getText().toString()));
+	    	calc.setMortIns(Double.valueOf(mTextMortIns.getText().toString()));
+	    	calc.setClosingCost(Double.valueOf(mTextClosingCost.getText().toString()));
+	    	calc.setHomeApprRate(Double.valueOf(mTextApprRate.getText().toString()));
+    	} catch(NumberFormatException e) {
+    		//do nothing
+    	}
     }
     
 }

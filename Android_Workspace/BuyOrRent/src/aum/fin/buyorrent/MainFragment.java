@@ -107,25 +107,25 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         
 
         TextView buy = new TextView(this);
-        buy.setTextColor(miRed);
+        buy.setTextColor(miGreen);
         buy.setTextSize(30);
         buy.setTypeface(null, Typeface.BOLD);    
         
         TextView rent = new TextView(this);
-        rent.setTextColor(miGreen);
+        rent.setTextColor(miRed);
         rent.setTextSize(30);
         rent.setTypeface(null, Typeface.BOLD);
         
         mstrDecision = getPreferences(Context.MODE_PRIVATE).getString("Decision", "");
         if(mstrDecision.equals("RENT"))
         {
-	        mTextSwitchDecision.addView(buy);
-	        mTextSwitchDecision.addView(rent);
+        	mTextSwitchDecision.addView(rent);
+	        mTextSwitchDecision.addView(buy);	        
         }
         else
         {
-        	mTextSwitchDecision.addView(rent);
         	mTextSwitchDecision.addView(buy);
+        	mTextSwitchDecision.addView(rent);        	
         }
         
         mTextSwitchDecision.setInAnimation(this,  android.R.anim.fade_in);

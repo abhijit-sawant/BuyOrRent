@@ -72,7 +72,12 @@ public class EditTextSeekBarLinker {
 				 mSeekBarLinked.setProgress(0);
 				 return;
 			 }
-			 double dInput = Double.valueOf(s.toString());
+			 double dInput = 0;
+			 try{
+				 dInput = Double.valueOf(s.toString()); 
+			 } catch (NumberFormatException e) {
+				 dInput = 0;
+			 }
 			 if(dInput < mDblMin ||  dInput > mDblMax)
 			 {
 				 mDblMin = dInput - dInput*0.5;

@@ -28,6 +28,7 @@
             android:layout_marginLeft="25dip"
             android:layout_toRightOf="@+id/actTax_textView1"
             android:inputType="numberDecimal"
+            android:maxLength="4"
             android:maxWidth="100dip" />
 
         <TextView
