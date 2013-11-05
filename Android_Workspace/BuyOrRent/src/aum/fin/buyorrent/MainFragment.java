@@ -106,26 +106,26 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         mTextSwitchDecision  = (TextSwitcher) findViewById(R.id.actMain_textSwitcher1);
         
 
-        TextView buy = new TextView(this);
-        buy.setTextColor(miGreen);
-        buy.setTextSize(30);
-        buy.setTypeface(null, Typeface.BOLD);    
+        TextView viewGreen = new TextView(this);
+        viewGreen.setTextColor(miGreen);
+        viewGreen.setTextSize(30);
+        viewGreen.setTypeface(null, Typeface.BOLD);    
         
-        TextView rent = new TextView(this);
-        rent.setTextColor(miRed);
-        rent.setTextSize(30);
-        rent.setTypeface(null, Typeface.BOLD);
+        TextView viewRed = new TextView(this);
+        viewRed.setTextColor(miRed);
+        viewRed.setTextSize(30);
+        viewRed.setTypeface(null, Typeface.BOLD);
         
         mstrDecision = getPreferences(Context.MODE_PRIVATE).getString("Decision", "");
-        if(mstrDecision.equals("RENT"))
+        if(mstrDecision.equals("RENT") || mstrDecision.equals(""))
         {
-        	mTextSwitchDecision.addView(rent);
-	        mTextSwitchDecision.addView(buy);	        
+        	mTextSwitchDecision.addView(viewRed);
+	        mTextSwitchDecision.addView(viewGreen);	        
         }
         else
         {
-        	mTextSwitchDecision.addView(buy);
-        	mTextSwitchDecision.addView(rent);        	
+        	mTextSwitchDecision.addView(viewGreen);
+        	mTextSwitchDecision.addView(viewRed);        	
         }
         
         mTextSwitchDecision.setInAnimation(this,  android.R.anim.fade_in);
