@@ -164,10 +164,40 @@
 	        android:layout_marginBottom="8dip"
 	        android:layout_toRightOf="@+id/actBuy_editText5" />
 	     
+	     <TextView
+	        android:id="@+id/actBuy_textView11"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actBuy_textView5"
+	        android:layout_marginTop="40dip"
+	        android:text="@string/apprRate"
+	        android:textSize="15sp"/>
+	
+	    <EditText
+	        android:id="@+id/actBuy_editText11"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/actBuy_editText5"
+	        android:layout_alignBottom="@+id/actBuy_textView11"
+	        android:inputType="numberDecimal"
+	        android:maxLength="4"
+	        android:maxWidth="70dip"/>
+	    
+	     <SeekBar
+	        android:id="@+id/actBuy_seekBar11"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/actBuy_textView11"
+	        android:layout_centerInParent="true"
+	        android:layout_marginLeft="2dip"
+	        android:layout_marginRight="2dip"
+	        android:layout_marginBottom="8dip"
+	        android:layout_toRightOf="@+id/actBuy_editText11" />
+	     
 	    <View
 	        android:id="@+id/actBuy_yearlyExpDivider"
 			android:layout_width="fill_parent"
-			android:layout_below="@+id/actBuy_textView5"
+			android:layout_below="@+id/actBuy_textView11"
 			android:layout_marginTop="25dip"
 			android:layout_height="1dp"
 			android:background="@android:color/darker_gray"/>
@@ -230,17 +260,6 @@
 			        android:maxLength="8"
 			        android:maxWidth="100dip"/>
 			    
-			     <SeekBar
-			        android:id="@+id/actBuy_seekBar6"
-			        android:layout_width="match_parent"
-			        android:layout_height="wrap_content"
-			        android:layout_alignBottom="@+id/actBuy_textView6"
-			        android:layout_centerInParent="true"
-			        android:layout_marginLeft="2dip"
-			        android:layout_marginRight="2dip"
-			        android:layout_marginBottom="8dip"
-			        android:layout_toRightOf="@+id/actBuy_editText6" />
-			     
 			     <TextView
 			        android:id="@+id/actBuy_textView7"
 			        android:layout_width="wrap_content"
@@ -260,17 +279,6 @@
 			        android:maxLength="8"
 			        android:maxWidth="100dip"/>
 			    
-			     <SeekBar
-			        android:id="@+id/actBuy_seekBar7"
-			        android:layout_width="match_parent"
-			        android:layout_height="wrap_content"
-			        android:layout_alignBottom="@+id/actBuy_textView7"
-			        android:layout_centerInParent="true"
-			        android:layout_marginLeft="2dip"
-			        android:layout_marginRight="2dip"
-			        android:layout_marginBottom="8dip"
-			        android:layout_toRightOf="@+id/actBuy_editText7" />
-			     
 			     <TextView
 			        android:id="@+id/actBuy_textView8"
 			        android:layout_width="wrap_content"
@@ -290,18 +298,7 @@
 			        android:maxLength="8"
 			        android:maxWidth="100dip"/>
 			    
-			     <SeekBar
-			        android:id="@+id/actBuy_seekBar8"
-			        android:layout_width="match_parent"
-			        android:layout_height="wrap_content"
-			        android:layout_alignBottom="@+id/actBuy_textView8"
-			        android:layout_centerInParent="true"
-			        android:layout_marginLeft="2dip"
-			        android:layout_marginRight="2dip"
-			        android:layout_marginBottom="8dip"
-			        android:layout_toRightOf="@+id/actBuy_editText8" />
-			
-			</RelativeLayout>
+     		</RelativeLayout>
 		
 		</RelativeLayout>
 		
@@ -371,17 +368,6 @@
 			        android:maxLength="4"
 			        android:maxWidth="70dip"/>
 			    
-			     <SeekBar
-			        android:id="@+id/actBuy_seekBar9"
-			        android:layout_width="match_parent"
-			        android:layout_height="wrap_content"
-			        android:layout_alignBottom="@+id/actBuy_textView9"
-			        android:layout_centerInParent="true"
-			        android:layout_marginLeft="2dip"
-			        android:layout_marginRight="2dip"
-			        android:layout_marginBottom="8dip"
-			        android:layout_toRightOf="@+id/actBuy_editText9" />   
-			        
 			   <TextView
 			        android:id="@+id/actBuy_textView10"
 			        android:layout_width="wrap_content"
@@ -401,48 +387,7 @@
 			        android:maxLength="4"
 			        android:maxWidth="70dip"/>
 			    
-			     <SeekBar
-			        android:id="@+id/actBuy_seekBar10"
-			        android:layout_width="match_parent"
-			        android:layout_height="wrap_content"
-			        android:layout_alignBottom="@+id/actBuy_textView10"
-			        android:layout_centerInParent="true"
-			        android:layout_marginLeft="2dip"
-			        android:layout_marginRight="2dip"
-			        android:layout_marginBottom="8dip"
-			        android:layout_toRightOf="@+id/actBuy_editText10" />
-			     
-				<TextView
-			        android:id="@+id/actBuy_textView11"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_below="@+id/actBuy_textView10"
-			        android:layout_marginTop="40dip"
-			        android:text="@string/apprRate"
-			        android:textSize="15sp"/>
-			
-			    <EditText
-			        android:id="@+id/actBuy_editText11"
-			        android:layout_width="70dip"
-			        android:layout_height="wrap_content"
-			        android:layout_alignLeft="@+id/actBuy_editText10"
-			        android:layout_alignBottom="@+id/actBuy_textView11"
-			        android:inputType="numberDecimal"
-			        android:maxLength="4"
-			        android:maxWidth="70dip"/>
-			    
-			     <SeekBar
-			        android:id="@+id/actBuy_seekBar11"
-			        android:layout_width="match_parent"
-			        android:layout_height="wrap_content"
-			        android:layout_alignBottom="@+id/actBuy_textView11"
-			        android:layout_centerInParent="true"
-			        android:layout_marginLeft="2dip"
-			        android:layout_marginRight="2dip"
-			        android:layout_marginBottom="8dip"
-			        android:layout_toRightOf="@+id/actBuy_editText11" />
-			     
-			</RelativeLayout>
+        	</RelativeLayout>
 			
 		</RelativeLayout>
 		

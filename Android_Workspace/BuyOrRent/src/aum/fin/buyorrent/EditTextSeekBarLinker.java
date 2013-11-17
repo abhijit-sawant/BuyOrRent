@@ -10,15 +10,15 @@ import android.widget.SeekBar;
 
 public class EditTextSeekBarLinker {
 	
-	private BuySeekBarListner mBarListner  = null;
-	private BuyTextWatcher    mTextWatcher = null;
+	private BRSeekBarListner mBarListner  = null;
+	private BRTextWatcher    mTextWatcher = null;
 	
-	class BuySeekBarListner implements SeekBar.OnSeekBarChangeListener {
+	class BRSeekBarListner implements SeekBar.OnSeekBarChangeListener {
     	private double mDblMin = 0;
     	private double mDblMax = 0;
     	private EditText mEditTextLinked;
    	 
-    	public BuySeekBarListner(EditText editTextLinked) {
+    	public BRSeekBarListner(EditText editTextLinked) {
    		 	mEditTextLinked = editTextLinked;
    	 	}
    	 
@@ -37,13 +37,13 @@ public class EditTextSeekBarLinker {
 	   	 }    	 
     };
     
-    class BuyTextWatcher implements TextWatcher {
+    class BRTextWatcher implements TextWatcher {
 		private double mDblMin = 0;
 		private double mDblMax = 0;
 		private SeekBar mSeekBarLinked;
-		private BuySeekBarListner mSeekBarLinkedListner;
+		private BRSeekBarListner mSeekBarLinkedListner;
 		
-		public BuyTextWatcher(SeekBar seekBarLinked, BuySeekBarListner seekBarLinkedListner) {
+		public BRTextWatcher(SeekBar seekBarLinked, BRSeekBarListner seekBarLinkedListner) {
 			mSeekBarLinked = seekBarLinked;
 			mSeekBarLinkedListner = seekBarLinkedListner;
 		}
@@ -109,8 +109,8 @@ public class EditTextSeekBarLinker {
     };
     
     public EditTextSeekBarLinker(EditText text, SeekBar bar, double dVal, String strPref) {
-  	     mBarListner  = new BuySeekBarListner(text);
-  	     mTextWatcher = new BuyTextWatcher(bar, mBarListner);
+  	     mBarListner  = new BRSeekBarListner(text);
+  	     mTextWatcher = new BRTextWatcher(bar, mBarListner);
   	     
   	     text.addTextChangedListener(mTextWatcher);
   	     bar.setOnSeekBarChangeListener(mBarListner);
@@ -118,11 +118,11 @@ public class EditTextSeekBarLinker {
   	     setValMinMax(text, dVal, strPref);
   }
     
-   public BuySeekBarListner getSeekBarListner() {
+   public BRSeekBarListner getSeekBarListner() {
 	   return mBarListner;
    }
    
-   public BuyTextWatcher getTextWatcher() {
+   public BRTextWatcher getTextWatcher() {
 	   return mTextWatcher;
    }
    

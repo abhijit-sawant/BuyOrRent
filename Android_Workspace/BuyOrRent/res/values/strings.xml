@@ -21,8 +21,8 @@
 	<string name="downPay">Down Payment</string>
 	<string name="loanAmt">Loan Amount</string>
 	<string name="intRate">Interest Rate\n(%)</string>
-	<string name="tenure">Loan Tenure\n(years)</string>
-	<string name="holdPeriod">Holding Period\n(years)</string>
+	<string name="tenure">Loan Tenure\n(Years)</string>
+	<string name="holdPeriod">Holding Period\n(Years)</string>
 	<string name="yearlyExpenses">Yearly Expenses</string>
 	<string name="yearTax">Property Tax</string>
 	<string name="yearlyMaint">Maintenance</string>
@@ -30,12 +30,12 @@
 	<string name="periExpenses">Peripheral Expenses</string>
 	<string name="mortInsRate">Mortgage Insurance\nRate (%)</string>
 	<string name="closingCost">Closing Cost\n(%)</string>
-	<string name="apprRate">Home Appreciation\nRate (%)</string>
+	<string name="apprRate">Appreciation\nRate (%)</string>
 	
-	<string name="rent">Rent</string>
-	<string name="yearlyRentIncrease">Yearly Rent\nIncrease Rate (%)</string>
-	<string name="rentInsurance">Renters Insurance</string>
-	<string name="utilities">Utilities per Month</string>
+	<string name="rent">Rent\n(per Month)</string>
+	<string name="yearlyRentIncrease">Rent Increase\nRate (Yearly %)</string>
+	<string name="rentInsurance">Renters Insurance\n(per Month)</string>
+	<string name="utilities">Utilities\n(per Month)</string>
 	
 	<string name="taxBracket">Tax Bracket (%)</string>
 	<string name="taxBracketHelp">Keep this zero or blank if itemized deduction is less than standard deduction</string>
