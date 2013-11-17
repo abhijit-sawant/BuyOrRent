@@ -24,7 +24,7 @@
 	        android:layout_width="75dip"
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/actRent_textView1"
-	        android:layout_marginLeft="100dip"
+	        android:layout_marginLeft="70dip"
 	        android:layout_toRightOf="@+id/actRent_textView1"
 	        android:inputType="number"
 	        android:maxLength="8"
@@ -91,17 +91,6 @@
 	        android:maxLength="4"
 	        android:maxWidth="75dip"/>
 	    
-	    <SeekBar
-	        android:id="@+id/actRent_seekBar3"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/actRent_textView3"
-	        android:layout_centerInParent="true"
-	        android:layout_marginLeft="2dip"
-	        android:layout_marginRight="2dip"
-	        android:layout_marginBottom="8dip"
-	        android:layout_toRightOf="@+id/actRent_editText3" />
-	    
 	    <TextView
 	        android:id="@+id/actRent_textView4"
 	        android:layout_width="wrap_content"
@@ -121,17 +110,6 @@
 	        android:maxLength="8"
 	        android:maxWidth="75dip"/>
 	    
-	     <SeekBar
-	        android:id="@+id/actRent_seekBar4"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/actRent_textView4"
-	        android:layout_centerInParent="true"
-	        android:layout_marginLeft="2dip"
-	        android:layout_marginRight="2dip"
-	        android:layout_marginBottom="8dip"
-	        android:layout_toRightOf="@+id/actRent_editText4" />
-	    
-	    </RelativeLayout>
+    </RelativeLayout>
     
 </ScrollView>    

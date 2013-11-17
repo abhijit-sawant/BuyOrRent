@@ -1,6 +1,8 @@
 package aum.fin.buyorrent;
 
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +16,14 @@ import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
 
 public class RentFragment extends Fragment implements OnDataChangedListener {
 	
+	class RentTextWatcher implements TextWatcher {
+		public void afterTextChanged(Editable s) {}	 
+		public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+			 ((MainFragment) getActivity()).calcBuyOrRent();
+		 }     
+    };
+	
     private EditText mTextRent = null;
     private SeekBar  mSeekRent;
     private EditTextSeekBarLinker mRentLnk;
@@ -23,12 +33,7 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
     private EditTextSeekBarLinker mYrlyRentIncreaseLnk;
     
     private EditText mTextRentIns;
-    private SeekBar  mSeekRentIns;
-    private EditTextSeekBarLinker mRentInsLnk;
-    
     private EditText mTextUtility;
-    private SeekBar  mSeekUtility;
-    private EditTextSeekBarLinker mUtilityLnk;
     
     private SharedPreferences mPrefrences;
     
@@ -51,10 +56,10 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
         mSeekYrlyRentIncrease = (SeekBar) viewRent.findViewById(R.id.actRent_seekBar2);
         
         mTextRentIns = (EditText) viewRent.findViewById(R.id.actRent_editText3);
-        mSeekRentIns = (SeekBar) viewRent.findViewById(R.id.actRent_seekBar3);
+        mTextRentIns.addTextChangedListener(new RentTextWatcher());
         
         mTextUtility = (EditText) viewRent.findViewById(R.id.actRent_editText4);
-        mSeekUtility = (SeekBar) viewRent.findViewById(R.id.actRent_seekBar4);
+        mTextUtility.addTextChangedListener(new RentTextWatcher());
         
         mPrefrences = ((MainFragment) getActivity()).getPreferences(Context.MODE_PRIVATE);
         
@@ -67,8 +72,9 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
     	
     	mRentLnk.setValMinMax(mTextRent, calc.getRent(), "");
     	mYrlyRentIncreaseLnk.setValMinMax(mTextYrlyRentIncrease, calc.getRentIncreaseRate(), "");
-    	mRentInsLnk.setValMinMax(mTextRentIns, calc.getRentIns(), "");
-		mUtilityLnk.setValMinMax(mTextUtility, calc.getUtility(), "");    	
+    	
+    	mTextRentIns.setText(String.valueOf((int) calc.getRentIns()));
+		mTextUtility.setText(String.valueOf((int) calc.getUtility()));
     }
     
     public void onStart () {
@@ -80,8 +86,9 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
        	mRentLnk = new EditTextSeekBarLinker(mTextRent, mSeekRent, calc.getRent(), "Rent");        
 		mYrlyRentIncreaseLnk = new EditTextSeekBarLinker(mTextYrlyRentIncrease, mSeekYrlyRentIncrease, 
 				                                        calc.getRentIncreaseRate(), "YrlyRentIncrease");
-		mRentInsLnk = new EditTextSeekBarLinker(mTextRentIns, mSeekRentIns, calc.getRentIns(), "RentIns");
-		mUtilityLnk = new EditTextSeekBarLinker(mTextUtility, mSeekUtility, calc.getUtility(), "Utility");
+		
+    	mTextRentIns.setText(String.valueOf((int) calc.getRentIns()));
+		mTextUtility.setText(String.valueOf((int) calc.getUtility()));
    		
    		((MainFragment) getActivity()).setUpdateResult(true);
     }
@@ -94,11 +101,7 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
     	editor.putFloat("RentMin",             (float) mRentLnk.getTextWatcher().getMin());
     	editor.putFloat("YrlyRentIncreaseMax", (float) mYrlyRentIncreaseLnk.getTextWatcher().getMax());
     	editor.putFloat("YrlyRentIncreaseMin", (float) mYrlyRentIncreaseLnk.getTextWatcher().getMin());
-    	editor.putFloat("RentInsMax",          (float) mRentInsLnk.getTextWatcher().getMax());
-    	editor.putFloat("RentInsMin",          (float) mRentInsLnk.getTextWatcher().getMin());
-    	editor.putFloat("UtilityMax",          (float) mUtilityLnk.getTextWatcher().getMax());
-    	editor.putFloat("UtilityMin",          (float) mUtilityLnk.getTextWatcher().getMin());
-    	
+   	
     	editor.commit();
     }
     

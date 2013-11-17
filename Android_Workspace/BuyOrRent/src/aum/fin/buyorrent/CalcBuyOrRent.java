@@ -258,7 +258,8 @@ public class CalcBuyOrRent {
 		mdBuyProfit = dHouseSellPrice - (miHousePrice + dIntPaid + dClosingCost + dTotalMortIns + dTaxInsMaintain);
 		mdBuyProfit = mdBuyProfit + taxSavings(dMonthlyPayment, dIntRatePerMont);
 		
-		mdTotalRent = futureValueOnMonthly((miRent), mdRentIncreaseRate, miHoldingPeriod) + (miHoldingPeriod*12*miUtility);
+		mdTotalRent = futureValueOnMonthly((miRent), mdRentIncreaseRate, miHoldingPeriod) + 
+				      (miHoldingPeriod*12*miUtility) + (miHoldingPeriod*12*miRentIns);
 	}
 	
     private double futureValueOnAnnual(double dCurVal, double dApprRate, int iPeriod) {
