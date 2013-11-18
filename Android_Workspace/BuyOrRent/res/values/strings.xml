@@ -23,6 +23,7 @@
 	<string name="intRate">Interest Rate\n(%)</string>
 	<string name="tenure">Loan Tenure\n(Years)</string>
 	<string name="holdPeriod">Holding Period\n(Years)</string>
+	<string name="apprRate">Appreciation\nRate (%)</string>
 	<string name="yearlyExpenses">Yearly Expenses</string>
 	<string name="yearTax">Property Tax</string>
 	<string name="yearlyMaint">Maintenance</string>
@@ -30,7 +31,7 @@
 	<string name="periExpenses">Peripheral Expenses</string>
 	<string name="mortInsRate">Mortgage Insurance\nRate (%)</string>
 	<string name="closingCost">Closing Cost\n(%)</string>
-	<string name="apprRate">Appreciation\nRate (%)</string>
+	<string name="movingInCost">Moving-in Cost</string>	
 	
 	<string name="rent">Rent\n(per Month)</string>
 	<string name="yearlyRentIncrease">Rent Increase\nRate (Yearly %)</string>

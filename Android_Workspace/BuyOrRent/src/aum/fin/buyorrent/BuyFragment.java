@@ -57,6 +57,7 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
     
     private EditText mTextMortIns;
     private EditText mTextClosingCost;
+    private EditText mTextMovingInCost;
    
     private RelativeLayout mLoYearlyContent;
     private ImageView      mImgYearlyArrow;
@@ -90,6 +91,9 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 		 
 		mTextHoldingPeriod = (EditText) viewBuy.findViewById(R.id.actBuy_editText5);
 		mSeekHoldingPeriod = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar5);
+		
+		mTextApprRate = (EditText) viewBuy.findViewById(R.id.actBuy_editText11);
+		mSeekApprRate = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar11); 
 		 
 		mTextYearlyTax = (EditText) viewBuy.findViewById(R.id.actBuy_editText6);
 		mTextYearlyTax.addTextChangedListener(new BuyTextWatcher());
@@ -106,8 +110,8 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 		mTextClosingCost = (EditText) viewBuy.findViewById(R.id.actBuy_editText10);
 		mTextClosingCost.addTextChangedListener(new BuyTextWatcher()); 
 		 
-		mTextApprRate = (EditText) viewBuy.findViewById(R.id.actBuy_editText11);
-		mSeekApprRate = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar11);  
+		mTextMovingInCost = (EditText) viewBuy.findViewById(R.id.actBuy_editText12);
+		mTextMovingInCost.addTextChangedListener(new BuyTextWatcher()); 
 		
 		mPrefrences = ((MainFragment) getActivity()).getPreferences(Context.MODE_PRIVATE);
 		      
@@ -160,8 +164,9 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
     	mTextYearlyMaintain.setText(String.valueOf((int) calc.getYearlyMaintain()));
     	mTextYearlyPropIns.setText( String.valueOf((int) calc.getYearlyPropIns()));
     	
-    	mTextMortIns.setText(    String.format("%.2f", calc.getMortIns()));
-    	mTextClosingCost.setText(String.format("%.2f", calc.getClosingCost()));    	
+    	mTextMortIns.setText(     String.format("%.2f", calc.getMortIns()));
+    	mTextClosingCost.setText( String.format("%.2f", calc.getClosingCost()));
+    	mTextMovingInCost.setText(String.valueOf((int) calc.getMovingInCost()));
     }
     
     public void onStart () {
@@ -181,8 +186,9 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
     	mTextYearlyMaintain.setText(String.valueOf((int) calc.getYearlyMaintain()));
     	mTextYearlyPropIns.setText( String.valueOf((int) calc.getYearlyPropIns()));
  		
-    	mTextMortIns.setText(    String.format("%.2f", calc.getMortIns()));
-    	mTextClosingCost.setText(String.format("%.2f", calc.getClosingCost())); 
+    	mTextMortIns.setText(     String.format("%.2f", calc.getMortIns()));
+    	mTextClosingCost.setText( String.format("%.2f", calc.getClosingCost()));
+    	mTextMovingInCost.setText(String.valueOf((int) calc.getMovingInCost()));
  		 		
  		((MainFragment) getActivity()).setUpdateResult(true);
  	 	((MainFragment) getActivity()).calcBuyOrRent();
@@ -244,12 +250,13 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 	    	calc.setLoanIntRate(Double.valueOf(mTextIntRate.getText().toString()));
 	    	calc.setLoanTenr(Integer.valueOf(mTextLoanTenr.getText().toString()));
 	    	calc.setHoldingPriod(Integer.valueOf(mTextHoldingPeriod.getText().toString()));
+	    	calc.setHomeApprRate(Double.valueOf(mTextApprRate.getText().toString()));
 	    	calc.setYearlyTax(Integer.valueOf(mTextYearlyTax.getText().toString()));
 	    	calc.setYearlyMaintain(Integer.valueOf(mTextYearlyMaintain.getText().toString()));
 	    	calc.setYearlyPropIns(Integer.valueOf(mTextYearlyPropIns.getText().toString()));
 	    	calc.setMortIns(Double.valueOf(mTextMortIns.getText().toString()));
 	    	calc.setClosingCost(Double.valueOf(mTextClosingCost.getText().toString()));
-	    	calc.setHomeApprRate(Double.valueOf(mTextApprRate.getText().toString()));
+	    	calc.setMovingInCost(Integer.valueOf(mTextMovingInCost.getText().toString()));
     	} catch(NumberFormatException e) {
     		//do nothing
     	}

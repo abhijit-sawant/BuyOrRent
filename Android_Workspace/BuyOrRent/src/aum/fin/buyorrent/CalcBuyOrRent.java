@@ -14,12 +14,13 @@ public class CalcBuyOrRent {
 	private double mdLoanIntRate;
 	private int    miLoanTenr;
 	private int    miHoldingPeriod;
+	private double mdHomeApprRate;
 	private int    miYearlyTax;
 	private int    miYearlyMaintain;
 	private int    miYearlyPropIns;
 	private double mdMortIns;
 	private double mdClosingCost;
-	private double mdHomeApprRate;
+	private int    miMovingInCost;
 	
 	private int    miRent;
 	private double mdRentIncreaseRate;
@@ -41,13 +42,13 @@ public class CalcBuyOrRent {
 		mdLoanIntRate    = pref.getFloat("IntRate", (float) mdLoanIntRate);
 		miLoanTenr       = pref.getInt("LoanTenr", miLoanTenr);
 		miHoldingPeriod  = pref.getInt("HoldingPeriod", miHoldingPeriod);
+		mdHomeApprRate   = pref.getFloat("ApprRate", (float) mdHomeApprRate);
 		miYearlyTax      = pref.getInt("YearlyTax", miYearlyTax);
 		miYearlyMaintain = pref.getInt("YearlyMaintain", miYearlyMaintain);
 		miYearlyPropIns  = pref.getInt("YearlyPropIns", miYearlyPropIns);
 		mdMortIns        = pref.getFloat("MortIns", (float) mdMortIns);
 		mdClosingCost    = pref.getFloat("ClosingCost", (float) mdClosingCost);
-		mdHomeApprRate   = pref.getFloat("ApprRate", (float) mdHomeApprRate);
-		
+		miMovingInCost   = pref.getInt("MovingInCost", miMovingInCost);
 		//rent
 		miRent             = pref.getInt("Rent", miRent);
 		mdRentIncreaseRate = pref.getFloat("RentIncreaseRate", (float) mdRentIncreaseRate);
@@ -68,12 +69,13 @@ public class CalcBuyOrRent {
 		mdLoanIntRate    = 2;
 		miLoanTenr       = 30;
 		miHoldingPeriod  = 15;
+		mdHomeApprRate   = 2;
 		miYearlyTax      = 2000;
 		miYearlyMaintain = 1200;
 		miYearlyPropIns  = 1200;
 		mdMortIns        = 0.52;
 		mdClosingCost    = 7;
-		mdHomeApprRate   = 2;
+		miMovingInCost   = 0;
 		
 		//rent
 		miRent             = 800;
@@ -126,6 +128,14 @@ public class CalcBuyOrRent {
 	
 	public void setHoldingPriod(int iVal) {
 		miHoldingPeriod = iVal;
+	}
+	
+	public int getMovingInCost() {
+		return miMovingInCost;
+	}
+	
+	public void setMovingInCost(int iVal) {
+		miMovingInCost = iVal;
 	}
 		
 	public int getYearlyTax() {
@@ -229,9 +239,9 @@ public class CalcBuyOrRent {
 	}
 	
 	public void calculate() {
-		int iLoanAmount = miHousePrice - miDownPay;
+		int    iLoanAmount     = miHousePrice - miDownPay;
 		double dIntRatePerMont = (mdLoanIntRate*0.01)/12;
-		int iNumLoanPay = miLoanTenr * 12;
+		int    iNumLoanPay     = miLoanTenr * 12;
 		
 		double dMonthlyPayment = iLoanAmount * dIntRatePerMont;
 		dMonthlyPayment = dMonthlyPayment / (1 - (1/Math.pow(1 + dIntRatePerMont, iNumLoanPay)));
@@ -255,7 +265,7 @@ public class CalcBuyOrRent {
 		double dTaxInsMaintain = ((double) (miYearlyTax + miYearlyPropIns + miYearlyMaintain) / 12) * iHoldingPeriodMnths;
 		double dClosingCost = mdClosingCost * 0.01 * dHouseSellPrice;
 		
-		mdBuyProfit = dHouseSellPrice - (miHousePrice + dIntPaid + dClosingCost + dTotalMortIns + dTaxInsMaintain);
+		mdBuyProfit = dHouseSellPrice - (miHousePrice + miMovingInCost + dIntPaid + dClosingCost + dTotalMortIns + dTaxInsMaintain);
 		mdBuyProfit = mdBuyProfit + taxSavings(dMonthlyPayment, dIntRatePerMont);
 		
 		mdTotalRent = futureValueOnMonthly((miRent), mdRentIncreaseRate, miHoldingPeriod) + 
@@ -307,12 +317,13 @@ public class CalcBuyOrRent {
     	editor.putFloat("IntRate",      (float) mdLoanIntRate);
     	editor.putInt("LoanTenr",       miLoanTenr);
     	editor.putInt("HoldingPeriod",  miHoldingPeriod);
+    	editor.putFloat("ApprRate",     (float) mdHomeApprRate);
     	editor.putInt("YearlyTax",      miYearlyTax);
     	editor.putInt("YearlyMaintain", miYearlyMaintain);
     	editor.putInt("YearlyPropIns",  miYearlyPropIns);
     	editor.putFloat("MortIns",      (float) mdMortIns);
     	editor.putFloat("ClosingCost",  (float) mdClosingCost);
-    	editor.putFloat("ApprRate",     (float) mdHomeApprRate);
+    	editor.putInt("MovingInCost",   miMovingInCost);
     	
     	editor.putInt("Rent",               miRent);
     	editor.putFloat("RentIncreaseRate", (float) mdRentIncreaseRate);

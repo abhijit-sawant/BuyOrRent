@@ -387,6 +387,25 @@
 			        android:maxLength="4"
 			        android:maxWidth="70dip"/>
 			    
+			    <TextView
+			        android:id="@+id/actBuy_textView12"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@+id/actBuy_textView10"
+			        android:layout_marginTop="40dip"
+			        android:text="@string/movingInCost"
+			        android:textSize="15sp"/>
+			
+			    <EditText
+			        android:id="@+id/actBuy_editText12"
+			        android:layout_width="70dip"
+			        android:layout_height="wrap_content"
+			        android:layout_alignLeft="@+id/actBuy_editText10"
+			        android:layout_alignBottom="@+id/actBuy_textView12"
+			        android:inputType="number"
+			        android:maxLength="6"
+			        android:maxWidth="70dip"/>
+			    
         	</RelativeLayout>
 			
 		</RelativeLayout>
