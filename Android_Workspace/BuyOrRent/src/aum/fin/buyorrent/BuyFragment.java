@@ -20,13 +20,15 @@ import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
 public class BuyFragment  extends Fragment implements OnDataChangedListener {
 	
 	class BuyTextWatcher implements TextWatcher {
-		public void afterTextChanged(Editable s) {}	 
+		
+    	public void afterTextChanged(Editable s) {}	 		
 		public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+		
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
 			 ((MainFragment) getActivity()).calcBuyOrRent();
 		 }     
     };
-
+    
     private EditText mTextHousePrice;
     private SeekBar  mSeekHousePrice;
     private EditTextSeekBarLinker mHousePriceLnk;
@@ -95,24 +97,14 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 		mTextApprRate = (EditText) viewBuy.findViewById(R.id.actBuy_editText11);
 		mSeekApprRate = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar11); 
 		 
-		mTextYearlyTax = (EditText) viewBuy.findViewById(R.id.actBuy_editText6);
-		mTextYearlyTax.addTextChangedListener(new BuyTextWatcher());
-		 
+		mTextYearlyTax      = (EditText) viewBuy.findViewById(R.id.actBuy_editText6);
 		mTextYearlyMaintain = (EditText) viewBuy.findViewById(R.id.actBuy_editText7);
-		mTextYearlyMaintain.addTextChangedListener(new BuyTextWatcher());
+		mTextYearlyPropIns  = (EditText) viewBuy.findViewById(R.id.actBuy_editText8);
 		 
-		mTextYearlyPropIns = (EditText) viewBuy.findViewById(R.id.actBuy_editText8);
-		mTextYearlyPropIns.addTextChangedListener(new BuyTextWatcher());
-		 
-		mTextMortIns = (EditText) viewBuy.findViewById(R.id.actBuy_editText9);
-		mTextMortIns.addTextChangedListener(new BuyTextWatcher());    
-		 
-		mTextClosingCost = (EditText) viewBuy.findViewById(R.id.actBuy_editText10);
-		mTextClosingCost.addTextChangedListener(new BuyTextWatcher()); 
-		 
+		mTextMortIns      = (EditText) viewBuy.findViewById(R.id.actBuy_editText9);
+		mTextClosingCost  = (EditText) viewBuy.findViewById(R.id.actBuy_editText10);
 		mTextMovingInCost = (EditText) viewBuy.findViewById(R.id.actBuy_editText12);
-		mTextMovingInCost.addTextChangedListener(new BuyTextWatcher()); 
-		
+
 		mPrefrences = ((MainFragment) getActivity()).getPreferences(Context.MODE_PRIVATE);
 		      
 		//yearly expenses
@@ -189,6 +181,14 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
     	mTextMortIns.setText(     String.format("%.2f", calc.getMortIns()));
     	mTextClosingCost.setText( String.format("%.2f", calc.getClosingCost()));
     	mTextMovingInCost.setText(String.valueOf((int) calc.getMovingInCost()));
+    	
+    	mTextYearlyTax.addTextChangedListener(new BuyTextWatcher());		 
+		mTextYearlyMaintain.addTextChangedListener(new BuyTextWatcher());		 
+		mTextYearlyPropIns.addTextChangedListener(new BuyTextWatcher());
+		 
+		mTextMortIns.addTextChangedListener(new BuyTextWatcher());		 
+		mTextClosingCost.addTextChangedListener(new BuyTextWatcher());		 
+		mTextMovingInCost.addTextChangedListener(new BuyTextWatcher()); 
  		 		
  		((MainFragment) getActivity()).setUpdateResult(true);
  	 	((MainFragment) getActivity()).calcBuyOrRent();
@@ -251,12 +251,13 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 	    	calc.setLoanTenr(Integer.valueOf(mTextLoanTenr.getText().toString()));
 	    	calc.setHoldingPriod(Integer.valueOf(mTextHoldingPeriod.getText().toString()));
 	    	calc.setHomeApprRate(Double.valueOf(mTextApprRate.getText().toString()));
-	    	calc.setYearlyTax(Integer.valueOf(mTextYearlyTax.getText().toString()));
+	    	
+/*	    	calc.setYearlyTax(Integer.valueOf(mTextYearlyTax.getText().toString()));
 	    	calc.setYearlyMaintain(Integer.valueOf(mTextYearlyMaintain.getText().toString()));
 	    	calc.setYearlyPropIns(Integer.valueOf(mTextYearlyPropIns.getText().toString()));
 	    	calc.setMortIns(Double.valueOf(mTextMortIns.getText().toString()));
 	    	calc.setClosingCost(Double.valueOf(mTextClosingCost.getText().toString()));
-	    	calc.setMovingInCost(Integer.valueOf(mTextMovingInCost.getText().toString()));
+	    	calc.setMovingInCost(Integer.valueOf(mTextMovingInCost.getText().toString()));*/
     	} catch(NumberFormatException e) {
     		//do nothing
     	}

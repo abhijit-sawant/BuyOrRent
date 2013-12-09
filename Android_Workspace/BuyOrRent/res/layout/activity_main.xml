@@ -46,7 +46,7 @@
 				android:layout_below="@id/actMain_textView1"
 				android:layout_alignLeft="@+id/actMain_textView1"
 				android:layout_marginTop="5dip"
-				android:text="@string/rentexpenses"
+				android:text="@string/rentprofit"
 				android:textStyle="bold"
 				android:textSize="15sp" />
 			    
@@ -56,7 +56,7 @@
 				android:layout_height="wrap_content"
 				android:layout_alignLeft="@id/actMain_textView2"
 				android:layout_alignTop="@id/actMain_textView3"
-				android:text="@string/rentexpenses"
+				android:text="@string/rentprofit"
 				android:textStyle="bold"
 				android:textSize="15sp" 
 				android:maxWidth="90dip"/>

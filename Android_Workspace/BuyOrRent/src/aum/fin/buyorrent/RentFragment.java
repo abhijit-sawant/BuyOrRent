@@ -34,6 +34,7 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
     
     private EditText mTextRentIns;
     private EditText mTextUtility;
+    private EditText mTextSavingReturn;
     
     private SharedPreferences mPrefrences;
     
@@ -56,10 +57,13 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
         mSeekYrlyRentIncrease = (SeekBar) viewRent.findViewById(R.id.actRent_seekBar2);
         
         mTextRentIns = (EditText) viewRent.findViewById(R.id.actRent_editText3);
-        mTextRentIns.addTextChangedListener(new RentTextWatcher());
+        
         
         mTextUtility = (EditText) viewRent.findViewById(R.id.actRent_editText4);
-        mTextUtility.addTextChangedListener(new RentTextWatcher());
+        
+        
+        mTextSavingReturn = (EditText) viewRent.findViewById(R.id.actRent_editText5);
+       
         
         mPrefrences = ((MainFragment) getActivity()).getPreferences(Context.MODE_PRIVATE);
         
@@ -74,7 +78,8 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
     	mYrlyRentIncreaseLnk.setValMinMax(mTextYrlyRentIncrease, calc.getRentIncreaseRate(), "");
     	
     	mTextRentIns.setText(String.valueOf((int) calc.getRentIns()));
-		mTextUtility.setText(String.valueOf((int) calc.getUtility()));
+    	mTextUtility.setText(String.valueOf((int) calc.getUtility()));
+		mTextSavingReturn.setText(String.format("%.2f", calc.getSavingReturnRate()));
     }
     
     public void onStart () {
@@ -88,7 +93,13 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
 				                                        calc.getRentIncreaseRate(), "YrlyRentIncrease");
 		
     	mTextRentIns.setText(String.valueOf((int) calc.getRentIns()));
+    	mTextRentIns.addTextChangedListener(new RentTextWatcher());
+    	
 		mTextUtility.setText(String.valueOf((int) calc.getUtility()));
+		mTextUtility.addTextChangedListener(new RentTextWatcher());
+		
+		mTextSavingReturn.setText(String.format("%.2f", calc.getSavingReturnRate()));
+		mTextSavingReturn.addTextChangedListener(new RentTextWatcher());
    		
    		((MainFragment) getActivity()).setUpdateResult(true);
     }
@@ -116,6 +127,7 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
 	    	calc.setRentIncreaseRate(Double.valueOf(mTextYrlyRentIncrease.getText().toString()));
 	    	calc.setRentIns(Integer.valueOf(mTextRentIns.getText().toString()));
 	    	calc.setUtility(Integer.valueOf(mTextUtility.getText().toString()));
+	    	calc.setSavingReturnRate(Double.valueOf(mTextSavingReturn.getText().toString()));
     	} catch(NumberFormatException e) {
     		//do nothing
     	}

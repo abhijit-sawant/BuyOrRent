@@ -35,8 +35,7 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
         ScrollView viewTax = (ScrollView)inflater.inflate(R.layout.activity_tax, container, false);
        
        mTextTaxBracket = (EditText) viewTax.findViewById(R.id.actTax_editText1);
-       mTextTaxBracket.addTextChangedListener(new TaxTextWatcher());
-       
+              
 	   mbIsCreated = true;
 	  
 	   return viewTax;
@@ -53,8 +52,10 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
     	
    		((MainFragment) getActivity()).setUpdateResult(false);
    		
-   		CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();		
+   		CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();	
+   		
    		mTextTaxBracket.setText(String.format("%.2f", calc.getTaxBracket()));
+   		mTextTaxBracket.addTextChangedListener(new TaxTextWatcher());
    		
    		((MainFragment) getActivity()).setUpdateResult(true);
     }

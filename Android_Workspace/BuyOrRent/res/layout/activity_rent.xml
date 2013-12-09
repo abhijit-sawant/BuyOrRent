@@ -110,6 +110,25 @@
 	        android:maxLength="8"
 	        android:maxWidth="75dip"/>
 	    
+	    <TextView
+	        android:id="@+id/actRent_textView5"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actRent_textView4"
+	        android:layout_marginTop="40dip"
+	        android:text="@string/savingReturns"
+	        android:textSize="15sp" />
+	
+	    <EditText
+	        android:id="@+id/actRent_editText5"
+	        android:layout_width="75dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/actRent_editText4"
+	        android:layout_alignBottom="@+id/actRent_textView5"
+	        android:inputType="numberDecimal"
+	        android:maxLength="4"
+	        android:maxWidth="75dip"/>	    
+	    
     </RelativeLayout>
     
 </ScrollView>    

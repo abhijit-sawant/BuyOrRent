@@ -1,9 +1,11 @@
 package aum.fin.buyorrent;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
  
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -43,16 +45,23 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     private TabInfo mLastTab   = null;
     private CalcBuyOrRent mCalcBuyOrRent = null;
     
-    private TextView mTextBuyRent;
-    private TextView mTextRent;
+    private TextView mTextBuyProfit;
+    private TextView mTextRentProfit;
     private TextView mTextNetProfit;
+    
+    private TextView mTextBuyProfitLabel;
+    private TextView mTextRentProfitLabel;
+    private TextView mTextNetProfitLabel;
+    
+    private TextView mTextDecisionBuy;
+    private TextView mTextDecisionRent;
     private TextSwitcher mTextSwitchDecision;
     
     private boolean mbUpdateResult = false;
-    private String  mstrDecision = "";
     
-    private final int miRed   = 0xffff3333;
-    private final int miGreen = 0xff006600; //0x9600ff80;
+    private final int miRed   = Color.rgb(183, 0,   0);
+    private final int miGreen = Color.rgb(0,   153, 51);
+    public  static final NumberFormat mFormatCurrancy = NumberFormat.getCurrencyInstance(); 
  
     private class TabInfo {
          private String tag;
@@ -78,7 +87,6 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     	super.onPause();
     	
     	SharedPreferences.Editor editor = getPreferences(Context.MODE_PRIVATE).edit();
-    	editor.putString("Decision", mstrDecision);
     	editor.putString("TabTag", mTabHost.getCurrentTabTag());
     	editor.commit();
     	
@@ -100,38 +108,35 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         	mTabHost.setCurrentTabByTag(strTabTag);
         }
         
-        mTextBuyRent   = (TextView) findViewById(R.id.actMain_textView2);
-        mTextRent      = (TextView) findViewById(R.id.actMain_textView4);
-        mTextNetProfit = (TextView) findViewById(R.id.actMain_textView6);
-        mTextSwitchDecision  = (TextSwitcher) findViewById(R.id.actMain_textSwitcher1);
+        mTextBuyProfit      = (TextView) findViewById(R.id.actMain_textView2);
+        mTextRentProfit     = (TextView) findViewById(R.id.actMain_textView4);
+        mTextNetProfit      = (TextView) findViewById(R.id.actMain_textView6);
         
-
-        TextView viewGreen = new TextView(this);
-        viewGreen.setTextColor(miGreen);
-        viewGreen.setTextSize(30);
-        viewGreen.setTypeface(null, Typeface.BOLD);    
+        mTextBuyProfitLabel  = (TextView) findViewById(R.id.actMain_textView1);
+        mTextRentProfitLabel = (TextView) findViewById(R.id.actMain_textView3);
+        mTextNetProfitLabel  = (TextView) findViewById(R.id.actMain_textView5);
         
-        TextView viewRed = new TextView(this);
-        viewRed.setTextColor(miRed);
-        viewRed.setTextSize(30);
-        viewRed.setTypeface(null, Typeface.BOLD);
+        mTextSwitchDecision = (TextSwitcher) findViewById(R.id.actMain_textSwitcher1);        
         
-        mstrDecision = getPreferences(Context.MODE_PRIVATE).getString("Decision", "");
-        if(mstrDecision.equals("RENT") || mstrDecision.equals(""))
-        {
-        	mTextSwitchDecision.addView(viewRed);
-	        mTextSwitchDecision.addView(viewGreen);	        
-        }
-        else
-        {
-        	mTextSwitchDecision.addView(viewGreen);
-        	mTextSwitchDecision.addView(viewRed);        	
-        }
+        mTextDecisionBuy = new TextView(this);
+        mTextDecisionBuy.setText("BUY");
+        mTextDecisionBuy.setTextColor(Color.rgb(0, 128, 0));
+        mTextDecisionBuy.setTextSize(30);
+        mTextDecisionBuy.setTypeface(Typeface.SERIF);    
+        
+        mTextDecisionRent = new TextView(this);
+        mTextDecisionRent.setText("RENT");
+        mTextDecisionRent.setTextColor(Color.rgb(128, 0, 0));
+        mTextDecisionRent.setTextSize(30);
+        mTextDecisionRent.setTypeface(Typeface.SERIF);
+        
+      	mTextSwitchDecision.addView(mTextDecisionBuy);
+        mTextSwitchDecision.addView(mTextDecisionRent);
         
         mTextSwitchDecision.setInAnimation(this,  android.R.anim.fade_in);
         mTextSwitchDecision.setOutAnimation(this, android.R.anim.fade_out);
         
-        mTextRent.setTextColor(miRed);
+        mTextNetProfit.setTextColor(miGreen);
     }
  
     protected void onSaveInstanceState(Bundle outState) {
@@ -261,45 +266,67 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     	((OnDataChangedListener) fragmentCurrent).onDataChanged();
     	
     	getCalcBuyOrRent().calculate();
-    	double dBuyProfit  = getCalcBuyOrRent().getBuyProfit();
-    	double dRent       = getCalcBuyOrRent().getTotalRent();
-    	double dNetProfit  = getCalcBuyOrRent().getNetProfit();
+    	double dBuyProfit     = getCalcBuyOrRent().getBuyProfit();
+    	double dRentProfit    = getCalcBuyOrRent().getRentProfit();
+    	double dBuyNetProfit  = getCalcBuyOrRent().getBuyNetProfit();
     	
-    	mTextBuyRent.setText(String.format("%.2f", dBuyProfit));
+    	if(dBuyProfit > 0)
+    		mTextBuyProfitLabel.setText("Buy Profit");
+    	else
+    		mTextBuyProfitLabel.setText("Buy Loss");
+    	
+    	if(dRentProfit > 0)
+    		mTextRentProfitLabel.setText("Rent Profit");
+    	else
+    		mTextRentProfitLabel.setText("Rent Loss");    	
+    	
+    	if(dBuyNetProfit > 0)
+    		mTextNetProfitLabel.setText("Net profit\nif you Buy");
+    	else
+    		mTextNetProfitLabel.setText("Net loss\nif you Buy");
+    	
+    	int iFactMult = 1;
     	if(dBuyProfit < 0)
-    		mTextBuyRent.setTextColor(miRed);
-    	else
-    		mTextBuyRent.setTextColor(miGreen);
-    	
-    	mTextRent.setText(String.format("%.2f", dRent));
-    	
-    	mTextNetProfit.setText(String.format("%.2f", dNetProfit));
-    	if(dNetProfit < 0)
-    		mTextNetProfit.setTextColor(miRed);
-    	else
-    		mTextNetProfit.setTextColor(miGreen);
-    	
-    	if(dNetProfit > 0)
     	{
-    		if(mstrDecision.equals("BUY") == false)
-    		{
-    			mstrDecision = "BUY";
-    			mTextSwitchDecision.setText(mstrDecision);    			 
-    		} 
-    		else
-    			mTextSwitchDecision.setCurrentText(mstrDecision);
-    		//mTextDecision.setTextColor(miGreen);
+    		iFactMult = -1;
+    		mTextBuyProfit.setTextColor(miRed);
+    	}
+    	else
+    		mTextBuyProfit.setTextColor(miGreen);
+    	String strBuyProfit = mFormatCurrancy.format(iFactMult * dBuyProfit);
+    	mTextBuyProfit.setText(strBuyProfit);
+    	
+    	iFactMult = 1;
+    	if(dRentProfit < 0)
+    	{
+    		iFactMult = -1;
+    		mTextRentProfit.setTextColor(miRed);
+    	}
+    	else
+    		mTextRentProfit.setTextColor(miGreen);
+    	String strRentProfit = mFormatCurrancy.format(iFactMult * dRentProfit);
+    	mTextRentProfit.setText(strRentProfit);   	
+    	
+    	iFactMult = 1;
+    	if(dBuyNetProfit < 0)
+    	{
+    		iFactMult = -1;
+    		mTextNetProfit.setTextColor(miRed);
+    	}
+    	else
+    		mTextNetProfit.setTextColor(miGreen); 
+    	String strNetProfit = mFormatCurrancy.format(iFactMult * dBuyNetProfit);
+    	mTextNetProfit.setText(strNetProfit);
+  		    	
+    	if(dBuyProfit > dRentProfit)
+    	{
+    		if(mTextSwitchDecision.getNextView() == mTextDecisionBuy)
+    			mTextSwitchDecision.showNext();
     	}
     	else
     	{
-    		if(mstrDecision.equals("RENT") == false)
-    		{
-    			mstrDecision = "RENT";
-    			mTextSwitchDecision.setText(mstrDecision);    			 
-    		}
-    		else
-    			mTextSwitchDecision.setCurrentText(mstrDecision);
-    		//mTextDecision.setTextColor(miRed);
+    		if(mTextSwitchDecision.getNextView() == mTextDecisionRent)
+    			mTextSwitchDecision.showNext();
     	}
     }
  

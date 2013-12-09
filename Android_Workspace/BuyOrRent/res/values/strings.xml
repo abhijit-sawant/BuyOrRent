@@ -10,8 +10,8 @@
     <string name="title_activity_tax"><b>Tax</b></string>
     
     <string name="buyprofitloss">Buy Profit</string>
-    <string name="rentexpenses">Rent</string>
-    <string name="netprofitloss">Net Profit</string>
+    <string name="rentprofit">Rent Profit</string>
+    <string name="netprofitloss">Net Profit (Buy - Rent)</string>
     <string name="decision">Decision</string>
     
     <string name="decisionbuy">BUY</string>
@@ -37,6 +37,7 @@
 	<string name="yearlyRentIncrease">Rent Increase\nRate (Yearly %)</string>
 	<string name="rentInsurance">Renters Insurance\n(per Month)</string>
 	<string name="utilities">Utilities\n(per Month)</string>
+	<string name="savingReturns">Return on loan\ndownpay savings\n(Yearly %)</string>
 	
 	<string name="taxBracket">Tax Bracket (%)</string>
 	<string name="taxBracketHelp">Keep this zero or blank if itemized deduction is less than standard deduction</string>

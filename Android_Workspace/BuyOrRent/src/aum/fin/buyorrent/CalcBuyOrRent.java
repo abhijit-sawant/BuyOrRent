@@ -26,11 +26,13 @@ public class CalcBuyOrRent {
 	private double mdRentIncreaseRate;
 	private int    miRentIns;
 	private int    miUtility;
+	private double mdSavingReturnRate;
 	
 	private double mdTaxBracket;
 	
 	private double mdBuyProfit;
-	private double mdTotalRent;
+	private double mdRentProfit;
+	private double mdNetBuyProfit;
 	
 	public CalcBuyOrRent(SharedPreferences pref) {	
 		
@@ -54,22 +56,24 @@ public class CalcBuyOrRent {
 		mdRentIncreaseRate = pref.getFloat("RentIncreaseRate", (float) mdRentIncreaseRate);
 		miRentIns          = pref.getInt("RentIns", miRentIns);
 		miUtility          = pref.getInt("Utility", miUtility);
+		mdSavingReturnRate = pref.getFloat("SavingReturnRate", (float) mdSavingReturnRate);
 		
 		//tax
 		mdTaxBracket  = pref.getFloat("TaxBracket", (float) mdTaxBracket);	
 		
-		mdBuyProfit = 0;
-		mdTotalRent = 0;
+		mdBuyProfit    = 0;
+		mdRentProfit   = 0;
+		mdNetBuyProfit = 0;
 	}
 	
 	public void resetToDefault() {
 		//loan
 		miHousePrice     = 300000;
-		miDownPay        = 100000;
-		mdLoanIntRate    = 2;
+		miDownPay        = 20000;
+		mdLoanIntRate    = 3;
 		miLoanTenr       = 30;
-		miHoldingPeriod  = 15;
-		mdHomeApprRate   = 2;
+		miHoldingPeriod  = 20;
+		mdHomeApprRate   = 3;
 		miYearlyTax      = 2000;
 		miYearlyMaintain = 1200;
 		miYearlyPropIns  = 1200;
@@ -78,16 +82,18 @@ public class CalcBuyOrRent {
 		miMovingInCost   = 0;
 		
 		//rent
-		miRent             = 800;
+		miRent             = 900;
 		mdRentIncreaseRate = 4;
 		miRentIns          = 0;
-		miUtility          = 50;
+		miUtility          = 150;
+		mdSavingReturnRate = 0;
 		
 		//tax
 		mdTaxBracket  = 0;		
 		
-		mdBuyProfit = 0;
-		mdTotalRent = 0;
+		mdBuyProfit    = 0;
+		mdRentProfit   = 0;
+		mdNetBuyProfit = 0;
 	}
 	
 	public int getHousePrice() {
@@ -218,6 +224,14 @@ public class CalcBuyOrRent {
 		miUtility = iVal;
 	}
 	
+	public double getSavingReturnRate() {
+		return mdSavingReturnRate;
+	}
+	
+	public void setSavingReturnRate(double dVal) {
+		mdSavingReturnRate = dVal;
+	}	
+	
 	public double getTaxBracket() {
 		return mdTaxBracket;
 	}
@@ -230,12 +244,12 @@ public class CalcBuyOrRent {
 		return mdBuyProfit;
 	}
 	
-	public double getTotalRent() {
-		return -1 * mdTotalRent;
+	public double getRentProfit() {
+		return mdRentProfit;
 	}
 	
-	public double getNetProfit() {
-		return (getBuyProfit() - getTotalRent());
+	public double getBuyNetProfit() {
+		return mdNetBuyProfit;
 	}
 	
 	public void calculate() {
@@ -260,16 +274,19 @@ public class CalcBuyOrRent {
 		//house sell price
 		double dHouseSellPrice = futureValueOnAnnual(miHousePrice, mdHomeApprRate, miHoldingPeriod);
 		
-		double dTotalMortIns = dMortInsPerMonth * iHoldingPeriodMnths;
+		double dTotalMortIns   = dMortInsPerMonth * iHoldingPeriodMnths;		
+		double dTaxInsMaintain = ((double) (miYearlyTax + miYearlyPropIns + miYearlyMaintain)) * miHoldingPeriod;
+		double dClosingCost    = mdClosingCost * 0.01 * dHouseSellPrice;
 		
-		double dTaxInsMaintain = ((double) (miYearlyTax + miYearlyPropIns + miYearlyMaintain) / 12) * iHoldingPeriodMnths;
-		double dClosingCost = mdClosingCost * 0.01 * dHouseSellPrice;
+		double dBuyExpense  = (iHoldingPeriodMnths * dMonthlyPayment) + miMovingInCost + dTotalMortIns + dTaxInsMaintain;
+		dBuyExpense -= taxSavings(dMonthlyPayment, dIntRatePerMont);
 		
-		mdBuyProfit = dHouseSellPrice - (miHousePrice + miMovingInCost + dIntPaid + dClosingCost + dTotalMortIns + dTaxInsMaintain);
-		mdBuyProfit = mdBuyProfit + taxSavings(dMonthlyPayment, dIntRatePerMont);
+		double dRentExpense = rentExpense();
+		dRentExpense -= futureValueOnAnnual(miDownPay, mdSavingReturnRate, miHoldingPeriod);
 		
-		mdTotalRent = futureValueOnMonthly((miRent), mdRentIncreaseRate, miHoldingPeriod) + 
-				      (miHoldingPeriod*12*miUtility) + (miHoldingPeriod*12*miRentIns);
+		mdBuyProfit  = dHouseSellPrice - dBuyExpense - dLoanBalance - dClosingCost;
+		mdRentProfit = dBuyExpense - dRentExpense;
+		mdNetBuyProfit = mdBuyProfit - mdRentProfit;
 	}
 	
     private double futureValueOnAnnual(double dCurVal, double dApprRate, int iPeriod) {
@@ -288,6 +305,18 @@ public class CalcBuyOrRent {
 			dMonthly += dMonthly * (dApprRate * 0.01);
 		}
 		return dFutVal;
+	}
+	
+	private double rentExpense() {
+		double dRentExpense = 0;
+		double dMonthly = miRent;
+		for(int i = 1; i <= miHoldingPeriod; i++)
+		{
+			dRentExpense += 12 * (dMonthly);
+			dMonthly += dMonthly * (mdRentIncreaseRate * 0.01);
+		}
+		dRentExpense += (miHoldingPeriod * 12 * miUtility) + (miHoldingPeriod * 12 * miRentIns);
+		return dRentExpense;
 	}
 	
 	private double taxSavings(double dMonthlyPay, double dIntRatePerMont) {
@@ -329,6 +358,7 @@ public class CalcBuyOrRent {
     	editor.putFloat("RentIncreaseRate", (float) mdRentIncreaseRate);
     	editor.putInt("RentIns",            miRentIns);
     	editor.putInt("Utility",            miUtility);
+    	editor.putFloat("SavingReturnRate", (float) mdSavingReturnRate);
     	
     	editor.putFloat("TaxBracket", (float) mdTaxBracket);
     	
