@@ -24,6 +24,7 @@
 	<string name="tenure">Loan Tenure\n(Years)</string>
 	<string name="holdPeriod">Holding Period\n(Years)</string>
 	<string name="apprRate">Appreciation\nRate (%)</string>
+	<string name="buyUtilities">Utilities\n(per Month)</string>
 	<string name="yearlyExpenses">Yearly Expenses</string>
 	<string name="yearTax">Property Tax</string>
 	<string name="yearlyMaint">Maintenance</string>

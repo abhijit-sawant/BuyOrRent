@@ -12,80 +12,97 @@
 		android:layout_height="wrap_content"
 		android:layout_marginTop="5dip"
 		android:baselineAligned="false">
-
+		
         <RelativeLayout
             android:id="@+id/actMain_RelLayout1"
 			android:layout_width="0dip"
 			android:layout_height="wrap_content"
 			android:layout_weight="1.5">
+			
+            <TableLayout
+			    android:id="@+id/tableLayout1"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content" >
+		 
+			    <TableRow
+			        android:id="@+id/tableRow1"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:padding="5dip">
+			 
+					<TextView
+						android:id="@+id/actMain_textView1"
+						android:layout_width="0dip"
+						android:layout_height="wrap_content"
+						android:text="@string/buyprofitloss"
+						android:textStyle="bold"
+						android:textSize="15sp"
+						android:layout_weight="1"/>
+					
+					<TextView
+						android:id="@+id/actMain_textView2"
+						android:layout_width="0dip"
+						android:layout_height="wrap_content"
+						android:text="@string/buyprofitloss"
+						android:textStyle="bold"
+						android:textSize="15sp"
+						android:layout_weight="1"/>
+			    </TableRow>
+			    
+			    <TableRow android:id="@+id/tableRow2"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:padding="5dip">
+					
+					<TextView
+						android:id="@+id/actMain_textView3"
+						android:layout_width="0dip"
+						android:layout_height="wrap_content"
+						android:text="@string/rentprofit"
+						android:textStyle="bold"
+						android:textSize="15sp"
+						android:layout_weight="1"/>
+					    
+					<TextView
+						android:id="@+id/actMain_textView4"
+						android:layout_width="0dip"
+						android:layout_height="wrap_content"
+						android:text="@string/rentprofit"
+						android:textStyle="bold"
+						android:textSize="15sp"
+						android:layout_weight="1"/>			        
+			    </TableRow>
+			    
+			    <TableRow android:id="@+id/tableRow3"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:padding="5dip">
+					
+			        <TextView
+						android:id="@+id/actMain_textView5"
+						android:layout_width="0dip"
+						android:layout_height="wrap_content"
+						android:text="@string/netprofitloss"
+						android:textStyle="bold"
+						android:textSize="15sp"
+						android:layout_weight="1"/>
+			    
+					<TextView
+						android:id="@+id/actMain_textView6"
+						android:layout_width="0dip"
+						android:layout_height="wrap_content"
+						android:text="@string/netprofitloss"
+						android:textStyle="bold"
+						android:textSize="15sp"
+						android:layout_weight="1"/>
+			        
+			    </TableRow>
+			    
+			</TableLayout>
 
-			<TextView
-				android:id="@+id/actMain_textView1"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="15dip"
-				android:text="@string/buyprofitloss"
-				android:textStyle="bold"
-				android:textSize="15sp" />
-			
-			<TextView
-				android:id="@+id/actMain_textView2"
-				android:layout_width="90dip"
-				android:layout_height="wrap_content"
-				android:layout_alignParentRight="true"
-				android:layout_marginRight="10dip"
-				android:text="@string/buyprofitloss"
-				android:textStyle="bold"
-				android:textSize="15sp"
-				android:maxWidth="90dip"/>
-			
-			<TextView
-				android:id="@+id/actMain_textView3"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_below="@id/actMain_textView1"
-				android:layout_alignLeft="@+id/actMain_textView1"
-				android:layout_marginTop="5dip"
-				android:text="@string/rentprofit"
-				android:textStyle="bold"
-				android:textSize="15sp" />
-			    
-			<TextView
-				android:id="@+id/actMain_textView4"
-				android:layout_width="90dip"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@id/actMain_textView2"
-				android:layout_alignTop="@id/actMain_textView3"
-				android:text="@string/rentprofit"
-				android:textStyle="bold"
-				android:textSize="15sp" 
-				android:maxWidth="90dip"/>
-			
-			<TextView
-				android:id="@+id/actMain_textView5"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_below="@id/actMain_textView3"
-				android:layout_alignLeft="@+id/actMain_textView3"
-				android:layout_marginTop="5dip"
-				android:text="@string/netprofitloss"
-				android:textStyle="bold"
-				android:textSize="15sp" />
-			    
-			<TextView
-				android:id="@+id/actMain_textView6"
-				android:layout_width="90dip"
-				android:layout_height="wrap_content"
-				android:layout_alignLeft="@id/actMain_textView4"
-				android:layout_alignTop="@id/actMain_textView5"
-				android:text="@string/netprofitloss"
-				android:textStyle="bold"
-				android:textSize="15sp" 
-				android:maxWidth="90dip"/>
-			
 			<View
 				android:id="@+id/actMain_ResultDivider"
-				android:layout_height="75dip"
+				android:layout_height="105dip"
 				android:layout_width="1dip"
 				android:layout_alignParentRight="true"
 				android:background="@android:color/black"/>
@@ -95,14 +112,13 @@
         <RelativeLayout
             android:id="@+id/actMain_RelLayout2"
 			android:layout_width="0dip"
-			android:layout_height="wrap_content"
+			android:layout_height="105dip"
 			android:layout_weight="1">
 
 			<TextSwitcher
 				android:id="@+id/actMain_textSwitcher1"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="40dip"
 				android:layout_centerInParent="true"/>
 
         </RelativeLayout>

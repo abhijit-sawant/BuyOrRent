@@ -15,6 +15,7 @@ public class CalcBuyOrRent {
 	private int    miLoanTenr;
 	private int    miHoldingPeriod;
 	private double mdHomeApprRate;
+	private int    miBuyUtilities;
 	private int    miYearlyTax;
 	private int    miYearlyMaintain;
 	private int    miYearlyPropIns;
@@ -45,6 +46,7 @@ public class CalcBuyOrRent {
 		miLoanTenr       = pref.getInt("LoanTenr", miLoanTenr);
 		miHoldingPeriod  = pref.getInt("HoldingPeriod", miHoldingPeriod);
 		mdHomeApprRate   = pref.getFloat("ApprRate", (float) mdHomeApprRate);
+		miBuyUtilities   = pref.getInt("BuyUtilities", miBuyUtilities);
 		miYearlyTax      = pref.getInt("YearlyTax", miYearlyTax);
 		miYearlyMaintain = pref.getInt("YearlyMaintain", miYearlyMaintain);
 		miYearlyPropIns  = pref.getInt("YearlyPropIns", miYearlyPropIns);
@@ -74,6 +76,7 @@ public class CalcBuyOrRent {
 		miLoanTenr       = 30;
 		miHoldingPeriod  = 20;
 		mdHomeApprRate   = 3;
+		miBuyUtilities   = 200;
 		miYearlyTax      = 2000;
 		miYearlyMaintain = 1200;
 		miYearlyPropIns  = 1200;
@@ -192,6 +195,14 @@ public class CalcBuyOrRent {
 		mdHomeApprRate = dVal;
 	}
 	
+	public int getBuyUtilities() {
+		return miBuyUtilities;
+	}
+	
+	public void setBuyUtilities(int iVal) {
+		miBuyUtilities = iVal;
+	}		
+	
 	public int getRent() {
 		return miRent;
 	}
@@ -278,7 +289,8 @@ public class CalcBuyOrRent {
 		double dTaxInsMaintain = ((double) (miYearlyTax + miYearlyPropIns + miYearlyMaintain)) * miHoldingPeriod;
 		double dClosingCost    = mdClosingCost * 0.01 * dHouseSellPrice;
 		
-		double dBuyExpense  = (iHoldingPeriodMnths * dMonthlyPayment) + miMovingInCost + dTotalMortIns + dTaxInsMaintain;
+		double dBuyExpense  = (iHoldingPeriodMnths * dMonthlyPayment) + (iHoldingPeriodMnths * miBuyUtilities) +
+		                      miMovingInCost + dTotalMortIns + dTaxInsMaintain;
 		dBuyExpense -= taxSavings(dMonthlyPayment, dIntRatePerMont);
 		
 		double dRentExpense = rentExpense();
@@ -347,6 +359,7 @@ public class CalcBuyOrRent {
     	editor.putInt("LoanTenr",       miLoanTenr);
     	editor.putInt("HoldingPeriod",  miHoldingPeriod);
     	editor.putFloat("ApprRate",     (float) mdHomeApprRate);
+    	editor.putInt("BuyUtilities",   miBuyUtilities);
     	editor.putInt("YearlyTax",      miYearlyTax);
     	editor.putInt("YearlyMaintain", miYearlyMaintain);
     	editor.putInt("YearlyPropIns",  miYearlyPropIns);

@@ -194,10 +194,29 @@
 	        android:layout_marginBottom="8dip"
 	        android:layout_toRightOf="@+id/actBuy_editText11" />
 	     
+	    <TextView
+	        android:id="@+id/actBuy_textView13"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actBuy_textView11"
+	        android:layout_marginTop="40dip"
+	        android:text="@string/buyUtilities"
+	        android:textSize="15sp"/>
+	
+	    <EditText
+	        android:id="@+id/actBuy_editText13"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/actBuy_editText11"
+	        android:layout_alignBottom="@+id/actBuy_textView13"
+	        android:inputType="number"
+	        android:maxLength="4"
+	        android:maxWidth="70dip"/>
+	     
 	    <View
 	        android:id="@+id/actBuy_yearlyExpDivider"
 			android:layout_width="fill_parent"
-			android:layout_below="@+id/actBuy_textView11"
+			android:layout_below="@+id/actBuy_textView13"
 			android:layout_marginTop="25dip"
 			android:layout_height="1dp"
 			android:background="@android:color/darker_gray"/>

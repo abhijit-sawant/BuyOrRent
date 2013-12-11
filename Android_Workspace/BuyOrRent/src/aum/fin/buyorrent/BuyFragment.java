@@ -53,6 +53,8 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
     private SeekBar  mSeekApprRate;
     private EditTextSeekBarLinker mApprRateLnk;
     
+    private EditText mTextUtilities;
+    
     private EditText mTextYearlyTax;
     private EditText mTextYearlyMaintain;
     private EditText mTextYearlyPropIns;
@@ -96,6 +98,8 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 		
 		mTextApprRate = (EditText) viewBuy.findViewById(R.id.actBuy_editText11);
 		mSeekApprRate = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar11); 
+		
+		mTextUtilities = (EditText) viewBuy.findViewById(R.id.actBuy_editText13);
 		 
 		mTextYearlyTax      = (EditText) viewBuy.findViewById(R.id.actBuy_editText6);
 		mTextYearlyMaintain = (EditText) viewBuy.findViewById(R.id.actBuy_editText7);
@@ -152,6 +156,8 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
     	mHoldingPeriodLnk.setValMinMax(mTextHoldingPeriod, calc.getHoldingPriod(), "");
     	mApprRateLnk.setValMinMax(mTextApprRate, calc.getHomeApprRate(), "");
     	
+    	mTextUtilities.setText(String.valueOf((int) calc.getBuyUtilities()));
+    	
     	mTextYearlyTax.setText(     String.valueOf((int) calc.getYearlyTax()));
     	mTextYearlyMaintain.setText(String.valueOf((int) calc.getYearlyMaintain()));
     	mTextYearlyPropIns.setText( String.valueOf((int) calc.getYearlyPropIns()));
@@ -174,13 +180,17 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
  		mHoldingPeriodLnk  = new EditTextSeekBarLinker(mTextHoldingPeriod, mSeekHoldingPeriod, calc.getHoldingPriod(), "HoldingPeriod");
  		mApprRateLnk       = new EditTextSeekBarLinker(mTextApprRate, mSeekApprRate, calc.getHomeApprRate(), "ApprRate");
  		
-    	mTextYearlyTax.setText(     String.valueOf((int) calc.getYearlyTax()));
+ 		mTextUtilities.setText(String.valueOf((int) calc.getBuyUtilities()));
+    	
+ 		mTextYearlyTax.setText(     String.valueOf((int) calc.getYearlyTax()));
     	mTextYearlyMaintain.setText(String.valueOf((int) calc.getYearlyMaintain()));
     	mTextYearlyPropIns.setText( String.valueOf((int) calc.getYearlyPropIns()));
  		
     	mTextMortIns.setText(     String.format("%.2f", calc.getMortIns()));
     	mTextClosingCost.setText( String.format("%.2f", calc.getClosingCost()));
     	mTextMovingInCost.setText(String.valueOf((int) calc.getMovingInCost()));
+    	
+    	mTextUtilities.addTextChangedListener(new BuyTextWatcher());
     	
     	mTextYearlyTax.addTextChangedListener(new BuyTextWatcher());		 
 		mTextYearlyMaintain.addTextChangedListener(new BuyTextWatcher());		 
@@ -252,12 +262,14 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 	    	calc.setHoldingPriod(Integer.valueOf(mTextHoldingPeriod.getText().toString()));
 	    	calc.setHomeApprRate(Double.valueOf(mTextApprRate.getText().toString()));
 	    	
-/*	    	calc.setYearlyTax(Integer.valueOf(mTextYearlyTax.getText().toString()));
+	    	calc.setBuyUtilities(Integer.valueOf(mTextUtilities.getText().toString()));
+	    	
+	    	calc.setYearlyTax(Integer.valueOf(mTextYearlyTax.getText().toString()));
 	    	calc.setYearlyMaintain(Integer.valueOf(mTextYearlyMaintain.getText().toString()));
 	    	calc.setYearlyPropIns(Integer.valueOf(mTextYearlyPropIns.getText().toString()));
 	    	calc.setMortIns(Double.valueOf(mTextMortIns.getText().toString()));
 	    	calc.setClosingCost(Double.valueOf(mTextClosingCost.getText().toString()));
-	    	calc.setMovingInCost(Integer.valueOf(mTextMovingInCost.getText().toString()));*/
+	    	calc.setMovingInCost(Integer.valueOf(mTextMovingInCost.getText().toString()));
     	} catch(NumberFormatException e) {
     		//do nothing
     	}
