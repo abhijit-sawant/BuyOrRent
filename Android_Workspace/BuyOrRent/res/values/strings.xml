@@ -38,7 +38,7 @@
 	<string name="yearlyRentIncrease">Rent Increase\nRate (Yearly %)</string>
 	<string name="rentInsurance">Renters Insurance\n(per Month)</string>
 	<string name="utilities">Utilities\n(per Month)</string>
-	<string name="savingReturns">Return on loan\ndownpay savings\n(Yearly %)</string>
+	<string name="savingReturns">Return on savings\nas compared to buy\n(Yearly %)</string>
 	
 	<string name="taxBracket">Tax Bracket (%)</string>
 	<string name="taxBracketHelp">Keep this zero or blank if itemized deduction is less than standard deduction</string>

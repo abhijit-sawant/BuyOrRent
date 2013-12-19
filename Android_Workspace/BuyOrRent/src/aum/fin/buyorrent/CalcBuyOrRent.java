@@ -283,39 +283,40 @@ public class CalcBuyOrRent {
 		double dIntPaid = dMortPaid - dPrincipalPaid;
 		
 		//house sell price
-		double dHouseSellPrice = futureValueOnAnnual(miHousePrice, mdHomeApprRate, miHoldingPeriod);
+		double dHouseSellPrice = futureValue(miHousePrice, mdHomeApprRate, miHoldingPeriod);
 		
 		double dTotalMortIns   = dMortInsPerMonth * iHoldingPeriodMnths;		
 		double dTaxInsMaintain = ((double) (miYearlyTax + miYearlyPropIns + miYearlyMaintain)) * miHoldingPeriod;
 		double dClosingCost    = mdClosingCost * 0.01 * dHouseSellPrice;
 		
 		double dBuyExpense  = (iHoldingPeriodMnths * dMonthlyPayment) + (iHoldingPeriodMnths * miBuyUtilities) +
-		                      miMovingInCost + dTotalMortIns + dTaxInsMaintain;
-		dBuyExpense -= taxSavings(dMonthlyPayment, dIntRatePerMont);
+		                      miMovingInCost + dTotalMortIns + dTaxInsMaintain + miDownPay;
+		//dBuyExpense -= taxSavings(dMonthlyPayment, mdTaxBracket);
 		
 		double dRentExpense = rentExpense();
-		dRentExpense -= futureValueOnAnnual(miDownPay, mdSavingReturnRate, miHoldingPeriod);
 		
+		double dSavingMnthly = (dBuyExpense - dRentExpense - miDownPay - miMovingInCost) / (miHoldingPeriod * 12);
+		double t = futureValueCompound(dSavingMnthly, (mdSavingReturnRate/12), (miHoldingPeriod * 12));
+		double dOpptCost = futureValue((miDownPay + miMovingInCost), mdSavingReturnRate, miHoldingPeriod) +
+				           futureValueCompound(dSavingMnthly, (mdSavingReturnRate/12), (miHoldingPeriod * 12));
+				
 		mdBuyProfit  = dHouseSellPrice - dBuyExpense - dLoanBalance - dClosingCost;
-		mdRentProfit = dBuyExpense - dRentExpense;
+		mdRentProfit = dOpptCost - dRentExpense;
+		
 		mdNetBuyProfit = mdBuyProfit - mdRentProfit;
 	}
 	
-    private double futureValueOnAnnual(double dCurVal, double dApprRate, int iPeriod) {
+    private double futureValue(double dCurVal, double dApprRate, int iPeriod) {
 		double dFutVal = dCurVal;
 		for(int i = 1; i <= iPeriod; i++)
 			dFutVal += dFutVal * (dApprRate * 0.01);
 		return dFutVal;
 	}
-	
-	private double futureValueOnMonthly(double dCurVal, double dApprRate, int iPeriod) {
+    
+    private double futureValueCompound(double dCurVal, double dApprRate, int iPeriod) {
 		double dFutVal = 0;
-		double dMonthly = dCurVal;
 		for(int i = 1; i <= iPeriod; i++)
-		{
-			dFutVal += 12 * dMonthly;
-			dMonthly += dMonthly * (dApprRate * 0.01);
-		}
+			dFutVal += dFutVal * (dApprRate * 0.01) + dCurVal;
 		return dFutVal;
 	}
 	
