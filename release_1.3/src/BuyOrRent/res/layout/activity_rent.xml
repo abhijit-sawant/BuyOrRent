@@ -1,0 +1,134 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true" >
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+             
+        <TextView
+	        android:id="@+id/actRent_textView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="25dip"
+	        android:text="@string/rent"
+	        android:textSize="15sp" />
+
+	    <EditText
+	        android:id="@+id/actRent_editText1"
+	        android:layout_width="75dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/actRent_textView1"
+	        android:layout_marginLeft="70dip"
+	        android:layout_toRightOf="@+id/actRent_textView1"
+	        android:inputType="number"
+	        android:maxLength="5"
+	        android:maxWidth="75dip" />
+	    
+	    <SeekBar
+	        android:id="@+id/actRent_seekBar1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/actRent_textView1"
+	        android:layout_centerInParent="true"
+	        android:layout_marginLeft="2dip"
+	        android:layout_marginRight="2dip"
+	        android:layout_marginBottom="8dip"
+	        android:layout_toRightOf="@+id/actRent_editText1" />
+	    
+	    <TextView
+	       android:id="@+id/actRent_textView2"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_alignParentLeft="true"
+	       android:layout_below="@+id/actRent_textView1"
+	       android:layout_marginTop="40dip"
+	       android:text="@string/yearlyRentIncrease"
+	       android:textSize="15sp" />
+	        
+	    <EditText
+	        android:id="@+id/actRent_editText2"
+	        android:layout_width="75dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/actRent_textView2"
+	        android:layout_alignLeft="@+id/actRent_editText1"
+	        android:inputType="numberDecimal"
+	        android:maxLength="5"
+	        android:maxWidth="75dip"/>
+	    
+	     <SeekBar
+	        android:id="@+id/actRent_seekBar2"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/actRent_textView2"
+	        android:layout_centerInParent="true"
+	        android:layout_marginLeft="2dip"
+	        android:layout_marginRight="2dip"
+	        android:layout_marginBottom="8dip"
+	        android:layout_toRightOf="@+id/actRent_editText2" />
+	     
+	     <TextView
+	        android:id="@+id/actRent_textView3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actRent_textView2"
+	        android:layout_marginTop="40dip"
+	        android:text="@string/rentInsurance"
+	        android:textSize="15sp" />
+	
+	    <EditText
+	        android:id="@+id/actRent_editText3"
+	        android:layout_width="75dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/actRent_textView3"
+	        android:layout_alignLeft="@+id/actRent_editText2"
+	        android:inputType="number"
+	        android:maxLength="5"
+	        android:maxWidth="75dip"/>
+	    
+	    <TextView
+	        android:id="@+id/actRent_textView4"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actRent_textView3"
+	        android:layout_marginTop="40dip"
+	        android:text="@string/utilities"
+	        android:textSize="15sp" />
+	
+	    <EditText
+	        android:id="@+id/actRent_editText4"
+	        android:layout_width="75dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/actRent_editText3"
+	        android:layout_alignBottom="@+id/actRent_textView4"
+	        android:inputType="number"
+	        android:maxLength="5"
+	        android:maxWidth="75dip"/>
+	    
+	    <TextView
+	        android:id="@+id/actRent_textView5"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actRent_textView4"
+	        android:layout_marginTop="40dip"
+	        android:text="@string/savingReturns"
+	        android:textSize="15sp" />
+	
+	    <EditText
+	        android:id="@+id/actRent_editText5"
+	        android:layout_width="75dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/actRent_editText4"
+	        android:layout_alignBottom="@+id/actRent_textView5"
+	        android:inputType="numberDecimal"
+	        android:maxLength="5"
+	        android:maxWidth="75dip"/>	    
+	    
+    </RelativeLayout>
+    
+</ScrollView>    
