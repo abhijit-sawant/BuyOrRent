@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+    
+    <TextView
+		android:id="@+id/actRep_textViewTitle"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dip"
+		android:text="@string/buyprofit"
+		android:gravity="center"
+		android:textStyle="bold"
+		android:textSize="15sp" />
+    
+    <View
+        android:id="@+id/actRep_dividerTitle"
+        android:layout_below="@+id/actRep_textViewTitle"
+		android:layout_width="fill_parent"		
+		android:layout_marginTop="10dip"
+		android:layout_height="1dp"
+		android:background="@android:color/darker_gray"/>
+        
+ 	<TextView
+		android:id="@+id/actRep_textView1"
+		android:layout_below="@+id/actRep_dividerTitle"
+		android:layout_toLeftOf="@+id/actRep_textView2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dip"
+		android:layout_alignParentLeft="true"
+		android:text="@string/buyprofit"
+		android:textStyle="bold"
+		android:textSize="15sp" />
+
+	<TextView
+		android:id="@+id/actRep_textView2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignTop="@+id/actRep_textView1"
+		android:layout_alignParentRight="true"
+		android:text="@string/buyprofit"
+		android:textStyle="bold"
+		android:textSize="15sp"/>
+	
+	<View
+        android:id="@+id/actRep_divider1"
+        android:layout_below="@+id/actRep_textView1"
+		android:layout_width="fill_parent"		
+		android:layout_marginTop="10dip"
+		android:layout_height="1dp"
+		android:background="@android:color/darker_gray"/>
+
+</RelativeLayout>

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
-        android:layout_marginTop="5dip"/>
+        android:layout_marginTop="10dip"/>
     
     <LinearLayout
         android:id="@+id/layout_graph"
@@ -19,13 +19,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/actMain_textSwitcher1"
-        android:layout_marginTop="5dip"
-        android:layout_marginRight="5dip"
-        android:layout_marginLeft="5dip">
+        android:padding="10dip">
     
 	    <com.echo.holographlibrary.BarGraph
 	        android:layout_width="fill_parent"
-	        android:layout_height="130dip"
+	        android:layout_height="260dip"
 	        android:id="@+id/graph"
 	        android:background="@drawable/border"/>    
     </LinearLayout>

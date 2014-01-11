@@ -13,11 +13,11 @@
     <string name="buyloss">Buy Loss</string>
     <string name="rentprofit">Rent Profit</string>
     <string name="rentloss">Rent Loss</string>
-    <string name="netprofit">Net profit\nif you Buy</string>
-    <string name="netloss">Net loss\nif you Buy</string>
+    <string name="netprofit">Net Buy Profit</string>
+    <string name="netloss">Net Buy Loss</string>
         
-    <string name="decisionbuy">BUY</string>
-    <string name="decisionrent">RENT</string>
+    <string name="decisionbuy">Buying is profitable</string>
+    <string name="decisionrent">Renting is profitable</string>
     
     <string name="housePrice">House Price</string>
 	<string name="downPay">Down Payment</string>

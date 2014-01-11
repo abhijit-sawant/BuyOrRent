@@ -9,16 +9,18 @@ package aum.fin.buyorrent;
 
 public final class R {
     public static final class array {
-        public static final int martialStatus_array=0x7f060000;
+        public static final int martialStatus_array=0x7f070000;
     }
     public static final class attr {
     }
     public static final class dimen {
-        public static final int TextViewMarg=0x7f040000;
+        public static final int TextViewMarg=0x7f060000;
     }
     public static final class drawable {
-        public static final int ic_action_search=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int border=0x7f020000;
+        public static final int ic_action_search=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int popup_black=0x7f020003;
     }
     public static final class id {
         public static final int actBuy_bottomDivider=0x7f09002d;
@@ -67,43 +69,40 @@ public final class R {
         public static final int actBuy_textView9=0x7f090027;
         public static final int actBuy_textYearlyTitle=0x7f090018;
         public static final int actBuy_yearlyExpDivider=0x7f090015;
-        public static final int actMain_RelLayout1=0x7f09002f;
-        public static final int actMain_RelLayout2=0x7f090037;
-        public static final int actMain_ResultDivider=0x7f090036;
-        public static final int actMain_TabDivider=0x7f090039;
-        public static final int actMain_textSwitcher1=0x7f090038;
-        public static final int actMain_textView1=0x7f090030;
-        public static final int actMain_textView2=0x7f090031;
-        public static final int actMain_textView3=0x7f090032;
-        public static final int actMain_textView4=0x7f090033;
-        public static final int actMain_textView5=0x7f090034;
-        public static final int actMain_textView6=0x7f090035;
-        public static final int actRent_editText1=0x7f09003c;
-        public static final int actRent_editText2=0x7f09003f;
-        public static final int actRent_editText3=0x7f090042;
-        public static final int actRent_editText4=0x7f090044;
-        public static final int actRent_editText5=0x7f090046;
-        public static final int actRent_seekBar1=0x7f09003d;
-        public static final int actRent_seekBar2=0x7f090040;
-        public static final int actRent_textView1=0x7f09003b;
-        public static final int actRent_textView2=0x7f09003e;
-        public static final int actRent_textView3=0x7f090041;
-        public static final int actRent_textView4=0x7f090043;
-        public static final int actRent_textView5=0x7f090045;
-        public static final int actTax_editText1=0x7f090048;
-        public static final int actTax_textView1=0x7f090047;
-        public static final int actTax_textView2=0x7f090049;
-        public static final int item_reset_values=0x7f09004b;
-        public static final int linearLayout1=0x7f09002e;
-        public static final int menu_settings=0x7f09004a;
+        public static final int actMain_textSwitcher1=0x7f09002e;
+        public static final int actRent_editText1=0x7f090033;
+        public static final int actRent_editText2=0x7f090036;
+        public static final int actRent_editText3=0x7f090039;
+        public static final int actRent_editText4=0x7f09003b;
+        public static final int actRent_editText5=0x7f09003d;
+        public static final int actRent_seekBar1=0x7f090034;
+        public static final int actRent_seekBar2=0x7f090037;
+        public static final int actRent_textView1=0x7f090032;
+        public static final int actRent_textView2=0x7f090035;
+        public static final int actRent_textView3=0x7f090038;
+        public static final int actRent_textView4=0x7f09003a;
+        public static final int actRent_textView5=0x7f09003c;
+        public static final int actRep_divider1=0x7f090042;
+        public static final int actRep_dividerTitle=0x7f09003f;
+        public static final int actRep_textView1=0x7f090040;
+        public static final int actRep_textView2=0x7f090041;
+        public static final int actRep_textViewTitle=0x7f09003e;
+        public static final int actTax_editText1=0x7f090044;
+        public static final int actTax_textView1=0x7f090043;
+        public static final int actTax_textView2=0x7f090045;
+        public static final int graph=0x7f090030;
+        public static final int item_reset_values=0x7f090047;
+        public static final int layout_graph=0x7f09002f;
+        public static final int menu_settings=0x7f090046;
         public static final int realtabcontent=0x01010000;
-        public static final int scrollView1=0x7f09003a;
+        public static final int scrollView1=0x7f090031;
     }
     public static final class layout {
         public static final int activity_buy=0x7f030000;
         public static final int activity_main=0x7f030001;
         public static final int activity_rent=0x7f030002;
-        public static final int activity_tax=0x7f030003;
+        public static final int activity_report=0x7f030003;
+        public static final int activity_tax=0x7f030004;
     }
     public static final class menu {
         public static final int activity_buy=0x7f080000;
@@ -113,46 +112,71 @@ public final class R {
         public static final int main_menu=0x7f080004;
     }
     public static final class string {
-        public static final int app_name=0x7f050001;
-        public static final int apprRate=0x7f050015;
-        public static final int buyUtilities=0x7f050016;
-        public static final int buyloss=0x7f050008;
-        public static final int buyprofit=0x7f050007;
-        public static final int closingCost=0x7f05001d;
-        public static final int decisionbuy=0x7f05000d;
-        public static final int decisionrent=0x7f05000e;
-        public static final int downPay=0x7f050010;
-        public static final int holdPeriod=0x7f050014;
-        public static final int housePrice=0x7f05000f;
-        public static final int intRate=0x7f050012;
-        public static final int loanAmt=0x7f050011;
-        public static final int menu_settings=0x7f050002;
-        public static final int mortInsRate=0x7f05001c;
-        public static final int movingInCost=0x7f05001e;
-        public static final int netloss=0x7f05000c;
-        public static final int netprofit=0x7f05000b;
-        public static final int periExpenses=0x7f05001b;
-        public static final int rent=0x7f05001f;
-        public static final int rentInsurance=0x7f050021;
-        public static final int rentloss=0x7f05000a;
-        public static final int rentprofit=0x7f050009;
-        public static final int reset_values=0x7f050000;
-        public static final int savingReturns=0x7f050023;
-        public static final int taxBracket=0x7f050024;
-        public static final int taxBracketHelp=0x7f050025;
-        public static final int tenure=0x7f050013;
-        public static final int title_activity_buy=0x7f050004;
-        public static final int title_activity_main=0x7f050003;
-        public static final int title_activity_rent=0x7f050005;
-        public static final int title_activity_tax=0x7f050006;
-        public static final int utilities=0x7f050022;
-        public static final int yearTax=0x7f050018;
-        public static final int yearlyExpenses=0x7f050017;
-        public static final int yearlyMaint=0x7f050019;
-        public static final int yearlyPropIns=0x7f05001a;
-        public static final int yearlyRentIncrease=0x7f050020;
+        public static final int app_name=0x7f040000;
+        public static final int apprRate=0x7f040015;
+        public static final int buyUtilities=0x7f040016;
+        public static final int buyloss=0x7f040008;
+        public static final int buyprofit=0x7f040007;
+        public static final int closingCost=0x7f04001d;
+        public static final int decisionbuy=0x7f04000d;
+        public static final int decisionrent=0x7f04000e;
+        public static final int downPay=0x7f040010;
+        public static final int holdPeriod=0x7f040014;
+        public static final int housePrice=0x7f04000f;
+        public static final int intRate=0x7f040012;
+        public static final int loanAmt=0x7f040011;
+        public static final int menu_settings=0x7f040002;
+        public static final int mortInsRate=0x7f04001c;
+        public static final int movingInCost=0x7f04001e;
+        public static final int netloss=0x7f04000c;
+        public static final int netprofit=0x7f04000b;
+        public static final int periExpenses=0x7f04001b;
+        public static final int rent=0x7f04001f;
+        public static final int rentInsurance=0x7f040021;
+        public static final int rentloss=0x7f04000a;
+        public static final int rentprofit=0x7f040009;
+        public static final int reset_values=0x7f040001;
+        public static final int savingReturns=0x7f040023;
+        public static final int taxBracket=0x7f040024;
+        public static final int taxBracketHelp=0x7f040025;
+        public static final int tenure=0x7f040013;
+        public static final int title_activity_buy=0x7f040004;
+        public static final int title_activity_main=0x7f040003;
+        public static final int title_activity_rent=0x7f040005;
+        public static final int title_activity_tax=0x7f040006;
+        public static final int utilities=0x7f040022;
+        public static final int yearTax=0x7f040018;
+        public static final int yearlyExpenses=0x7f040017;
+        public static final int yearlyMaint=0x7f040019;
+        public static final int yearlyPropIns=0x7f04001a;
+        public static final int yearlyRentIncrease=0x7f040020;
     }
     public static final class style {
-        public static final int AppTheme=0x7f070000;
+        /** 
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    
+
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        
+
+        Base application theme for API 11+. This theme completely replaces
+        AppBaseTheme from res/values/styles.xml on API 11+ devices.
+    
+ API 11 theme customizations can go here. 
+
+        Base application theme for API 14+. This theme completely replaces
+        AppBaseTheme from BOTH res/values/styles.xml and
+        res/values-v11/styles.xml on API 14+ devices.
+    
+ API 14 theme customizations can go here. 
+         */
+        public static final int AppBaseTheme=0x7f050000;
+        /**  Application theme. 
+ All customizations that are NOT specific to a particular API-level can go here. 
+         */
+        public static final int AppTheme=0x7f050001;
     }
 }

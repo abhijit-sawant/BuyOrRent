@@ -1,7 +1,11 @@
 package aum.fin.buyorrent;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import com.echo.holographlibrary.Bar;
+import com.echo.holographlibrary.BarGraph;
  
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,7 +24,7 @@ import android.widget.TabHost.TabContentFactory;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
- 
+
 public class MainFragment extends FragmentActivity implements TabHost.OnTabChangeListener {
 	
 	class TabFactory implements TabContentFactory {
@@ -45,17 +49,10 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     private TabInfo mLastTab   = null;
     private CalcBuyOrRent mCalcBuyOrRent = null;
     
-    private TextView mTextBuyProfit;
-    private TextView mTextRentProfit;
-    private TextView mTextNetProfit;
-    
-    private TextView mTextBuyProfitLabel;
-    private TextView mTextRentProfitLabel;
-    private TextView mTextNetProfitLabel;
-    
-    private TextView mTextDecisionBuy;
-    private TextView mTextDecisionRent;
     private TextSwitcher mTextSwitchDecision;
+    private TextView     mTextDecisionBuy;
+    private TextView     mTextDecisionRent;
+    private BarGraph     mGraphResult;
     
     private boolean mbUpdateResult = false;
     
@@ -108,26 +105,18 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         	mTabHost.setCurrentTabByTag(strTabTag);
         }
         
-        mTextBuyProfit      = (TextView) findViewById(R.id.actMain_textView2);
-        mTextRentProfit     = (TextView) findViewById(R.id.actMain_textView4);
-        mTextNetProfit      = (TextView) findViewById(R.id.actMain_textView6);
-        
-        mTextBuyProfitLabel  = (TextView) findViewById(R.id.actMain_textView1);
-        mTextRentProfitLabel = (TextView) findViewById(R.id.actMain_textView3);
-        mTextNetProfitLabel  = (TextView) findViewById(R.id.actMain_textView5);
-        
         mTextSwitchDecision = (TextSwitcher) findViewById(R.id.actMain_textSwitcher1);        
         
         mTextDecisionBuy = new TextView(this);
         mTextDecisionBuy.setText(R.string.decisionbuy);
-        mTextDecisionBuy.setTextColor(Color.rgb(0, 128, 0));
-        mTextDecisionBuy.setTextSize(30);
+        mTextDecisionBuy.setTextColor(Color.rgb(65, 105, 225));
+        mTextDecisionBuy.setTextSize(20);
         mTextDecisionBuy.setTypeface(Typeface.SERIF);    
         
         mTextDecisionRent = new TextView(this);
         mTextDecisionRent.setText(R.string.decisionrent);
-        mTextDecisionRent.setTextColor(Color.rgb(128, 0, 0));
-        mTextDecisionRent.setTextSize(30);
+        mTextDecisionRent.setTextColor(Color.rgb(255, 140, 0));
+        mTextDecisionRent.setTextSize(20);
         mTextDecisionRent.setTypeface(Typeface.SERIF);
         
       	mTextSwitchDecision.addView(mTextDecisionBuy);
@@ -136,7 +125,7 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
         mTextSwitchDecision.setInAnimation(this,  android.R.anim.fade_in);
         mTextSwitchDecision.setOutAnimation(this, android.R.anim.fade_out);
         
-        mTextNetProfit.setTextColor(miGreen);
+        mGraphResult = (BarGraph)findViewById(R.id.graph);        
     }
  
     protected void onSaveInstanceState(Bundle outState) {
@@ -196,6 +185,8 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     		((OnDataChangedListener) fragmentCurrent).onResetToDefault();
     	
     	setUpdateResult(true);
+    	
+    	mGraphResult.resetMaxVal();
     	calcBuyOrRent();
     }
     
@@ -270,54 +261,6 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     	double dRentProfit    = getCalcBuyOrRent().getRentProfit();
     	double dBuyNetProfit  = getCalcBuyOrRent().getBuyNetProfit();
     	
-    	if(dBuyProfit > 0)
-    		mTextBuyProfitLabel.setText(R.string.buyprofit);
-    	else
-    		mTextBuyProfitLabel.setText(R.string.buyloss);
-    	
-    	if(dRentProfit > 0)
-    		mTextRentProfitLabel.setText(R.string.rentprofit);
-    	else
-    		mTextRentProfitLabel.setText(R.string.rentloss);    	
-    	
-    	if(dBuyNetProfit > 0)
-    		mTextNetProfitLabel.setText(R.string.netprofit);
-    	else
-    		mTextNetProfitLabel.setText(R.string.netloss);
-    	
-    	int iFactMult = 1;
-    	if(dBuyProfit < 0)
-    	{
-    		iFactMult = -1;
-    		mTextBuyProfit.setTextColor(miRed);
-    	}
-    	else
-    		mTextBuyProfit.setTextColor(miGreen);
-    	String strBuyProfit = mFormatCurrancy.format(iFactMult * dBuyProfit);
-    	mTextBuyProfit.setText(strBuyProfit);
-    	
-    	iFactMult = 1;
-    	if(dRentProfit < 0)
-    	{
-    		iFactMult = -1;
-    		mTextRentProfit.setTextColor(miRed);
-    	}
-    	else
-    		mTextRentProfit.setTextColor(miGreen);
-    	String strRentProfit = mFormatCurrancy.format(iFactMult * dRentProfit);
-    	mTextRentProfit.setText(strRentProfit);   	
-    	
-    	iFactMult = 1;
-    	if(dBuyNetProfit < 0)
-    	{
-    		iFactMult = -1;
-    		mTextNetProfit.setTextColor(miRed);
-    	}
-    	else
-    		mTextNetProfit.setTextColor(miGreen); 
-    	String strNetProfit = mFormatCurrancy.format(iFactMult * dBuyNetProfit);
-    	mTextNetProfit.setText(strNetProfit);
-  		    	
     	if(dBuyProfit > dRentProfit)
     	{
     		if(mTextSwitchDecision.getNextView() == mTextDecisionBuy)
@@ -327,7 +270,56 @@ public class MainFragment extends FragmentActivity implements TabHost.OnTabChang
     	{
     		if(mTextSwitchDecision.getNextView() == mTextDecisionRent)
     			mTextSwitchDecision.showNext();
-    	}
+    	}    	
+    	
+    	int iFactMult = 1;
+    	if(dBuyProfit < 0)
+    		iFactMult = -1;
+    	String strBuyProfit = mFormatCurrancy.format(iFactMult * dBuyProfit);
+ 	
+    	iFactMult = 1;
+    	if(dRentProfit < 0)
+    		iFactMult = -1;
+    	String strRentProfit = mFormatCurrancy.format(iFactMult * dRentProfit);
+    	
+    	iFactMult = 1;
+    	if(dBuyNetProfit < 0)
+    		iFactMult = -1;
+    	String strNetProfit = mFormatCurrancy.format(iFactMult * dBuyNetProfit);
+  		    	
+    	ArrayList<Bar> points = new ArrayList<Bar>();
+    	Bar barBuy = new Bar();
+    	barBuy.setColor(Color.rgb(101, 153, 255));
+    	if(dBuyProfit > 0)
+    		barBuy.setName(getString(R.string.buyprofit));
+    	else
+    		barBuy.setName(getString(R.string.buyloss));
+    	barBuy.setValue((float) dBuyProfit);
+    	barBuy.setValueString(strBuyProfit);
+    	
+    	Bar barRent = new Bar();
+    	barRent.setColor(Color.rgb(255, 153, 0));
+    	if(dRentProfit > 0)
+    		barRent.setName(getString(R.string.rentprofit));
+    	else
+    		barRent.setName(getString(R.string.rentloss));
+    	barRent.setValue((float) dRentProfit);
+    	barRent.setValueString(strRentProfit);
+    	
+    	Bar barNet = new Bar();
+  		barNet.setColor(Color.rgb(9, 112, 84));
+  		if(dBuyNetProfit > 0)
+  			barNet.setName(getString(R.string.netprofit));
+  		else
+  			barNet.setName(getString(R.string.netloss));
+    	barNet.setValue((float) dBuyNetProfit);
+    	barNet.setValueString(strNetProfit);
+    	
+    	points.add(barBuy);
+    	points.add(barRent);   
+    	points.add(barNet);
+
+    	mGraphResult.setBars(points);    	
     }
  
 }
