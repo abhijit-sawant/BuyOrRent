@@ -25,7 +25,7 @@
     
 	    <com.echo.holographlibrary.BarGraph
 	        android:layout_width="fill_parent"
-	        android:layout_height="130dip"
+	        android:layout_height="150dip"
 	        android:id="@+id/graph"
 	        android:background="@drawable/border"/>    
     </LinearLayout>
