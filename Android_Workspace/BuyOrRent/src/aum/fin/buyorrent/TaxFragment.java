@@ -1,8 +1,8 @@
 package aum.fin.buyorrent;
 
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +17,7 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
      		public void afterTextChanged(Editable s) {}	 
 			public void beforeTextChanged(CharSequence s, int start, int count, int after){}
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				 ((MainFragment) getActivity()).calcBuyOrRent();
+				onDataChanged();
 			 }     
 	    };
 	
@@ -42,7 +42,7 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
     }
     
     public void onResetToDefault() {
-    	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
+    	CalcBuyOrRent calc = CalcBuyOrRent.getInstance();
     	
     	mTextTaxBracket.setText(String.format("%.2f", calc.getTaxBracket()));
     }
@@ -52,7 +52,7 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
     	
    		((MainFragment) getActivity()).setUpdateResult(false);
    		
-   		CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();	
+   		CalcBuyOrRent calc = CalcBuyOrRent.getInstance();
    		
    		mTextTaxBracket.setText(String.format("%.2f", calc.getTaxBracket()));
    		mTextTaxBracket.addTextChangedListener(new TaxTextWatcher());
@@ -64,7 +64,7 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
     	if(!mbIsCreated)
     		return;
     	
-    	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
+    	CalcBuyOrRent calc = CalcBuyOrRent.getInstance();
     	
     	double dVal = 0;
     	String strVal = mTextTaxBracket.getText().toString();

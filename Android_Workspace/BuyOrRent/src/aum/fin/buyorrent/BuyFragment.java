@@ -1,9 +1,9 @@
 package aum.fin.buyorrent;
 
 import android.R.drawable;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.SeekBar;
 import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
 
 public class BuyFragment  extends Fragment implements OnDataChangedListener {
@@ -25,36 +24,18 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 		public void beforeTextChanged(CharSequence s, int start, int count, int after){}
 		
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
-			 ((MainFragment) getActivity()).calcBuyOrRent();
+			onDataChanged();
 		 }     
     };
     
     private EditText mTextHousePrice;
-    private SeekBar  mSeekHousePrice;
-    private EditTextSeekBarLinker mHousePriceLnk;
-    
     private EditText mTextDownPay;
-    private SeekBar  mSeekDownPay;
-    private EditTextSeekBarLinker mDownPayLnk;
-    
     private EditText mTextIntRate;
-    private SeekBar  mSeekIntRate;
-    private EditTextSeekBarLinker mIntRateLnk;
-    
     private EditText mTextLoanTenr;
-    private SeekBar  mSeekLoanTenr;
-    private EditTextSeekBarLinker mLoanTenrLnk;
-    
     private EditText mTextHoldingPeriod;
-    private SeekBar  mSeekHoldingPeriod;
-    private EditTextSeekBarLinker mHoldingPeriodLnk;
+    private EditText mTextApprRate; 
     
-    private EditText mTextApprRate;
-    private SeekBar  mSeekApprRate;
-    private EditTextSeekBarLinker mApprRateLnk;
-    
-    private EditText mTextUtilities;
-    
+    private EditText mTextUtilities;    
     private EditText mTextYearlyTax;
     private EditText mTextYearlyMaintain;
     private EditText mTextYearlyPropIns;
@@ -71,6 +52,7 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
     private SharedPreferences mPrefrences;
     
     private Boolean mbIsCreated = false;
+    private boolean mbUpdate = true;
     
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     	
@@ -82,25 +64,13 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
         
 		final ScrollView viewBuy = (ScrollView)inflater.inflate(R.layout.activity_buy, container, false);
 		mTextHousePrice = (EditText) viewBuy.findViewById(R.id.actBuy_editText1);
-		mSeekHousePrice = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar1);
-		 
 		mTextDownPay = (EditText) viewBuy.findViewById(R.id.actBuy_editText2);
-		mSeekDownPay = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar2);     
-		 
 		mTextIntRate = (EditText) viewBuy.findViewById(R.id.actBuy_editText3);
-		mSeekIntRate = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar3);
-		 
 		mTextLoanTenr = (EditText) viewBuy.findViewById(R.id.actBuy_editText4);
-		mSeekLoanTenr = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar4);
-		 
 		mTextHoldingPeriod = (EditText) viewBuy.findViewById(R.id.actBuy_editText5);
-		mSeekHoldingPeriod = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar5);
-		
-		mTextApprRate = (EditText) viewBuy.findViewById(R.id.actBuy_editText11);
-		mSeekApprRate = (SeekBar) viewBuy.findViewById(R.id.actBuy_seekBar11); 
-		
+		mTextApprRate = (EditText) viewBuy.findViewById(R.id.actBuy_editText11);		
 		mTextUtilities = (EditText) viewBuy.findViewById(R.id.actBuy_editText13);
-		 
+		
 		mTextYearlyTax      = (EditText) viewBuy.findViewById(R.id.actBuy_editText6);
 		mTextYearlyMaintain = (EditText) viewBuy.findViewById(R.id.actBuy_editText7);
 		mTextYearlyPropIns  = (EditText) viewBuy.findViewById(R.id.actBuy_editText8);
@@ -148,48 +118,56 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
     }
     
     public void onResetToDefault() {
-    	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();    	
-    	mHousePriceLnk.setValMinMax(mTextHousePrice, calc.getHousePrice(), "");
-    	mDownPayLnk.setValMinMax(mTextDownPay, calc.getDownPay(), "");
-    	mIntRateLnk.setValMinMax(mTextIntRate, calc.getLoanIntRate(), "");
-    	mLoanTenrLnk.setValMinMax(mTextLoanTenr, calc.getLoanTenr(), "");
-    	mHoldingPeriodLnk.setValMinMax(mTextHoldingPeriod, calc.getHoldingPriod(), "");
-    	mApprRateLnk.setValMinMax(mTextApprRate, calc.getHomeApprRate(), "");
+    	mbUpdate = false;
     	
-    	mTextUtilities.setText(String.valueOf((int) calc.getBuyUtilities()));
+    	CalcBuyOrRent calc = CalcBuyOrRent.getInstance(); 
     	
-    	mTextYearlyTax.setText(     String.valueOf((int) calc.getYearlyTax()));
-    	mTextYearlyMaintain.setText(String.valueOf((int) calc.getYearlyMaintain()));
-    	mTextYearlyPropIns.setText( String.valueOf((int) calc.getYearlyPropIns()));
+    	mTextHousePrice.setText(String.valueOf(calc.getHousePrice()));
+    	mTextDownPay.setText(String.valueOf(calc.getDownPay()));
+    	mTextIntRate.setText(String.format("%.2f", calc.getLoanIntRate()));
+    	mTextLoanTenr.setText(String.valueOf(calc.getLoanTenr()));
+    	mTextHoldingPeriod.setText(String.valueOf(calc.getHoldingPriod()));
+    	mTextApprRate.setText(String.format("%.2f", calc.getHomeApprRate()));    	
+    	mTextUtilities.setText(String.valueOf(calc.getBuyUtilities()));
     	
-    	mTextMortIns.setText(     String.format("%.2f", calc.getMortIns()));
+    	mTextYearlyTax.setText(String.valueOf(calc.getYearlyTax()));
+    	mTextYearlyMaintain.setText(String.valueOf(calc.getYearlyMaintain()));
+    	mTextYearlyPropIns.setText( String.valueOf(calc.getYearlyPropIns()));
+    	
+    	mTextMortIns.setText(String.format("%.2f", calc.getMortIns()));
     	mTextClosingCost.setText( String.format("%.2f", calc.getClosingCost()));
-    	mTextMovingInCost.setText(String.valueOf((int) calc.getMovingInCost()));
+    	mTextMovingInCost.setText(String.valueOf(calc.getMovingInCost()));
+    	
+    	mbUpdate = true;
     }
     
     public void onStart () {
     	super.onStart();
     	
-   		((MainFragment) getActivity()).setUpdateResult(false);
-    	
-    	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent(); 		
- 		mHousePriceLnk     = new EditTextSeekBarLinker(mTextHousePrice,    mSeekHousePrice,    calc.getHousePrice(),   "HousePrice");
- 		mDownPayLnk        = new EditTextSeekBarLinker(mTextDownPay,       mSeekDownPay,       calc.getDownPay(),      "DownPay");
- 		mIntRateLnk        = new EditTextSeekBarLinker(mTextIntRate,       mSeekIntRate,       calc.getLoanIntRate(),  "IntRate");
- 		mLoanTenrLnk       = new EditTextSeekBarLinker(mTextLoanTenr,      mSeekLoanTenr,      calc.getLoanTenr(),     "LoanTenr");
- 		mHoldingPeriodLnk  = new EditTextSeekBarLinker(mTextHoldingPeriod, mSeekHoldingPeriod, calc.getHoldingPriod(), "HoldingPeriod");
- 		mApprRateLnk       = new EditTextSeekBarLinker(mTextApprRate, mSeekApprRate, calc.getHomeApprRate(), "ApprRate");
+    	CalcBuyOrRent calc = CalcBuyOrRent.getInstance();		
  		
- 		mTextUtilities.setText(String.valueOf((int) calc.getBuyUtilities()));
+    	mTextHousePrice.setText(String.valueOf(calc.getHousePrice()));
+    	mTextDownPay.setText(String.valueOf(calc.getDownPay()));
+    	mTextIntRate.setText(String.format("%.2f", calc.getLoanIntRate()));
+    	mTextLoanTenr.setText(String.valueOf(calc.getLoanTenr()));
+    	mTextHoldingPeriod.setText(String.valueOf(calc.getHoldingPriod()));
+    	mTextApprRate.setText(String.format("%.2f", calc.getHomeApprRate()));    	
+ 		mTextUtilities.setText(String.valueOf(calc.getBuyUtilities()));
     	
- 		mTextYearlyTax.setText(     String.valueOf((int) calc.getYearlyTax()));
-    	mTextYearlyMaintain.setText(String.valueOf((int) calc.getYearlyMaintain()));
-    	mTextYearlyPropIns.setText( String.valueOf((int) calc.getYearlyPropIns()));
+ 		mTextYearlyTax.setText(String.valueOf(calc.getYearlyTax()));
+    	mTextYearlyMaintain.setText(String.valueOf(calc.getYearlyMaintain()));
+    	mTextYearlyPropIns.setText( String.valueOf(calc.getYearlyPropIns()));
  		
-    	mTextMortIns.setText(     String.format("%.2f", calc.getMortIns()));
+    	mTextMortIns.setText(String.format("%.2f", calc.getMortIns()));
     	mTextClosingCost.setText( String.format("%.2f", calc.getClosingCost()));
-    	mTextMovingInCost.setText(String.valueOf((int) calc.getMovingInCost()));
+    	mTextMovingInCost.setText(String.valueOf(calc.getMovingInCost()));
     	
+    	mTextHousePrice.addTextChangedListener(new BuyTextWatcher());
+    	mTextDownPay.addTextChangedListener(new BuyTextWatcher());
+    	mTextIntRate.addTextChangedListener(new BuyTextWatcher());
+    	mTextLoanTenr.addTextChangedListener(new BuyTextWatcher());
+    	mTextHoldingPeriod.addTextChangedListener(new BuyTextWatcher());
+    	mTextApprRate.addTextChangedListener(new BuyTextWatcher());
     	mTextUtilities.addTextChangedListener(new BuyTextWatcher());
     	
     	mTextYearlyTax.addTextChangedListener(new BuyTextWatcher());		 
@@ -199,9 +177,6 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 		mTextMortIns.addTextChangedListener(new BuyTextWatcher());		 
 		mTextClosingCost.addTextChangedListener(new BuyTextWatcher());		 
 		mTextMovingInCost.addTextChangedListener(new BuyTextWatcher()); 
- 		 		
- 		((MainFragment) getActivity()).setUpdateResult(true);
- 	 	((MainFragment) getActivity()).calcBuyOrRent();
     }
 
     
@@ -232,27 +207,14 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
     	editor.putInt("LoYearlyState", mLoYearlyContent.getVisibility());
     	editor.putInt("LoPeriState",   mLoPeriContent.getVisibility());
     	
-    	editor.putFloat("HousePriceMax",     (float) mHousePriceLnk.getTextWatcher().getMax());
-    	editor.putFloat("HousePriceMin",     (float) mHousePriceLnk.getTextWatcher().getMin());
-    	editor.putFloat("DownPayMax",        (float) mDownPayLnk.getTextWatcher().getMax());
-    	editor.putFloat("DownPayMin",        (float) mDownPayLnk.getTextWatcher().getMin());
-    	editor.putFloat("IntRateMax",        (float) mIntRateLnk.getTextWatcher().getMax());
-    	editor.putFloat("IntRateMin",        (float) mIntRateLnk.getTextWatcher().getMin());
-    	editor.putFloat("LoanTenrMax",       (float) mLoanTenrLnk.getTextWatcher().getMax());
-    	editor.putFloat("LoanTenrMin",       (float) mLoanTenrLnk.getTextWatcher().getMin());
-    	editor.putFloat("HoldingPeriodMax",  (float) mHoldingPeriodLnk.getTextWatcher().getMax());
-    	editor.putFloat("HoldingPeriodMin",  (float) mHoldingPeriodLnk.getTextWatcher().getMin());
-    	editor.putFloat("ApprRateMax",       (float) mApprRateLnk.getTextWatcher().getMax());
-    	editor.putFloat("ApprRateMin",       (float) mApprRateLnk.getTextWatcher().getMin());
-    	
     	editor.commit();
     }
     
     public void onDataChanged() {
-    	if(!mbIsCreated)
+    	if(!mbIsCreated || !mbUpdate)
     		return;
     	
-    	CalcBuyOrRent calc = ((MainFragment) getActivity()).getCalcBuyOrRent();
+    	CalcBuyOrRent calc = CalcBuyOrRent.getInstance();
     	
     	try {
 	    	calc.setHousePrice(Integer.valueOf(mTextHousePrice.getText().toString()));

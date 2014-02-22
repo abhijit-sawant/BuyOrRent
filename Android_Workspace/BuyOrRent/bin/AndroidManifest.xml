@@ -1,25 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="aum.fin.buyorrent"
     android:versionCode="4"
     android:versionName="1.3" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="13"
         android:targetSdkVersion="18" />
 
     <application
+        android:name="aum.fin.buyorrent.BuyOrRentApp"
+        android:allowBackup="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:allowBackup="false" >
+        android:theme="@android:style/Theme.Holo.Light" >
         <activity
-            android:name=".MainFragment"
-            android:label="@string/title_activity_main" 
-            android:windowSoftInputMode="stateUnchanged" >"
+            android:name="aum.fin.buyorrent.MainFragment"
+            android:label="@string/title_activity_main"
+            android:windowSoftInputMode="stateUnchanged" >
+"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="aum.fin.buyorrent.ResultActiviy"
+            android:label="@string/title_activity_result_activiy"
+            android:parentActivityName="aum.fin.buyorrent.MainFragment" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="aum.fin.buyorrent.MainFragment" />
         </activity>
     </application>
 

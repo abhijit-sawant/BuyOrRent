@@ -1,5 +1,6 @@
 package aum.fin.buyorrent;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 public class CalcBuyOrRent {
@@ -8,6 +9,8 @@ public class CalcBuyOrRent {
 		public void onDataChanged();
 		public void onResetToDefault();
 	}
+	
+	private static CalcBuyOrRent mInstance = null;
 	
 	private int    miHousePrice;
 	private int    miDownPay;
@@ -35,7 +38,18 @@ public class CalcBuyOrRent {
 	private double mdRentProfit;
 	private double mdNetBuyProfit;
 	
-	public CalcBuyOrRent(SharedPreferences pref) {	
+	public static CalcBuyOrRent getInstance() {
+		if(mInstance == null) {
+			mInstance = new CalcBuyOrRent();
+		}
+		return mInstance;
+	}
+	
+	public CalcBuyOrRent() {	
+		
+		SharedPreferences pref = BuyOrRentApp.getInstance().getSharedPreferences(
+				                                                                 MainFragment.class.getSimpleName(), 
+				                                                                 Context.MODE_PRIVATE);
 		
 		resetToDefault();
 		
@@ -350,7 +364,12 @@ public class CalcBuyOrRent {
 		return dTaxSaving;
 	}
 	
-	public void onPause(SharedPreferences pref) {
+	public void onPause() {
+		
+		SharedPreferences pref = BuyOrRentApp.getInstance().getSharedPreferences(
+                                                                                 MainFragment.class.getSimpleName(), 
+                                                                                 Context.MODE_PRIVATE);
+		
 		SharedPreferences.Editor editor = pref.edit();
     	
     	editor.putInt("HousePrice",     miHousePrice);
