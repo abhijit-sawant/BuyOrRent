@@ -40,7 +40,7 @@
 	        android:layout_marginBottom="6dip"
 	        android:layout_marginLeft="3dip"
 	        android:text="@string/unit_currency"
-	        android:textSize="18sp"/>	    
+	        android:textSize="15sp"/>	    
 	    
 	   <TextView
 	       android:id="@+id/actBuy_textView2"
@@ -71,7 +71,7 @@
 	        android:layout_marginBottom="6dip"
 	        android:layout_marginLeft="3dip"
 	        android:text="@string/unit_currency"
-	        android:textSize="18sp"/>	    
+	        android:textSize="15sp"/>	    
 	    
         <TextView
 	        android:id="@+id/actBuy_textView3"
@@ -101,7 +101,7 @@
 	        android:layout_marginBottom="6dip"
 	        android:layout_marginLeft="3dip"
 	        android:text="@string/unit_percent"
-	        android:textSize="18sp"/>	    
+	        android:textSize="15sp"/>	    
 	    
 	    <TextView
 	        android:id="@+id/actBuy_textView4"
@@ -131,7 +131,7 @@
 	        android:layout_marginBottom="6dip"
 	        android:layout_marginLeft="3dip"
 	        android:text="@string/unit_years"
-	        android:textSize="18sp"/>	    
+	        android:textSize="15sp"/>	    
 	     
 	     <TextView
 	        android:id="@+id/actBuy_textView5"
@@ -161,7 +161,7 @@
 	        android:layout_marginBottom="6dip"
 	        android:layout_marginLeft="3dip"
 	        android:text="@string/unit_years"
-	        android:textSize="18sp"/>	    
+	        android:textSize="15sp"/>	    
 	     
 	     <TextView
 	        android:id="@+id/actBuy_textView11"
@@ -191,7 +191,7 @@
 	        android:layout_marginBottom="6dip"
 	        android:layout_marginLeft="3dip"
 	        android:text="@string/unit_percent"
-	        android:textSize="18sp"/>	    
+	        android:textSize="15sp"/>	    
 	     
 	    <TextView
 	        android:id="@+id/actBuy_textView13"
@@ -221,7 +221,7 @@
 	        android:layout_marginBottom="6dip"
 	        android:layout_marginLeft="3dip"
 	        android:text="@string/unit_currency"
-	        android:textSize="18sp"/>	    
+	        android:textSize="15sp"/>	    
 	     
 	    <View
 	        android:id="@+id/actBuy_yearlyExpDivider"
@@ -299,7 +299,7 @@
 			        android:layout_marginBottom="6dip"
 			        android:layout_marginLeft="3dip"
 			        android:text="@string/unit_currency"
-			        android:textSize="18sp"/>			    
+			        android:textSize="15sp"/>			    
 			    
 			     <TextView
 			        android:id="@+id/actBuy_textView7"
@@ -329,7 +329,7 @@
 			        android:layout_marginBottom="6dip"
 			        android:layout_marginLeft="3dip"
 			        android:text="@string/unit_currency"
-			        android:textSize="18sp"/>					    
+			        android:textSize="15sp"/>					    
 			    
 			     <TextView
 			        android:id="@+id/actBuy_textView8"
@@ -359,7 +359,7 @@
 			        android:layout_marginBottom="6dip"
 			        android:layout_marginLeft="3dip"
 			        android:text="@string/unit_currency"
-			        android:textSize="18sp"/>			    
+			        android:textSize="15sp"/>			    
 			    
      		</RelativeLayout>
 		
@@ -441,7 +441,7 @@
 			        android:layout_marginBottom="6dip"
 			        android:layout_marginLeft="3dip"
 			        android:text="@string/unit_mortInsRate"
-			        android:textSize="18sp"/>			    
+			        android:textSize="15sp"/>			    
 			    
 			   <TextView
 			        android:id="@+id/actBuy_textView10"
@@ -471,7 +471,7 @@
 			        android:layout_marginBottom="6dip"
 			        android:layout_marginLeft="3dip"
 			        android:text="@string/unit_closingCost"
-			        android:textSize="18sp"/>			    
+			        android:textSize="15sp"/>			    
 			    
 			    <TextView
 			        android:id="@+id/actBuy_textView12"
@@ -501,7 +501,7 @@
 			        android:layout_marginBottom="6dip"
 			        android:layout_marginLeft="3dip"
 			        android:text="@string/unit_currency"
-			        android:textSize="18sp"/>			    
+			        android:textSize="15sp"/>			    
 			    
         	</RelativeLayout>
 			

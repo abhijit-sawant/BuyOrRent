@@ -27,7 +27,7 @@
     
 	    <com.echo.holographlibrary.BarGraph
 	        android:layout_width="fill_parent"
-	        android:layout_height="150dip"
+	        android:layout_height="200dip"
 	        android:id="@+id/res_bar_graph"
 	        android:background="@drawable/border"/>    
     </LinearLayout>
@@ -68,7 +68,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
 		        android:text="@string/housePrice"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 
 		    <TextView
 		        android:id="@+id/actRes_home_price_value"
@@ -79,7 +79,7 @@
 		        android:layout_toRightOf="@+id/actRes_home_price_title"
 		        android:layout_marginLeft="30dip"
 		        android:text="@string/tempnum"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 		    
 		    <SeekBar
 		        android:id="@+id/actRes_home_price_seek"
@@ -96,7 +96,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
 		        android:text="@string/downPay"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 
 		    <TextView
 		        android:id="@+id/actRes_down_pay_value"
@@ -107,7 +107,7 @@
 		        android:layout_alignTop="@+id/actRes_down_pay_title"
 		        android:layout_alignLeft="@+id/actRes_home_price_value"
 		        android:text="@string/tempnum"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 		    
 		    <SeekBar
 		        android:id="@+id/actRes_down_pay_seek"
@@ -125,7 +125,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
 		        android:text="@string/intRate"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 
 		    <TextView
 		        android:id="@+id/actRes_int_rate_value"
@@ -136,7 +136,7 @@
 		        android:layout_alignTop="@+id/actRes_int_rate_title"
 		        android:layout_alignLeft="@+id/actRes_down_pay_value"
 		        android:text="@string/tempnum"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 		    
 		    <SeekBar
 		        android:id="@+id/actRes_int_rate_seek"
@@ -154,7 +154,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
 		        android:text="@string/tenure"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 
 		    <TextView
 		        android:id="@+id/actRes_tenure_value"
@@ -165,7 +165,7 @@
 		        android:layout_alignTop="@+id/actRes_tenure_title"
 		        android:layout_alignLeft="@+id/actRes_down_pay_value"
 		        android:text="@string/tempnum"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 		    
 		    <SeekBar
 		        android:id="@+id/actRes_tenure_seek"
@@ -183,7 +183,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
 		        android:text="@string/holdPeriod"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 
 		    <TextView
 		        android:id="@+id/actRes_holdPeriod_value"
@@ -194,7 +194,7 @@
 		        android:layout_alignTop="@+id/actRes_holdPeriod_title"
 		        android:layout_alignLeft="@+id/actRes_tenure_value"
 		        android:text="@string/tempnum"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 		    
 		    <SeekBar
 		        android:id="@+id/actRes_holdPeriod_seek"
@@ -212,7 +212,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
 		        android:text="@string/apprRate"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 
 		    <TextView
 		        android:id="@+id/actRes_apprRate_value"
@@ -223,7 +223,7 @@
 		        android:layout_alignTop="@+id/actRes_apprRate_title"
 		        android:layout_alignLeft="@+id/actRes_holdPeriod_value"
 		        android:text="@string/tempnum"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 		    
 		    <SeekBar
 		        android:id="@+id/actRes_apprRate_seek"
@@ -268,7 +268,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
 		        android:text="@string/rent"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 
 		    <TextView
 		        android:id="@+id/actRes_rent_value"
@@ -279,7 +279,7 @@
 		        android:layout_toRightOf="@+id/actRes_rent_title"
 		        android:layout_marginLeft="50dip"
 		        android:text="@string/tempnum"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 		    
 		    <SeekBar
 		        android:id="@+id/actRes_rent_seek"
@@ -296,7 +296,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
 		        android:text="@string/yearlyRentIncrease"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 
 		    <TextView
 		        android:id="@+id/actRes_rent_increase_value"
@@ -307,7 +307,7 @@
 		        android:layout_alignTop="@+id/actRes_rent_increase_title"
 		        android:layout_alignLeft="@+id/actRes_rent_value"
 		        android:text="@string/tempnum"
-		        android:textSize="18sp"/>
+		        android:textSize="16sp"/>
 		    
 		    <SeekBar
 		        android:id="@+id/actRes_rent_increase_seek"

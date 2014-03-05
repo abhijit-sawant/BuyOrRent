@@ -18,7 +18,7 @@
             android:name="aum.fin.buyorrent.MainFragment"
             android:label="@string/title_activity_main"
             android:windowSoftInputMode="stateUnchanged" >
-"
+"
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,6 +28,14 @@
         <activity
             android:name="aum.fin.buyorrent.ResultActiviy"
             android:label="@string/title_activity_result_activiy"
+            android:parentActivityName="aum.fin.buyorrent.MainFragment" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="aum.fin.buyorrent.MainFragment" />
+        </activity>
+        <activity
+            android:name="aum.fin.buyorrent.ReportActivity"
+            android:label="@string/title_activity_report"
             android:parentActivityName="aum.fin.buyorrent.MainFragment" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

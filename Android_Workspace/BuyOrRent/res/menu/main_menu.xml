@@ -3,8 +3,13 @@
     <item android:id="@+id/item_reset_values"
           android:title="@string/reset_values"/>
     
+    <item android:id="@+id/item_report"
+          android:title="@string/result"
+          android:icon="@drawable/ic_menu_report"
+          android:showAsAction="ifRoom"/>    
+    
     <item android:id="@+id/item_result"
           android:title="@string/result"
-          android:icon="@drawable/ic_launcher"
+          android:icon="@drawable/ic_menu_result_2"
           android:showAsAction="ifRoom"/>
 </menu>

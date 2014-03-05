@@ -2,9 +2,6 @@ package aum.fin.buyorrent;
 
 import java.text.NumberFormat;
 
-import com.echo.holographlibrary.Bar;
-import com.echo.holographlibrary.BarGraph;
-
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.Activity;
@@ -12,17 +9,15 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextSwitcher;
-import android.widget.TextView;
 import aum.fin.buyorrent.CalcBuyOrRent.OnDataChangedListener;
 
 public class MainFragment extends Activity {
+	
+    public static final NumberFormat mFormatCurrancy = NumberFormat.getCurrencyInstance(); 
 	
 	public static class TabListener<T extends Fragment> implements ActionBar.TabListener {
 	    private Fragment mFragment;
@@ -74,20 +69,8 @@ public class MainFragment extends Activity {
 		}
 	}
 	
-    private TextSwitcher mTextSwitchDecision;
-    private TextView     mTextDecisionBuy;
-    private TextView     mTextDecisionRent;
-    private BarGraph     mGraphResult;
-    
-    private boolean mbUpdateResult = false;
-    
-    public  static final NumberFormat mFormatCurrancy = NumberFormat.getCurrencyInstance(); 
- 
     protected void onStart() {
     	super.onStart();
-    	
-    	setUpdateResult(true);
-    	calcBuyOrRent();
     }
     
     protected void onPause() {
@@ -129,28 +112,6 @@ public class MainFragment extends Activity {
         
         int iTabIndex = getPreferences(Context.MODE_PRIVATE).getInt("TabIndex", 0);
         actionBar.selectTab(actionBar.getTabAt(iTabIndex));
-        
-        mTextSwitchDecision = (TextSwitcher) findViewById(R.id.actMain_textSwitcher1);        
-        
-        mTextDecisionBuy = new TextView(this);
-        mTextDecisionBuy.setText(R.string.decisionbuy);
-        mTextDecisionBuy.setTextColor(Color.rgb(65, 105, 225));
-        mTextDecisionBuy.setTextSize(20);
-        mTextDecisionBuy.setTypeface(Typeface.SERIF);    
-        
-        mTextDecisionRent = new TextView(this);
-        mTextDecisionRent.setText(R.string.decisionrent);
-        mTextDecisionRent.setTextColor(Color.rgb(255, 140, 0));
-        mTextDecisionRent.setTextSize(20);
-        mTextDecisionRent.setTypeface(Typeface.SERIF);
-        
-      	/*mTextSwitchDecision.addView(mTextDecisionBuy);
-        mTextSwitchDecision.addView(mTextDecisionRent);
-        
-        mTextSwitchDecision.setInAnimation(this,  android.R.anim.fade_in);
-        mTextSwitchDecision.setOutAnimation(this, android.R.anim.fade_out);*/
-        
-        mGraphResult = (BarGraph)findViewById(R.id.graph);        
     }
  
     protected void onSaveInstanceState(Bundle outState) {
@@ -163,8 +124,6 @@ public class MainFragment extends Activity {
     }
  
     private void onResetToDefault() {
-    	setUpdateResult(false);
-    	
     	SharedPreferences pref =  getPreferences(Context.MODE_PRIVATE);
     	SharedPreferences.Editor edit = pref.edit();
     	edit.clear();
@@ -179,18 +138,6 @@ public class MainFragment extends Activity {
 	    	if(fragmentCurrent != null)
 	    		((OnDataChangedListener) fragmentCurrent).onResetToDefault();
     	}
-    	
-    	setUpdateResult(true);
-    	
-    	//calcBuyOrRent();
-    }
-    
-    public void setUpdateResult(boolean bVal) {
-    	mbUpdateResult = bVal;
-    }
-    
-    public boolean getUpdateResult() {
-    	return mbUpdateResult;
     }
     
     @Override
@@ -206,92 +153,17 @@ public class MainFragment extends Activity {
             case R.id.item_reset_values:
             	onResetToDefault();
                 return true;
+            case R.id.item_report:
+            	Intent intent_report = new Intent(this, ReportActivity.class);
+            	startActivity(intent_report);
+            	return true;                
             case R.id.item_result:
-            	Intent intent = new Intent(this, ResultActiviy.class);
-            	startActivity(intent);
+            	Intent intent_result = new Intent(this, ResultActiviy.class);
+            	startActivity(intent_result);
             	return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
     
-    public void calcBuyOrRent() {
-    	if(getUpdateResult() == false)
-    		return;
-    	
-    	Tab currentTab = getActionBar().getSelectedTab();
-    	if(currentTab == null)
-    		return;    	
-    	Fragment fragmentCurrent = getFragmentManager().findFragmentByTag((String) currentTab.getTag());
-    	if(fragmentCurrent == null)
-    		return;
-    	
-    	((OnDataChangedListener) fragmentCurrent).onDataChanged();
-    	
-    	/*getCalcBuyOrRent().calculate();
-    	double dBuyProfit     = getCalcBuyOrRent().getBuyProfit();
-    	double dRentProfit    = getCalcBuyOrRent().getRentProfit();
-    	double dBuyNetProfit  = getCalcBuyOrRent().getBuyNetProfit();
-    	
-    	if(dBuyProfit > dRentProfit)
-    	{
-    		if(mTextSwitchDecision.getNextView() == mTextDecisionBuy)
-    			mTextSwitchDecision.showNext();
-    	}
-    	else
-    	{
-    		if(mTextSwitchDecision.getNextView() == mTextDecisionRent)
-    			mTextSwitchDecision.showNext();
-    	}    	
-    	
-    	int iFactMult = 1;
-    	if(dBuyProfit < 0)
-    		iFactMult = -1;
-    	String strBuyProfit = mFormatCurrancy.format(iFactMult * dBuyProfit);
- 	
-    	iFactMult = 1;
-    	if(dRentProfit < 0)
-    		iFactMult = -1;
-    	String strRentProfit = mFormatCurrancy.format(iFactMult * dRentProfit);
-    	
-    	iFactMult = 1;
-    	if(dBuyNetProfit < 0)
-    		iFactMult = -1;
-    	String strNetProfit = mFormatCurrancy.format(iFactMult * dBuyNetProfit);
-  		    	
-    	ArrayList<Bar> points = new ArrayList<Bar>();
-    	Bar barBuy = new Bar();
-    	barBuy.setColor(Color.rgb(101, 153, 255));
-    	if(dBuyProfit > 0)
-    		barBuy.setName(getString(R.string.buyprofit));
-    	else
-    		barBuy.setName(getString(R.string.buyloss));
-    	barBuy.setValue((float) dBuyProfit);
-    	barBuy.setValueString(strBuyProfit);
-    	
-    	Bar barRent = new Bar();
-    	barRent.setColor(Color.rgb(255, 153, 0));
-    	if(dRentProfit > 0)
-    		barRent.setName(getString(R.string.rentprofit));
-    	else
-    		barRent.setName(getString(R.string.rentloss));
-    	barRent.setValue((float) dRentProfit);
-    	barRent.setValueString(strRentProfit);
-    	
-    	Bar barNet = new Bar();
-  		barNet.setColor(Color.rgb(9, 112, 84));
-  		if(dBuyNetProfit > 0)
-  			barNet.setName(getString(R.string.netprofit));
-  		else
-  			barNet.setName(getString(R.string.netloss));
-    	barNet.setValue((float) dBuyNetProfit);
-    	barNet.setValueString(strNetProfit);
-    	
-    	points.add(barBuy);
-    	points.add(barRent);   
-    	points.add(barNet);*/
-
-    	//mGraphResult.setBars(points);    	
-    }
- 
 }

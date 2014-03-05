@@ -3,8 +3,6 @@ package aum.fin.buyorrent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.app.Fragment;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,8 +27,6 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
     private EditText mTextUtility;
     private EditText mTextSavingReturn;
     
-    private SharedPreferences mPrefrences;
-    
     private boolean mbIsCreated = false;
     private boolean mbUpdate = true;
     
@@ -49,8 +45,6 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
         mTextRentIns = (EditText) viewRent.findViewById(R.id.actRent_editText3);
         mTextUtility = (EditText) viewRent.findViewById(R.id.actRent_editText4);
         mTextSavingReturn = (EditText) viewRent.findViewById(R.id.actRent_editText5);       
-        
-        mPrefrences = ((MainFragment) getActivity()).getPreferences(Context.MODE_PRIVATE);
         
         mbIsCreated = true;		
         return viewRent;
@@ -73,10 +67,10 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
     
     public void onStart () {
     	super.onStart();
-    	
-   		((MainFragment) getActivity()).setUpdateResult(false);
    		
    		CalcBuyOrRent calc = CalcBuyOrRent.getInstance();
+   		
+   		mbUpdate = false;
 		
 		mTextRent.setText(String.valueOf(calc.getRent()));
 		mTextRent.addTextChangedListener(new RentTextWatcher());
@@ -92,8 +86,8 @@ public class RentFragment extends Fragment implements OnDataChangedListener {
 		
 		mTextSavingReturn.setText(String.format("%.2f", calc.getSavingReturnRate()));
 		mTextSavingReturn.addTextChangedListener(new RentTextWatcher());
-   		
-   		((MainFragment) getActivity()).setUpdateResult(true);
+		
+		mbUpdate = true;
     }
     
     public void onDataChanged() {

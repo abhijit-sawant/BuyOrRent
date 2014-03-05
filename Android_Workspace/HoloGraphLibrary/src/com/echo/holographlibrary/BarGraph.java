@@ -42,6 +42,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
+import android.graphics.Typeface;
 import android.graphics.drawable.NinePatchDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -49,7 +50,7 @@ import android.view.View;
 
 public class BarGraph extends View {
 
-	private final static int VALUE_FONT_SIZE = 13, AXIS_LABEL_FONT_SIZE = 13;
+	private final static int VALUE_FONT_SIZE = 14, AXIS_LABEL_FONT_SIZE = 14;
 	
     private ArrayList<Bar> mBars = new ArrayList<Bar>();
     private Paint mPaint = new Paint();
@@ -60,13 +61,14 @@ public class BarGraph extends View {
     private OnBarClickedListener mListener;
     private Bitmap mFullImage;
     private boolean mShouldUpdate = false;
+    private boolean mIsDynamic = false;
     
     private double mdMaxVal = 0;
     
     private Context mContext = null;
     
     private float getXHeight() {
-    	return (float) (getHeight()/2.0);
+  		return (float) (getHeight()/2.0);
     }    
     
     public BarGraph(Context context) {
@@ -77,6 +79,10 @@ public class BarGraph extends View {
     public BarGraph(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
+    }
+    
+    public void setDynamic(boolean bFlag) {
+    	mIsDynamic = bFlag;
     }
     
     public void setShowBarText(boolean show){
@@ -97,9 +103,13 @@ public class BarGraph extends View {
         return this.mBars;
     }
     
-    public void resetMaxVal() {
-    	mdMaxVal = 0;
+    public void setMaxVal(double dVal) {
+    	mdMaxVal = dVal;
     }
+    
+    public double getMaxVal() {
+    	return mdMaxVal;
+    }    
 
     public void onDraw(Canvas ca) {
     	
@@ -107,7 +117,6 @@ public class BarGraph extends View {
             mFullImage = Bitmap.createBitmap(getWidth(), getHeight(), Config.ARGB_8888);
             Canvas canvas = new Canvas(mFullImage);
             canvas.drawColor(Color.TRANSPARENT);
-            NinePatchDrawable popup = (NinePatchDrawable)this.getResources().getDrawable(R.drawable.popup_black);
             
             float padding = 30 * mContext.getResources().getDisplayMetrics().density;
             int selectPadding = (int) (4 * mContext.getResources().getDisplayMetrics().density);
@@ -115,9 +124,10 @@ public class BarGraph extends View {
             float usableHeight;
             if (mShowBarText) {
                 this.mPaint.setTextSize(VALUE_FONT_SIZE * mContext.getResources().getDisplayMetrics().scaledDensity);
+                this.mPaint.setTypeface(Typeface.SANS_SERIF);
                 Rect r3 = new Rect();
                 this.mPaint.getTextBounds("$", 0, 1, r3);
-                usableHeight = getXHeight()-Math.abs(r3.top-r3.bottom)/*-24 * mContext.getResources().getDisplayMetrics().density*/;
+                usableHeight = getXHeight()-Math.abs(r3.top-r3.bottom)-(8 * mContext.getResources().getDisplayMetrics().density);
             } else {
             	usableHeight = getXHeight();
             }
@@ -146,10 +156,14 @@ public class BarGraph extends View {
                 }
             }
             
-            if(dMaxValTemp > mdMaxVal)
-	            mdMaxVal = 2 * dMaxValTemp;
-            else if(4 * dMaxValTemp < mdMaxVal) 
-            	mdMaxVal = 2 * dMaxValTemp;
+            if(mIsDynamic) {
+	            if(dMaxValTemp > mdMaxVal)
+		            mdMaxVal = 2 * dMaxValTemp;
+	            else if(4 * dMaxValTemp < mdMaxVal) 
+	            	mdMaxVal = 2 * dMaxValTemp;
+            }
+            else
+            	mdMaxVal = dMaxValTemp;
 
             mRectangle = new Rect();
             
@@ -164,13 +178,13 @@ public class BarGraph extends View {
                 
                 if(bar.getValue() > 0)
                 {
-                	top = (int)(getXHeight()-(usableHeight*(bar.getValue()/mdMaxVal)));
+               		top = (int)(getXHeight()-(usableHeight*(bar.getValue()/mdMaxVal)));
                 	bottom = (int)(getXHeight());
                 }
                 else
                 {
                 	top = (int)(getXHeight());
-                	bottom = (int)(getXHeight()+(usableHeight*((-1*bar.getValue())/mdMaxVal)));
+               		bottom = (int)(getXHeight()+(usableHeight*((-1*bar.getValue())/mdMaxVal)));
                 }                
                 
                 mRectangle.set(left, top, right, bottom);
@@ -191,6 +205,7 @@ public class BarGraph extends View {
                 // Draw x-axis label text
                 if (mShowAxis){
                 	this.mPaint.setTextSize(AXIS_LABEL_FONT_SIZE * mContext.getResources().getDisplayMetrics().scaledDensity);
+                	this.mPaint.setTypeface(Typeface.SANS_SERIF);
                     int x = (int)(((mRectangle.left+mRectangle.right)/2)-(this.mPaint.measureText(bar.getName())/2));
                 	int y = 0;
                 	if(bar.getValue() > 0)
@@ -204,14 +219,9 @@ public class BarGraph extends View {
                 // Draw value text
                 if (mShowBarText){
                     this.mPaint.setTextSize(VALUE_FONT_SIZE * mContext.getResources().getDisplayMetrics().scaledDensity);
+                    this.mPaint.setTypeface(Typeface.SANS_SERIF);
                     Rect r2 = new Rect();
                     this.mPaint.getTextBounds(bar.getValueString(), 0, 1, r2);
-                    
-                    //int boundLeft = (int) (((mRectangle.left+mRectangle.right)/2)-(this.mPaint.measureText(bar.getValueString())/2)-10 * mContext.getResources().getDisplayMetrics().density);
-                    //int boundRight = (int)(((mRectangle.left+mRectangle.right)/2)+(this.mPaint.measureText(bar.getValueString())/2)+10 * mContext.getResources().getDisplayMetrics().density);
-                  	int boundTop = (int) (mRectangle.top+(r2.top-r2.bottom)-18 * mContext.getResources().getDisplayMetrics().density);
-                  	//popup.setBounds(boundLeft, boundTop, boundRight, mRectangle.top);
-                    //popup.draw(canvas);
                     
                   	if(bar.getValue() > 0)
                   	{

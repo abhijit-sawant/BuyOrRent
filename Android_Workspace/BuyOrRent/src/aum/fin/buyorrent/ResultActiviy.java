@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
@@ -164,6 +163,7 @@ public class ResultActiviy extends Activity {
 		
 		mTextResult  = (TextView) findViewById(R.id.actRes_textViewTitle);
 		mGraphResult = (BarGraph)findViewById(R.id.res_bar_graph);
+		mGraphResult.setDynamic(true);
 		
 		mTextHousePrice = (TextView) findViewById(R.id.actRes_home_price_value);
 		mSeekHousePrice = (SeekBar) findViewById(R.id.actRes_home_price_seek);
@@ -257,12 +257,16 @@ public class ResultActiviy extends Activity {
     	
     	setUpdate(true);
     	
+    	SharedPreferences pref = BuyOrRentApp.getInstance().getSharedPreferences(MainFragment.class.getSimpleName(), 
+                                                                                 Context.MODE_PRIVATE);
+        double dGraphMax = (double) pref.getFloat("GraphProfitLossMaxVal", 0);
+        mGraphResult.setMaxVal(dGraphMax);
+    	
     	try {
 			onDataChanged();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-    	updateResults();
     }
     
     public void onPause() {
@@ -295,6 +299,8 @@ public class ResultActiviy extends Activity {
     	
     	editor.putFloat("YrlyRentIncreaseMax", (float) mSeekListenerRentIncrease.getProgressMax());
     	editor.putFloat("YrlyRentIncreaseMin", (float) mSeekListenerRentIncrease.getProgressMin());
+    	
+    	editor.putFloat("GraphProfitLossMaxVal", (float) mGraphResult.getMaxVal());
     	
     	editor.commit();
     }
@@ -375,12 +381,12 @@ public class ResultActiviy extends Activity {
     	if(dBuyProfit > dRentProfit)
     	{
             mTextResult.setText(R.string.decisionbuy);
-            mTextResult.setTextColor(Color.rgb(65, 105, 225));
+            mTextResult.setTextColor(Color.parseColor("#0099CC"));
     	}
     	else
     	{
     		mTextResult.setText(R.string.decisionrent);
-    		mTextResult.setTextColor(Color.rgb(255, 140, 0));
+    		mTextResult.setTextColor(Color.parseColor("#FF8800"));
     	}   
     	
     	int iFactMult = 1;
@@ -400,7 +406,7 @@ public class ResultActiviy extends Activity {
     	
     	ArrayList<Bar> points = new ArrayList<Bar>();
     	Bar barBuy = new Bar();
-    	barBuy.setColor(Color.rgb(101, 153, 255));
+    	barBuy.setColor(Color.parseColor("#0099CC"));
     	if(dBuyProfit > 0)
     		barBuy.setName(getString(R.string.buyprofit));
     	else
@@ -409,7 +415,7 @@ public class ResultActiviy extends Activity {
     	barBuy.setValueString(strBuyProfit);
     	
     	Bar barRent = new Bar();
-    	barRent.setColor(Color.rgb(255, 153, 0));
+    	barRent.setColor(Color.parseColor("#FF8800"));
     	if(dRentProfit > 0)
     		barRent.setName(getString(R.string.rentprofit));
     	else
@@ -418,7 +424,7 @@ public class ResultActiviy extends Activity {
     	barRent.setValueString(strRentProfit);
     	
     	Bar barNet = new Bar();
-  		barNet.setColor(Color.rgb(9, 112, 84));
+  		barNet.setColor(Color.parseColor("#669900"));
   		if(dBuyNetProfit > 0)
   			barNet.setName(getString(R.string.netprofit));
   		else

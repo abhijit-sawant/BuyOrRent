@@ -103,8 +103,8 @@ public class EditTextSeekBarLinker {
 			 int iPos = (int)(dTemp + 0.5);
 			 mSeekBarLinked.setProgress(iPos);
 			 
-    		 MainFragment parentFragment = (MainFragment) mSeekBarLinked.getContext();
-    		 parentFragment.calcBuyOrRent();
+    		 //MainFragment parentFragment = (MainFragment) mSeekBarLinked.getContext();
+    		 //parentFragment.calcBuyOrRent();
 		 }     
     };
     

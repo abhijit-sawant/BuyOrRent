@@ -23,6 +23,7 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
 	
     private EditText mTextTaxBracket;
     private boolean mbIsCreated = false;
+    private boolean mbUpdate = true;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     	
@@ -50,18 +51,18 @@ public class TaxFragment extends Fragment implements OnDataChangedListener {
     public void onStart () {
     	super.onStart();
     	
-   		((MainFragment) getActivity()).setUpdateResult(false);
-   		
    		CalcBuyOrRent calc = CalcBuyOrRent.getInstance();
+   		
+   		mbUpdate = false;
    		
    		mTextTaxBracket.setText(String.format("%.2f", calc.getTaxBracket()));
    		mTextTaxBracket.addTextChangedListener(new TaxTextWatcher());
    		
-   		((MainFragment) getActivity()).setUpdateResult(true);
+   		mbUpdate = true;
     }
     
     public void onDataChanged() {
-    	if(!mbIsCreated)
+    	if(!mbIsCreated || !mbUpdate)
     		return;
     	
     	CalcBuyOrRent calc = CalcBuyOrRent.getInstance();

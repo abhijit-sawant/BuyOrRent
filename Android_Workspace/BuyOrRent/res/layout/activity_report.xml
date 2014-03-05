@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/actRep_scrollView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    
+	<RelativeLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="5dip"
+	    android:paddingRight="5dip" >
+	    
+	    <TextView
+			android:id="@+id/actRep_textViewBarTitle"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dip"
+			android:text="@string/buyprofit"
+			android:gravity="center"
+			android:textStyle="bold"
+			android:textSize="20sp" />
+	    
+	 	<LinearLayout
+	        android:id="@+id/actRep_layout_bar_graph"
+	        android:orientation="vertical"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actRep_textViewBarTitle"
+	        android:layout_marginTop="5dip"
+	        android:layout_marginRight="5dip"
+	        android:layout_marginLeft="5dip">
+	    
+		    <com.echo.holographlibrary.BarGraph
+		        android:layout_width="fill_parent"
+		        android:layout_height="200dip"
+		        android:id="@+id/rep_bar_graph"
+		        android:background="@drawable/border"/>    
+	    </LinearLayout>    
+	    
+	    <TextView
+			android:id="@+id/actRep_textViewPieTitle"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/actRep_layout_bar_graph"
+			android:layout_marginTop="10dip"
+			android:text="@string/buyprofit"
+			android:gravity="center"
+			android:textStyle="bold"
+			android:textSize="20sp" />
+	    
+	 	<LinearLayout
+	        android:id="@+id/actRep_layout_pie_graph"
+	        android:orientation="horizontal"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actRep_textViewPieTitle"
+	        android:layout_marginTop="5dip"
+	        android:layout_marginRight="5dip"
+	        android:layout_marginLeft="5dip"
+	        android:padding="10dip"
+	        android:baselineAligned="false"
+	        android:background="@drawable/border">	
+	        
+	 	    <LinearLayout 
+	 	        android:id="@+id/actRep_layout_pie_graph1"
+	 	        android:orientation="horizontal"
+	 	        android:layout_height="wrap_content"
+	 	        android:layout_width="0dip"
+	 	        android:layout_weight="40">	    
+	 	    
+				<com.echo.holographlibrary.PieGraph
+			        android:layout_width="match_parent"
+			        android:layout_height="200dp"
+			        android:id="@+id/rep_pie_graph"/>  
+			        
+			</LinearLayout>
+			
+	 	    <RelativeLayout
+	 	        android:id="@+id/actRep_layout_pie_graph2"
+	 	        android:orientation="horizontal"
+	 	        android:layout_height="wrap_content"
+	 	        android:layout_width="0dip"
+	 	        android:layout_weight="60">
+				
+	 	        <View
+			        android:id="@+id/actRep_ViewEmi"
+					android:layout_width="30dp"
+					android:layout_height="15dp"
+					android:layout_marginTop="10dip"
+					android:layout_marginLeft="10dip"
+					android:background="@android:color/darker_gray"/>
+			
+	 	    	<TextView 
+		 	        android:id="@+id/actRep_textViewEmiTitle"
+		 	        android:layout_height="wrap_content"
+		 	        android:layout_width="wrap_content"
+		 	        android:layout_toRightOf="@+id/actRep_ViewEmi"
+		 	        android:layout_alignBottom="@+id/actRep_ViewEmi"
+		 	        android:layout_marginBottom="6dip"
+		 	        android:layout_marginLeft="5dip"
+		 	        android:text="@string/mortgage"/>	
+		 	        
+	 	   		<TextView 
+		 	        android:id="@+id/actRep_textViewEmi"
+		 	        android:layout_height="wrap_content"
+		 	        android:layout_width="wrap_content"
+		 	        android:layout_toRightOf="@+id/actRep_ViewEmi"
+		 	        android:layout_alignTop="@+id/actRep_ViewEmi"
+		 	        android:layout_marginTop="6dip"
+		 	        android:layout_marginLeft="5dip"		 	        
+		 	        android:text="@string/tempnum"/>
+	 	   		
+	 	        <View
+			        android:id="@+id/actRep_ViewTax"
+					android:layout_width="30dp"
+					android:layout_height="15dp"
+					android:layout_marginTop="25dip"
+					android:layout_below="@+id/actRep_ViewEmi"
+					android:layout_alignLeft="@+id/actRep_ViewEmi"
+					android:background="@android:color/darker_gray"/>
+			
+	 	    	<TextView 
+		 	        android:id="@+id/actRep_textViewTaxTitle"
+		 	        android:layout_height="wrap_content"
+		 	        android:layout_width="wrap_content"
+		 	        android:layout_alignLeft="@+id/actRep_textViewEmiTitle"
+			        android:layout_toRightOf="@+id/actRep_ViewTax"
+			        android:layout_alignBottom="@+id/actRep_ViewTax"
+		 	        android:layout_marginBottom="6dip"			        
+		 	        android:text="@string/propTax"/>	
+		 	        
+	 	   		<TextView 
+		 	        android:id="@+id/actRep_textViewTax"
+		 	        android:layout_height="wrap_content"
+		 	        android:layout_width="wrap_content"
+		 	        android:layout_alignLeft="@+id/actRep_textViewTaxTitle"
+			        android:layout_toRightOf="@+id/actRep_ViewTax"
+			        android:layout_alignTop="@+id/actRep_ViewTax"
+			        android:layout_marginTop="6dip"
+    	 	        android:text="@string/tempnum"/>	
+    	 	        
+	 	        <View
+			        android:id="@+id/actRep_ViewInsu"
+					android:layout_width="30dp"
+					android:layout_height="15dp"
+					android:layout_marginTop="25dip"
+					android:layout_below="@+id/actRep_ViewTax"
+					android:layout_alignLeft="@+id/actRep_ViewTax"
+					android:background="@android:color/darker_gray"/>
+			
+	 	    	<TextView 
+		 	        android:id="@+id/actRep_textViewInsuTitle"
+		 	        android:layout_height="wrap_content"
+		 	        android:layout_width="wrap_content"
+		 	        android:layout_alignLeft="@+id/actRep_textViewTaxTitle"
+			        android:layout_toRightOf="@+id/actRep_ViewInsu"
+			        android:layout_alignBottom="@+id/actRep_ViewInsu"
+		 	        android:layout_marginBottom="6dip"			        
+		 	        android:text="@string/insu"/>	
+		 	        
+	 	   		<TextView 
+		 	        android:id="@+id/actRep_textViewInsu"
+		 	        android:layout_height="wrap_content"
+		 	        android:layout_width="wrap_content"
+		 	        android:layout_alignLeft="@+id/actRep_textViewTax"
+			        android:layout_toRightOf="@+id/actRep_ViewInsu"
+			        android:layout_alignTop="@+id/actRep_ViewInsu"
+		 	        android:layout_marginTop="6dip"			        
+    	 	        android:text="@string/tempnum"/>	 
+    	 	        
+	 	        <View
+			        android:id="@+id/actRep_ViewMortInsu"
+					android:layout_width="30dp"
+					android:layout_height="15dp"
+					android:layout_marginTop="25dip"
+					android:layout_below="@+id/actRep_ViewInsu"
+					android:layout_alignLeft="@+id/actRep_ViewInsu"
+					android:background="@android:color/darker_gray"/>
+			
+	 	    	<TextView 
+		 	        android:id="@+id/actRep_textViewMortInsuTitle"
+		 	        android:layout_height="wrap_content"
+		 	        android:layout_width="wrap_content"
+		 	        android:layout_alignLeft="@+id/actRep_textViewInsuTitle"
+			        android:layout_toRightOf="@+id/actRep_ViewMortInsu"
+			        android:layout_alignBottom="@+id/actRep_ViewMortInsu"
+			        android:layout_marginBottom="6dip"	
+		 	        android:text="@string/mortInsu"/>	
+		 	        
+	 	   		<TextView 
+		 	        android:id="@+id/actRep_textViewMortInsu"
+		 	        android:layout_height="wrap_content"
+		 	        android:layout_width="wrap_content"
+		 	        android:layout_alignLeft="@+id/actRep_textViewMortInsuTitle"
+			        android:layout_toRightOf="@+id/actRep_ViewMortInsu"
+			        android:layout_alignTop="@+id/actRep_ViewMortInsu"
+			        android:layout_marginTop="6dip"	
+    	 	        android:text="@string/tempnum"/>	
+    	 	        
+	 	        <View
+			        android:id="@+id/actRep_ViewMaint"
+					android:layout_width="30dp"
+					android:layout_height="15dp"
+					android:layout_marginTop="25dip"
+					android:layout_below="@+id/actRep_ViewMortInsu"
+					android:layout_alignLeft="@+id/actRep_ViewMortInsu"
+					android:background="@android:color/darker_gray"/>
+			
+	 	    	<TextView 
+		 	        android:id="@+id/actRep_textViewMaintTitle"
+		 	        android:layout_height="wrap_content"
+		 	        android:layout_width="wrap_content"
+		 	        android:layout_alignLeft="@+id/actRep_textViewMortInsuTitle"
+			        android:layout_toRightOf="@+id/actRep_ViewMaint"
+			        android:layout_alignBottom="@+id/actRep_ViewMaint"
+			        android:layout_marginBottom="6dip"
+		 	        android:text="@string/utilMain"/>	
+		 	        
+	 	   		<TextView 
+		 	        android:id="@+id/actRep_textViewMaint"
+		 	        android:layout_height="wrap_content"
+		 	        android:layout_width="wrap_content"
+		 	        android:layout_alignLeft="@+id/actRep_textViewMaintTitle"
+			        android:layout_toRightOf="@+id/actRep_ViewMaint"
+			        android:layout_alignTop="@+id/actRep_ViewMaint"
+			        android:layout_marginTop="6dip"
+    	 	        android:text="@string/tempnum"/>	 	   			   			   			   		
+		 	          
+			</RelativeLayout> 
+			        
+	    </LinearLayout>  	
+	
+	</RelativeLayout>
+
+</ScrollView>

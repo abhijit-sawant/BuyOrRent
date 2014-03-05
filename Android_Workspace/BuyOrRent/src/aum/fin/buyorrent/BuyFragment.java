@@ -146,6 +146,8 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
     	
     	CalcBuyOrRent calc = CalcBuyOrRent.getInstance();		
  		
+    	mbUpdate = false;
+    	
     	mTextHousePrice.setText(String.valueOf(calc.getHousePrice()));
     	mTextDownPay.setText(String.valueOf(calc.getDownPay()));
     	mTextIntRate.setText(String.format("%.2f", calc.getLoanIntRate()));
@@ -177,6 +179,8 @@ public class BuyFragment  extends Fragment implements OnDataChangedListener {
 		mTextMortIns.addTextChangedListener(new BuyTextWatcher());		 
 		mTextClosingCost.addTextChangedListener(new BuyTextWatcher());		 
 		mTextMovingInCost.addTextChangedListener(new BuyTextWatcher()); 
+		
+		mbUpdate = true;
     }
 
     

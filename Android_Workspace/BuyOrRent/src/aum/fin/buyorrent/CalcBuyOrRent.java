@@ -38,7 +38,7 @@ public class CalcBuyOrRent {
 	private double mdRentProfit;
 	private double mdNetBuyProfit;
 	
-	public static CalcBuyOrRent getInstance() {
+    public static CalcBuyOrRent getInstance() {
 		if(mInstance == null) {
 			mInstance = new CalcBuyOrRent();
 		}
@@ -277,15 +277,39 @@ public class CalcBuyOrRent {
 		return mdNetBuyProfit;
 	}
 	
-	public void calculate() {
+	public double getMonthlyPayment() {
 		int    iLoanAmount     = miHousePrice - miDownPay;
 		double dIntRatePerMont = (mdLoanIntRate*0.01)/12;
 		int    iNumLoanPay     = miLoanTenr * 12;
 		
 		double dMonthlyPayment = iLoanAmount * dIntRatePerMont;
-		dMonthlyPayment = dMonthlyPayment / (1 - (1/Math.pow(1 + dIntRatePerMont, iNumLoanPay)));
-		
-		double dMortInsPerMonth = (mdMortIns * 0.01 * iLoanAmount)/12;
+		return  (dMonthlyPayment / (1 - (1/Math.pow(1 + dIntRatePerMont, iNumLoanPay))));
+	}
+	
+	public double getMonthlyTax() {
+		return (miYearlyTax/12.0);
+	}
+	
+	public double getMonthlyInsu() {
+		return (miYearlyPropIns/12.0);
+	}
+	
+	public double getMonthlyMortInsu() {
+		int iLoanAmount = miHousePrice - miDownPay;
+		return (mdMortIns * 0.01 * iLoanAmount)/12;
+	}
+	
+	public double getMonthlyUtilMaint() {
+		return (miYearlyMaintain/12.0) + miBuyUtilities;
+	}
+	
+	public void calculate() {
+		double dMonthlyPayment = getMonthlyPayment();
+    	double dMortInsPerMonth = getMonthlyMortInsu();
+    	
+		int    iLoanAmount     = miHousePrice - miDownPay;
+		double dIntRatePerMont = (mdLoanIntRate*0.01)/12;
+		int    iNumLoanPay     = miLoanTenr * 12;
 		
 		int iHoldingPeriodMnths = miHoldingPeriod * 12;
 		double dLoanBalance = iLoanAmount;
