@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextSwitcher
+        android:id="@+id/actMain_textSwitcher1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="5dip"/>
+    
+    <LinearLayout
+        android:id="@+id/layout_graph"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actMain_textSwitcher1"
+        android:layout_marginTop="5dip"
+        android:layout_marginRight="5dip"
+        android:layout_marginLeft="5dip">
+    
+	    <com.echo.holographlibrary.BarGraph
+	        android:layout_width="fill_parent"
+	        android:layout_height="150dip"
+	        android:id="@+id/graph"
+	        android:background="@drawable/border"/>    
+    </LinearLayout>    
+    
+</RelativeLayout>

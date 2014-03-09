@@ -17,7 +17,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
-public class ResultActiviy extends Activity {
+public class TradeOffActiviy extends Activity {
 	
 	public enum DataType {
 		DOUBLE, INTEGER
@@ -156,38 +156,38 @@ public class ResultActiviy extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_result);
+		setContentView(R.layout.activity_trade_off);
 		
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
-		mTextResult  = (TextView) findViewById(R.id.actRes_textViewTitle);
+		mTextResult  = (TextView) findViewById(R.id.actTof_textViewTitle);
 		mGraphResult = (BarGraph)findViewById(R.id.res_bar_graph);
 		mGraphResult.setDynamic(true);
 		
-		mTextHousePrice = (TextView) findViewById(R.id.actRes_home_price_value);
-		mSeekHousePrice = (SeekBar) findViewById(R.id.actRes_home_price_seek);
+		mTextHousePrice = (TextView) findViewById(R.id.actTof_home_price_value);
+		mSeekHousePrice = (SeekBar) findViewById(R.id.actTof_home_price_seek);
 		 
-		mTextDownPay = (TextView) findViewById(R.id.actRes_down_pay_value);
-		mSeekDownPay = (SeekBar) findViewById(R.id.actRes_down_pay_seek);     
+		mTextDownPay = (TextView) findViewById(R.id.actTof_down_pay_value);
+		mSeekDownPay = (SeekBar) findViewById(R.id.actTof_down_pay_seek);     
 		 
-		mTextIntRate = (TextView) findViewById(R.id.actRes_int_rate_value);
-		mSeekIntRate = (SeekBar) findViewById(R.id.actRes_int_rate_seek);
+		mTextIntRate = (TextView) findViewById(R.id.actTof_int_rate_value);
+		mSeekIntRate = (SeekBar) findViewById(R.id.actTof_int_rate_seek);
 		 
-		mTextLoanTenr = (TextView) findViewById(R.id.actRes_tenure_value);
-		mSeekLoanTenr = (SeekBar) findViewById(R.id.actRes_tenure_seek);
+		mTextLoanTenr = (TextView) findViewById(R.id.actTof_tenure_value);
+		mSeekLoanTenr = (SeekBar) findViewById(R.id.actTof_tenure_seek);
 		 
-		mTextHoldingPeriod = (TextView) findViewById(R.id.actRes_holdPeriod_value);
-		mSeekHoldingPeriod = (SeekBar) findViewById(R.id.actRes_holdPeriod_seek);
+		mTextHoldingPeriod = (TextView) findViewById(R.id.actTof_holdPeriod_value);
+		mSeekHoldingPeriod = (SeekBar) findViewById(R.id.actTof_holdPeriod_seek);
 		
-		mTextApprRate = (TextView) findViewById(R.id.actRes_apprRate_value);
-		mSeekApprRate = (SeekBar) findViewById(R.id.actRes_apprRate_seek); 
+		mTextApprRate = (TextView) findViewById(R.id.actTof_apprRate_value);
+		mSeekApprRate = (SeekBar) findViewById(R.id.actTof_apprRate_seek); 
 		
-		mTextRent = (TextView) findViewById(R.id.actRes_rent_value);
-		mSeekRent = (SeekBar) findViewById(R.id.actRes_rent_seek);
+		mTextRent = (TextView) findViewById(R.id.actTof_rent_value);
+		mSeekRent = (SeekBar) findViewById(R.id.actTof_rent_seek);
 		
-		mTextRentIncrease = (TextView) findViewById(R.id.actRes_rent_increase_value);
-		mSeekRentIncrease = (SeekBar) findViewById(R.id.actRes_rent_increase_seek);
+		mTextRentIncrease = (TextView) findViewById(R.id.actTof_rent_increase_value);
+		mSeekRentIncrease = (SeekBar) findViewById(R.id.actTof_rent_increase_seek);
 	}
 
 	/**

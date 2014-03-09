@@ -6,7 +6,7 @@
     android:paddingRight="5dip" >
     
     <TextView
-		android:id="@+id/actRes_textViewTitle"
+		android:id="@+id/actTof_textViewTitle"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="10dip"
@@ -16,11 +16,11 @@
 		android:textSize="20sp" />
     
  	<LinearLayout
-        android:id="@+id/actRes_layout_bar_graph"
+        android:id="@+id/actTof_layout_bar_graph"
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/actRes_textViewTitle"
+        android:layout_below="@+id/actTof_textViewTitle"
         android:layout_marginTop="5dip"
         android:layout_marginRight="5dip"
         android:layout_marginLeft="5dip">
@@ -33,8 +33,8 @@
     </LinearLayout>
     
  	<ScrollView 
-	    android:id="@+id/actRes_scrollView1"
-	    android:layout_below="@+id/actRes_layout_bar_graph"
+	    android:id="@+id/actTof_scrollView1"
+	    android:layout_below="@+id/actTof_layout_bar_graph"
 	    android:layout_marginTop="5dip"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content">
@@ -44,7 +44,7 @@
 	        android:layout_height="wrap_content" >
 	    
 	 	    <TextView
-				android:id="@+id/actRes_Buy_Input_Title"
+				android:id="@+id/actTof_Buy_Input_Title"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="10dip"
@@ -54,16 +54,16 @@
 				android:textSize="20sp" />
 	    
 	    	<View
-		        android:id="@+id/actRes_dividerTitle"
-		        android:layout_below="@+id/actRes_Buy_Input_Title"
+		        android:id="@+id/actTof_dividerTitle"
+		        android:layout_below="@+id/actTof_Buy_Input_Title"
 				android:layout_width="fill_parent"		
 				android:layout_marginTop="10dip"
 				android:layout_height="1dp"
 				android:background="@android:color/darker_gray"/>
 	    	
 	    	<TextView
-		        android:id="@+id/actRes_home_price_title"
-		        android:layout_below="@+id/actRes_dividerTitle"
+		        android:id="@+id/actTof_home_price_title"
+		        android:layout_below="@+id/actTof_dividerTitle"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
@@ -71,27 +71,27 @@
 		        android:textSize="16sp"/>
 
 		    <TextView
-		        android:id="@+id/actRes_home_price_value"
+		        android:id="@+id/actTof_home_price_value"
 		        android:layout_width="115dip"
 		        android:maxWidth="115dip"
 		        android:layout_height="wrap_content"
-		        android:layout_alignTop="@+id/actRes_home_price_title"
-		        android:layout_toRightOf="@+id/actRes_home_price_title"
+		        android:layout_alignTop="@+id/actTof_home_price_title"
+		        android:layout_toRightOf="@+id/actTof_home_price_title"
 		        android:layout_marginLeft="30dip"
 		        android:text="@string/tempnum"
 		        android:textSize="16sp"/>
 		    
 		    <SeekBar
-		        android:id="@+id/actRes_home_price_seek"
+		        android:id="@+id/actTof_home_price_seek"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/actRes_home_price_value"
-		        android:layout_toRightOf="@+id/actRes_home_price_value"
+		        android:layout_alignBottom="@+id/actTof_home_price_value"
+		        android:layout_toRightOf="@+id/actTof_home_price_value"
 		        android:layout_marginLeft="2dip"/>	
 		        
 		    <TextView
-		        android:id="@+id/actRes_down_pay_title"
-		        android:layout_below="@+id/actRes_home_price_title"
+		        android:id="@+id/actTof_down_pay_title"
+		        android:layout_below="@+id/actTof_home_price_title"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
@@ -99,28 +99,28 @@
 		        android:textSize="16sp"/>
 
 		    <TextView
-		        android:id="@+id/actRes_down_pay_value"
+		        android:id="@+id/actTof_down_pay_value"
 		        android:layout_width="115dip"
 		        android:maxWidth="115dip"
 		        android:layout_height="wrap_content"
-		        android:layout_toRightOf="@+id/actRes_down_pay_title"
-		        android:layout_alignTop="@+id/actRes_down_pay_title"
-		        android:layout_alignLeft="@+id/actRes_home_price_value"
+		        android:layout_toRightOf="@+id/actTof_down_pay_title"
+		        android:layout_alignTop="@+id/actTof_down_pay_title"
+		        android:layout_alignLeft="@+id/actTof_home_price_value"
 		        android:text="@string/tempnum"
 		        android:textSize="16sp"/>
 		    
 		    <SeekBar
-		        android:id="@+id/actRes_down_pay_seek"
+		        android:id="@+id/actTof_down_pay_seek"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/actRes_down_pay_value"
-		        android:layout_toRightOf="@+id/actRes_down_pay_value"
-		        android:layout_alignLeft="@+id/actRes_home_price_seek"
+		        android:layout_alignBottom="@+id/actTof_down_pay_value"
+		        android:layout_toRightOf="@+id/actTof_down_pay_value"
+		        android:layout_alignLeft="@+id/actTof_home_price_seek"
 		        android:layout_marginLeft="2dip"/>
 		    
 		    <TextView
-		        android:id="@+id/actRes_int_rate_title"
-		        android:layout_below="@+id/actRes_down_pay_title"
+		        android:id="@+id/actTof_int_rate_title"
+		        android:layout_below="@+id/actTof_down_pay_title"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
@@ -128,28 +128,28 @@
 		        android:textSize="16sp"/>
 
 		    <TextView
-		        android:id="@+id/actRes_int_rate_value"
+		        android:id="@+id/actTof_int_rate_value"
 		        android:layout_width="115dip"
 		        android:maxWidth="115dip"
 		        android:layout_height="wrap_content"
-		        android:layout_toRightOf="@+id/actRes_int_rate_title"
-		        android:layout_alignTop="@+id/actRes_int_rate_title"
-		        android:layout_alignLeft="@+id/actRes_down_pay_value"
+		        android:layout_toRightOf="@+id/actTof_int_rate_title"
+		        android:layout_alignTop="@+id/actTof_int_rate_title"
+		        android:layout_alignLeft="@+id/actTof_down_pay_value"
 		        android:text="@string/tempnum"
 		        android:textSize="16sp"/>
 		    
 		    <SeekBar
-		        android:id="@+id/actRes_int_rate_seek"
+		        android:id="@+id/actTof_int_rate_seek"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/actRes_int_rate_value"
-		        android:layout_toRightOf="@+id/actRes_int_rate_value"
-		        android:layout_alignLeft="@+id/actRes_down_pay_seek"
+		        android:layout_alignBottom="@+id/actTof_int_rate_value"
+		        android:layout_toRightOf="@+id/actTof_int_rate_value"
+		        android:layout_alignLeft="@+id/actTof_down_pay_seek"
 		        android:layout_marginLeft="2dip"/>		
 		        
 		    <TextView
-		        android:id="@+id/actRes_tenure_title"
-		        android:layout_below="@+id/actRes_int_rate_title"
+		        android:id="@+id/actTof_tenure_title"
+		        android:layout_below="@+id/actTof_int_rate_title"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
@@ -157,28 +157,28 @@
 		        android:textSize="16sp"/>
 
 		    <TextView
-		        android:id="@+id/actRes_tenure_value"
+		        android:id="@+id/actTof_tenure_value"
 		        android:layout_width="115dip"
 		        android:maxWidth="115dip"
 		        android:layout_height="wrap_content"
-		        android:layout_toRightOf="@+id/actRes_tenure_title"
-		        android:layout_alignTop="@+id/actRes_tenure_title"
-		        android:layout_alignLeft="@+id/actRes_down_pay_value"
+		        android:layout_toRightOf="@+id/actTof_tenure_title"
+		        android:layout_alignTop="@+id/actTof_tenure_title"
+		        android:layout_alignLeft="@+id/actTof_down_pay_value"
 		        android:text="@string/tempnum"
 		        android:textSize="16sp"/>
 		    
 		    <SeekBar
-		        android:id="@+id/actRes_tenure_seek"
+		        android:id="@+id/actTof_tenure_seek"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/actRes_tenure_value"
-		        android:layout_toRightOf="@+id/actRes_int_rate_value"
-		        android:layout_alignLeft="@+id/actRes_down_pay_seek"
+		        android:layout_alignBottom="@+id/actTof_tenure_value"
+		        android:layout_toRightOf="@+id/actTof_int_rate_value"
+		        android:layout_alignLeft="@+id/actTof_down_pay_seek"
 		        android:layout_marginLeft="2dip"/>		
 		        
 		    <TextView
-		        android:id="@+id/actRes_holdPeriod_title"
-		        android:layout_below="@+id/actRes_tenure_title"
+		        android:id="@+id/actTof_holdPeriod_title"
+		        android:layout_below="@+id/actTof_tenure_title"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
@@ -186,28 +186,28 @@
 		        android:textSize="16sp"/>
 
 		    <TextView
-		        android:id="@+id/actRes_holdPeriod_value"
+		        android:id="@+id/actTof_holdPeriod_value"
 		        android:layout_width="115dip"
 		        android:maxWidth="115dip"
 		        android:layout_height="wrap_content"
-		        android:layout_toRightOf="@+id/actRes_holdPeriod_title"
-		        android:layout_alignTop="@+id/actRes_holdPeriod_title"
-		        android:layout_alignLeft="@+id/actRes_tenure_value"
+		        android:layout_toRightOf="@+id/actTof_holdPeriod_title"
+		        android:layout_alignTop="@+id/actTof_holdPeriod_title"
+		        android:layout_alignLeft="@+id/actTof_tenure_value"
 		        android:text="@string/tempnum"
 		        android:textSize="16sp"/>
 		    
 		    <SeekBar
-		        android:id="@+id/actRes_holdPeriod_seek"
+		        android:id="@+id/actTof_holdPeriod_seek"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/actRes_holdPeriod_value"
-		        android:layout_toRightOf="@+id/actRes_holdPeriod_value"
-		        android:layout_alignLeft="@+id/actRes_tenure_seek"
+		        android:layout_alignBottom="@+id/actTof_holdPeriod_value"
+		        android:layout_toRightOf="@+id/actTof_holdPeriod_value"
+		        android:layout_alignLeft="@+id/actTof_tenure_seek"
 		        android:layout_marginLeft="2dip"/>	
 		        
 		    <TextView
-		        android:id="@+id/actRes_apprRate_title"
-		        android:layout_below="@+id/actRes_holdPeriod_title"
+		        android:id="@+id/actTof_apprRate_title"
+		        android:layout_below="@+id/actTof_holdPeriod_title"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
@@ -215,36 +215,36 @@
 		        android:textSize="16sp"/>
 
 		    <TextView
-		        android:id="@+id/actRes_apprRate_value"
+		        android:id="@+id/actTof_apprRate_value"
 		        android:layout_width="115dip"
 		        android:maxWidth="115dip"
 		        android:layout_height="wrap_content"
-		        android:layout_toRightOf="@+id/actRes_apprRate_title"
-		        android:layout_alignTop="@+id/actRes_apprRate_title"
-		        android:layout_alignLeft="@+id/actRes_holdPeriod_value"
+		        android:layout_toRightOf="@+id/actTof_apprRate_title"
+		        android:layout_alignTop="@+id/actTof_apprRate_title"
+		        android:layout_alignLeft="@+id/actTof_holdPeriod_value"
 		        android:text="@string/tempnum"
 		        android:textSize="16sp"/>
 		    
 		    <SeekBar
-		        android:id="@+id/actRes_apprRate_seek"
+		        android:id="@+id/actTof_apprRate_seek"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/actRes_apprRate_value"
-		        android:layout_toRightOf="@+id/actRes_apprRate_value"
-		        android:layout_alignLeft="@+id/actRes_holdPeriod_seek"
+		        android:layout_alignBottom="@+id/actTof_apprRate_value"
+		        android:layout_toRightOf="@+id/actTof_apprRate_value"
+		        android:layout_alignLeft="@+id/actTof_holdPeriod_seek"
 		        android:layout_marginLeft="2dip"/>		
 		        
 	    	<View
-		        android:id="@+id/actRes_divider_buy_bot"
-		        android:layout_below="@+id/actRes_apprRate_title"
+		        android:id="@+id/actTof_divider_buy_bot"
+		        android:layout_below="@+id/actTof_apprRate_title"
 				android:layout_width="fill_parent"		
 				android:layout_marginTop="10dip"
 				android:layout_height="1dp"
 				android:background="@android:color/darker_gray"/>			    
 		        
 		    <TextView
-				android:id="@+id/actRes_Rent_Input_Title"
-				android:layout_below="@+id/actRes_divider_buy_bot"
+				android:id="@+id/actTof_Rent_Input_Title"
+				android:layout_below="@+id/actTof_divider_buy_bot"
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="20dip"
@@ -254,16 +254,16 @@
 				android:textSize="20sp" />
 	    
 	    	<View
-		        android:id="@+id/actRes_divider_rent_top"
-		        android:layout_below="@+id/actRes_Rent_Input_Title"
+		        android:id="@+id/actTof_divider_rent_top"
+		        android:layout_below="@+id/actTof_Rent_Input_Title"
 				android:layout_width="fill_parent"		
 				android:layout_marginTop="10dip"
 				android:layout_height="1dp"
 				android:background="@android:color/darker_gray"/>	
 				
 	    	<TextView
-		        android:id="@+id/actRes_rent_title"
-		        android:layout_below="@+id/actRes_divider_rent_top"
+		        android:id="@+id/actTof_rent_title"
+		        android:layout_below="@+id/actTof_divider_rent_top"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
@@ -271,27 +271,27 @@
 		        android:textSize="16sp"/>
 
 		    <TextView
-		        android:id="@+id/actRes_rent_value"
+		        android:id="@+id/actTof_rent_value"
 		        android:layout_width="115dip"
 		        android:maxWidth="115dip"
 		        android:layout_height="wrap_content"
-		        android:layout_alignTop="@+id/actRes_rent_title"
-		        android:layout_toRightOf="@+id/actRes_rent_title"
+		        android:layout_alignTop="@+id/actTof_rent_title"
+		        android:layout_toRightOf="@+id/actTof_rent_title"
 		        android:layout_marginLeft="50dip"
 		        android:text="@string/tempnum"
 		        android:textSize="16sp"/>
 		    
 		    <SeekBar
-		        android:id="@+id/actRes_rent_seek"
+		        android:id="@+id/actTof_rent_seek"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/actRes_rent_value"
-		        android:layout_toRightOf="@+id/actRes_rent_value"
+		        android:layout_alignBottom="@+id/actTof_rent_value"
+		        android:layout_toRightOf="@+id/actTof_rent_value"
 		        android:layout_marginLeft="2dip"/>
 		    
 		    <TextView
-		        android:id="@+id/actRes_rent_increase_title"
-		        android:layout_below="@+id/actRes_rent_title"
+		        android:id="@+id/actTof_rent_increase_title"
+		        android:layout_below="@+id/actTof_rent_title"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:layout_marginTop="20dip"
@@ -299,23 +299,23 @@
 		        android:textSize="16sp"/>
 
 		    <TextView
-		        android:id="@+id/actRes_rent_increase_value"
+		        android:id="@+id/actTof_rent_increase_value"
 		        android:layout_width="115dip"
 		        android:maxWidth="115dip"
 		        android:layout_height="wrap_content"
-		        android:layout_toRightOf="@+id/actRes_rent_increase_title"
-		        android:layout_alignTop="@+id/actRes_rent_increase_title"
-		        android:layout_alignLeft="@+id/actRes_rent_value"
+		        android:layout_toRightOf="@+id/actTof_rent_increase_title"
+		        android:layout_alignTop="@+id/actTof_rent_increase_title"
+		        android:layout_alignLeft="@+id/actTof_rent_value"
 		        android:text="@string/tempnum"
 		        android:textSize="16sp"/>
 		    
 		    <SeekBar
-		        android:id="@+id/actRes_rent_increase_seek"
+		        android:id="@+id/actTof_rent_increase_seek"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
-		        android:layout_alignBottom="@+id/actRes_rent_increase_value"
-		        android:layout_toRightOf="@+id/actRes_rent_increase_value"
-		        android:layout_alignLeft="@+id/actRes_rent_seek"
+		        android:layout_alignBottom="@+id/actTof_rent_increase_value"
+		        android:layout_toRightOf="@+id/actTof_rent_increase_value"
+		        android:layout_alignLeft="@+id/actTof_rent_seek"
 		        android:layout_marginLeft="2dip"/>		    		    			    		        
 	    	
 	    </RelativeLayout>    

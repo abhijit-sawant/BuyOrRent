@@ -1,0 +1,521 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/actBuy_scrollView1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true" 
+    android:padding="5dip">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+             
+        <TextView
+	        android:id="@+id/actBuy_textView1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="25dip"
+	        android:text="@string/housePrice"
+	        android:textSize="18sp"/>
+
+	    <EditText
+	        android:id="@+id/actBuy_editText1"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/actBuy_textView1"
+	        android:layout_marginLeft="30dip"
+	        android:layout_toRightOf="@+id/actBuy_textView1"
+	        android:inputType="number"
+	        android:maxLength="7"
+	        android:maxWidth="100dip" />
+	    
+        <TextView
+	        android:id="@+id/actBuy_editText1_unit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/actBuy_editText1"
+	        android:layout_alignBottom="@+id/actBuy_editText1"
+	        android:layout_marginBottom="6dip"
+	        android:layout_marginLeft="3dip"
+	        android:text="@string/unit_currency"
+	        android:textSize="15sp"/>	    
+	    
+	   <TextView
+	       android:id="@+id/actBuy_textView2"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_alignParentLeft="true"
+	       android:layout_below="@+id/actBuy_textView1"
+	       android:layout_marginTop="40dip"
+	       android:text="@string/downPay"
+	       android:textSize="18sp"/>
+	        
+	    <EditText
+	        android:id="@+id/actBuy_editText2"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/actBuy_textView2"
+	        android:layout_alignLeft="@+id/actBuy_editText1"
+	        android:inputType="number"
+	        android:maxLength="7"
+	        android:maxWidth="100dip"/>
+	    
+        <TextView
+	        android:id="@+id/actBuy_editText2_unit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/actBuy_editText2"
+	        android:layout_alignBottom="@+id/actBuy_editText2"
+	        android:layout_marginBottom="6dip"
+	        android:layout_marginLeft="3dip"
+	        android:text="@string/unit_currency"
+	        android:textSize="15sp"/>	    
+	    
+        <TextView
+	        android:id="@+id/actBuy_textView3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actBuy_textView2"
+	        android:layout_marginTop="40dip"
+	        android:text="@string/intRate"
+	        android:textSize="18sp"/>
+	
+	    <EditText
+	        android:id="@+id/actBuy_editText3"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/actBuy_textView3"
+	        android:layout_alignLeft="@+id/actBuy_editText2"
+	        android:inputType="numberDecimal"
+	        android:maxLength="5"
+	        android:maxWidth="100dip"/>
+	    
+        <TextView
+	        android:id="@+id/actBuy_editText3_unit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/actBuy_editText3"
+	        android:layout_alignBottom="@+id/actBuy_editText3"
+	        android:layout_marginBottom="6dip"
+	        android:layout_marginLeft="3dip"
+	        android:text="@string/unit_percent"
+	        android:textSize="15sp"/>	    
+	    
+	    <TextView
+	        android:id="@+id/actBuy_textView4"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actBuy_textView3"
+	        android:layout_marginTop="40dip"
+	        android:text="@string/tenure"
+	        android:textSize="18sp"/>
+	
+	    <EditText
+	        android:id="@+id/actBuy_editText4"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/actBuy_editText3"
+	        android:layout_alignBottom="@+id/actBuy_textView4"
+	        android:inputType="number"
+	        android:maxLength="3"
+	        android:maxWidth="100dip"/>
+	    
+        <TextView
+	        android:id="@+id/actBuy_editText4_unit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/actBuy_editText4"
+	        android:layout_alignBottom="@+id/actBuy_editText4"
+	        android:layout_marginBottom="6dip"
+	        android:layout_marginLeft="3dip"
+	        android:text="@string/unit_years"
+	        android:textSize="15sp"/>	    
+	     
+	     <TextView
+	        android:id="@+id/actBuy_textView5"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actBuy_textView4"
+	        android:layout_marginTop="40dip"
+	        android:text="@string/holdPeriod"
+	        android:textSize="18sp"/>
+	
+	    <EditText
+	        android:id="@+id/actBuy_editText5"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/actBuy_editText4"
+	        android:layout_alignBottom="@+id/actBuy_textView5"
+	        android:inputType="number"
+	        android:maxLength="3"
+	        android:maxWidth="100dip"/>
+	    
+        <TextView
+	        android:id="@+id/actBuy_editText5_unit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/actBuy_editText5"
+	        android:layout_alignBottom="@+id/actBuy_editText5"
+	        android:layout_marginBottom="6dip"
+	        android:layout_marginLeft="3dip"
+	        android:text="@string/unit_years"
+	        android:textSize="15sp"/>	    
+	     
+	     <TextView
+	        android:id="@+id/actBuy_textView11"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actBuy_textView5"
+	        android:layout_marginTop="40dip"
+	        android:text="@string/apprRate"
+	        android:textSize="18sp"/>
+	
+	    <EditText
+	        android:id="@+id/actBuy_editText11"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/actBuy_editText5"
+	        android:layout_alignBottom="@+id/actBuy_textView11"
+	        android:inputType="numberDecimal"
+	        android:maxLength="5"
+	        android:maxWidth="70dip"/>
+	    
+        <TextView
+	        android:id="@+id/actBuy_editText11_unit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/actBuy_editText11"
+	        android:layout_alignBottom="@+id/actBuy_editText11"
+	        android:layout_marginBottom="6dip"
+	        android:layout_marginLeft="3dip"
+	        android:text="@string/unit_percent"
+	        android:textSize="15sp"/>	    
+	     
+	    <TextView
+	        android:id="@+id/actBuy_textView13"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/actBuy_textView11"
+	        android:layout_marginTop="40dip"
+	        android:text="@string/buyUtilities"
+	        android:textSize="18sp"/>
+	
+	    <EditText
+	        android:id="@+id/actBuy_editText13"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/actBuy_editText11"
+	        android:layout_alignBottom="@+id/actBuy_textView13"
+	        android:inputType="number"
+	        android:maxLength="4"
+	        android:maxWidth="70dip"/>
+	    
+        <TextView
+	        android:id="@+id/actBuy_editText13_unit"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_toRightOf="@+id/actBuy_editText13"
+	        android:layout_alignBottom="@+id/actBuy_editText13"
+	        android:layout_marginBottom="6dip"
+	        android:layout_marginLeft="3dip"
+	        android:text="@string/unit_currency"
+	        android:textSize="15sp"/>	    
+	     
+	    <View
+	        android:id="@+id/actBuy_yearlyExpDivider"
+			android:layout_width="fill_parent"
+			android:layout_below="@+id/actBuy_textView13"
+			android:layout_marginTop="25dip"
+			android:layout_height="1dp"
+			android:background="@android:color/darker_gray"/>
+	     
+	     <RelativeLayout
+	         android:id="@+id/actBuy_layoutYearlyBorder"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:layout_below="@+id/actBuy_yearlyExpDivider">
+	     
+		     <RelativeLayout
+		         android:id="@+id/actBuy_layoutYearlyTitle"
+		         android:layout_width="match_parent"
+		         android:layout_height="wrap_content"
+		         android:gravity="center_vertical|center_horizontal"
+		         android:layout_marginTop="20dip">
+		         
+		        <TextView
+		            android:id="@+id/actBuy_textYearlyTitle"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+					android:layout_alignParentLeft="true" 
+		            android:text="@string/yearlyExpenses"
+		            android:textColor="#ff33b5e5"
+		            android:textStyle="bold"
+		            android:textSize="18sp"/>
+
+		        <ImageView
+		            android:id="@+id/actBuy_imageYearlyArrow"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentRight="true"
+		            android:layout_marginRight="20dp" 
+		            android:src="@android:drawable/arrow_down_float" />
+		        
+		     </RelativeLayout>
+		     
+		    <RelativeLayout
+		        android:id="@+id/actBuy_layoutYearlyContent"
+		        android:visibility="gone"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/actBuy_layoutYearlyTitle" >
+		     
+			     <TextView
+			        android:id="@+id/actBuy_textView6"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="25dip"
+			        android:text="@string/yearTax"
+			        android:textSize="18sp"/>
+			
+			    <EditText
+			        android:id="@+id/actBuy_editText6"
+			        android:layout_width="100dip"
+			        android:layout_height="wrap_content"
+					android:layout_alignBottom="@+id/actBuy_textView6"
+		        	android:layout_marginLeft="25dip"
+		        	android:layout_toRightOf="@+id/actBuy_textView6"
+			        android:inputType="number"
+			        android:maxLength="7"
+			        android:maxWidth="100dip"/>
+			    
+		        <TextView
+			        android:id="@+id/actBuy_editText6_unit"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_toRightOf="@+id/actBuy_editText6"
+			        android:layout_alignBottom="@+id/actBuy_editText6"
+			        android:layout_marginBottom="6dip"
+			        android:layout_marginLeft="3dip"
+			        android:text="@string/unit_currency"
+			        android:textSize="15sp"/>			    
+			    
+			     <TextView
+			        android:id="@+id/actBuy_textView7"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@+id/actBuy_textView6"
+			        android:layout_marginTop="40dip"
+			        android:text="@string/yearlyMaint"
+			        android:textSize="18sp"/>
+			
+			    <EditText
+			        android:id="@+id/actBuy_editText7"
+			        android:layout_width="100dip"
+			        android:layout_height="wrap_content"
+			        android:layout_alignLeft="@+id/actBuy_editText6"
+			        android:layout_alignBottom="@+id/actBuy_textView7"
+			        android:inputType="number"
+			        android:maxLength="7"
+			        android:maxWidth="100dip"/>
+			    
+				<TextView
+			        android:id="@+id/actBuy_editText7_unit"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_toRightOf="@+id/actBuy_editText7"
+			        android:layout_alignBottom="@+id/actBuy_editText7"
+			        android:layout_marginBottom="6dip"
+			        android:layout_marginLeft="3dip"
+			        android:text="@string/unit_currency"
+			        android:textSize="15sp"/>					    
+			    
+			     <TextView
+			        android:id="@+id/actBuy_textView8"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@+id/actBuy_textView7"
+			        android:layout_marginTop="40dip"
+			        android:text="@string/yearlyPropIns"
+			        android:textSize="18sp"/>
+			
+			    <EditText
+			        android:id="@+id/actBuy_editText8"
+			        android:layout_width="100dip"
+			        android:layout_height="wrap_content"
+			        android:layout_alignLeft="@+id/actBuy_editText7"
+			        android:layout_alignBottom="@+id/actBuy_textView8"
+			        android:inputType="number"
+			        android:maxLength="7"
+			        android:maxWidth="100dip"/>
+			    
+				<TextView
+			        android:id="@+id/actBuy_editText8_unit"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_toRightOf="@+id/actBuy_editText8"
+			        android:layout_alignBottom="@+id/actBuy_editText8"
+			        android:layout_marginBottom="6dip"
+			        android:layout_marginLeft="3dip"
+			        android:text="@string/unit_currency"
+			        android:textSize="15sp"/>			    
+			    
+     		</RelativeLayout>
+		
+		</RelativeLayout>
+		
+	    <View
+	        android:id="@+id/actBuy_periExpDivider"
+			android:layout_width="fill_parent"
+			android:layout_below="@+id/actBuy_layoutYearlyBorder"
+			android:layout_marginTop="20dip"
+			android:layout_height="1dp"
+			android:background="@android:color/darker_gray"/>
+		
+	    <RelativeLayout
+	         android:id="@+id/actBuy_layoutPeriBorder"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:layout_below="@+id/actBuy_periExpDivider">
+	     
+		     <RelativeLayout
+		         android:id="@+id/actBuy_layoutPeriTitle"
+		         android:layout_width="match_parent"
+		         android:layout_height="wrap_content"
+		         android:layout_marginTop="20dip"
+		         android:gravity="center_vertical|center_horizontal">
+		         
+		        <TextView
+		            android:id="@+id/actBuy_textPeriTitle"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentLeft="true" 
+		            android:text="@string/periExpenses"
+		            android:textColor="#ff33b5e5"
+		            android:textSize="18sp"
+		            android:textStyle="bold"/>
+		        
+		       <ImageView
+		            android:id="@+id/actBuy_imagePeriArrow"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_alignParentRight="true" 
+		            android:layout_marginRight="20dp"
+		            android:src="@android:drawable/arrow_down_float" />
+		         
+		     </RelativeLayout>
+		     
+		    <RelativeLayout
+		        android:id="@+id/actBuy_layoutPeriContent"
+		        android:visibility="gone"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/actBuy_layoutPeriTitle" > 
+	     
+			    <TextView
+			        android:id="@+id/actBuy_textView9"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginTop="20dip"
+			        android:text="@string/mortInsRate"
+			        android:textSize="18sp"/>
+			
+			    <EditText
+			        android:id="@+id/actBuy_editText9"
+			        android:layout_width="70dip"
+			        android:layout_height="wrap_content"
+			        android:layout_alignBottom="@+id/actBuy_textView9"
+		        	android:layout_toRightOf="@+id/actBuy_textView9"
+		        	android:layout_marginLeft="40dip"
+			        android:inputType="numberDecimal"
+			        android:maxLength="5"
+			        android:maxWidth="70dip"/>
+			    
+				<TextView
+			        android:id="@+id/actBuy_editText9_unit"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_toRightOf="@+id/actBuy_editText9"
+			        android:layout_alignBottom="@+id/actBuy_editText9"
+			        android:layout_marginBottom="6dip"
+			        android:layout_marginLeft="3dip"
+			        android:text="@string/unit_mortInsRate"
+			        android:textSize="15sp"/>			    
+			    
+			   <TextView
+			        android:id="@+id/actBuy_textView10"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@+id/actBuy_textView9"
+			        android:layout_marginTop="40dip"
+			        android:text="@string/closingCost"
+			        android:textSize="18sp"/>
+			
+			    <EditText
+			        android:id="@+id/actBuy_editText10"
+			        android:layout_width="70dip"
+			        android:layout_height="wrap_content"
+			        android:layout_alignLeft="@+id/actBuy_editText9"
+			        android:layout_alignBottom="@+id/actBuy_textView10"
+			        android:inputType="numberDecimal"
+			        android:maxLength="5"
+			        android:maxWidth="70dip"/>
+			    
+				<TextView
+			        android:id="@+id/actBuy_editText10_unit"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_toRightOf="@+id/actBuy_editText10"
+			        android:layout_alignBottom="@+id/actBuy_editText10"
+			        android:layout_marginBottom="6dip"
+			        android:layout_marginLeft="3dip"
+			        android:text="@string/unit_closingCost"
+			        android:textSize="15sp"/>			    
+			    
+			    <TextView
+			        android:id="@+id/actBuy_textView12"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_below="@+id/actBuy_textView10"
+			        android:layout_marginTop="40dip"
+			        android:text="@string/movingInCost"
+			        android:textSize="18sp"/>
+			
+			    <EditText
+			        android:id="@+id/actBuy_editText12"
+			        android:layout_width="70dip"
+			        android:layout_height="wrap_content"
+			        android:layout_alignLeft="@+id/actBuy_editText10"
+			        android:layout_alignBottom="@+id/actBuy_textView12"
+			        android:inputType="number"
+			        android:maxLength="7"
+			        android:maxWidth="70dip"/>
+			    
+				<TextView
+			        android:id="@+id/actBuy_editText12_unit"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_toRightOf="@+id/actBuy_editText12"
+			        android:layout_alignBottom="@+id/actBuy_editText12"
+			        android:layout_marginBottom="6dip"
+			        android:layout_marginLeft="3dip"
+			        android:text="@string/unit_currency"
+			        android:textSize="15sp"/>			    
+			    
+        	</RelativeLayout>
+			
+		</RelativeLayout>
+		
+	    <View
+	        android:id="@+id/actBuy_bottomDivider"
+			android:layout_width="fill_parent"
+			android:layout_below="@+id/actBuy_layoutPeriBorder"
+			android:layout_marginTop="20dip"
+			android:layout_height="1dp"
+			android:background="@android:color/darker_gray"/>
+
+    </RelativeLayout>
+
+</ScrollView>
+
